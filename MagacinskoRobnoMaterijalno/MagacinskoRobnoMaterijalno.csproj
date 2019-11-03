@@ -216,7 +216,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\MagacinskoRobnoMaterijalno.Models.csproj">
+    <ProjectReference Include="..\MagacinskoRobnoMaterijalno.Models\MagacinskoRobnoMaterijalno.Models.csproj">
       <Project>{cb036cbe-7055-411a-b343-3e731eb39daf}</Project>
       <Name>MagacinskoRobnoMaterijalno.Models</Name>
     </ProjectReference>

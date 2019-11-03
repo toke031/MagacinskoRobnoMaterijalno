@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinskoRobnoMaterijalno", "WindowsFormsApp2\MagacinskoRobnoMaterijalno.csproj", "{C48AF370-EFC7-4022-9253-BC851493DC04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinskoRobnoMaterijalno", "MagacinskoRobnoMaterijalno\MagacinskoRobnoMaterijalno.csproj", "{C48AF370-EFC7-4022-9253-BC851493DC04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinskoRobnoMaterijalno.Models", "ClassLibrary1\MagacinskoRobnoMaterijalno.Models.csproj", "{CB036CBE-7055-411A-B343-3E731EB39DAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinskoRobnoMaterijalno.Models", "MagacinskoRobnoMaterijalno.Models\MagacinskoRobnoMaterijalno.Models.csproj", "{CB036CBE-7055-411A-B343-3E731EB39DAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
