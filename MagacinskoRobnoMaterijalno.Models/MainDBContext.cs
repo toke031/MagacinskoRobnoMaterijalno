@@ -14,6 +14,7 @@ namespace MagacinskoRobnoMaterijalno.Models
         public DbSet<Client> Clients { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentItem> DocumentItems { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
         public bool SaveAllChanges()
         {
             int changes =  base.SaveChanges();

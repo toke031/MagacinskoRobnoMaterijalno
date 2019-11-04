@@ -9,9 +9,28 @@ namespace MagacinskoRobnoMaterijalno.Classes
 {
     public class DocumentLogic
     {
+        private DocumentRepository _docRepository;
+        public DocumentLogic()
+        {
+            _docRepository = new DocumentRepository();
+        }
+
         internal void DeleteDocument(Document document)
         {
-            throw new NotImplementedException();
+            _docRepository.DeleteDocument(document);
+        }
+        public bool SaveAllChanges()
+        {
+            return _docRepository.SaveChanges();
+        }
+        public void AddDocument(Document document)
+        {
+            _docRepository.AddDocument(document);
+        }
+
+        internal Document GetDocument(long iD)
+        {
+            return _docRepository.GetDocument(iD);
         }
     }
 }

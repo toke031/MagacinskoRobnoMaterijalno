@@ -14,5 +14,22 @@ namespace MagacinskoRobnoMaterijalno.Models
         {
             _context = new MainDBContext();
         }
+        public void DeleteDocument(Document itemForDelete)
+        {
+            _context.Documents.Remove(itemForDelete);
+        }
+        public void AddDocument(Document item)
+        {
+            _context.Documents.Add(item);
+        }
+        public bool SaveChanges()
+        {
+            return _context.SaveAllChanges();
+        }
+
+        public Document GetDocument(long iD)
+        {
+            return _context.Documents.FirstOrDefault(x => x.ID == iD);
+        }
     }
 }

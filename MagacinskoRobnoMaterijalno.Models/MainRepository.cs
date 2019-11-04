@@ -20,6 +20,13 @@ namespace MagacinskoRobnoMaterijalno.Models
             _context.Articles.Load();
             return _context.Articles.Local.ToBindingList();
         }
+
+        public BindingList<Warehouse> GetWarehouseByTypeID(int typeID)
+        {
+            _context.Warehouses.Where(x => x.WarehouseTypeID == typeID).Load();
+            return _context.Warehouses.Local.ToBindingList();
+        }
+
         public List<Article> GetArticlesByName(string articleName) 
         {
            return _context.Articles.Where(x=>x.Name.Contains(articleName)).ToList();
@@ -84,6 +91,11 @@ namespace MagacinskoRobnoMaterijalno.Models
         public bool SaveChanges()
         { 
             return _context.SaveAllChanges();
+        }
+
+        public void AddDocument(Document doc)
+        {
+            _context.Documents.Add(doc);
         }
 
     }

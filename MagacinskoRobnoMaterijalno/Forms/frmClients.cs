@@ -16,6 +16,10 @@ namespace MagacinskoRobnoMaterijalno.Forms
     {
         ClientLogic _clientLogic;
         Client _itemForDelete;
+
+        public bool SelectionMode { get; internal set; }
+        public Client SelectedClient { get; internal set; }
+
         public frmClients()
         {
             InitializeComponent();
@@ -26,14 +30,35 @@ namespace MagacinskoRobnoMaterijalno.Forms
         {
             _clientLogic = new ClientLogic();
             DGVClients.DataSource = _clientLogic.GetAllClients();
-            DGVClients.AllowUserToAddRows = false;
-            DGVClients.ReadOnly = true;
-            DGVClients.AllowUserToDeleteRows = true;
-            DGVClients.Click += Right_Click;
-            DGVClients.UserDeletingRow += DGVClients_UserDeletingRow;
-            DGVClients.UserDeletedRow += DGVClients_UserDeletedRow;
-            DGVClients.MouseDown+= new System.Windows.Forms.MouseEventHandler(this.MyDataGridView_MouseDown);
-            SelectedRow.Click += new System.EventHandler(this.SelectedRow_Click);
+            if (!SelectionMode)
+            {
+                DGVClients.AllowUserToAddRows = false;
+                DGVClients.ReadOnly = true;
+                DGVClients.AllowUserToDeleteRows = false;
+                DGVClients.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                DGVClients.DoubleClick += SelectedRow_DoubleClick;
+            }
+            else
+            {
+                DGVClients.AllowUserToAddRows = false;
+                DGVClients.ReadOnly = true;
+                DGVClients.AllowUserToDeleteRows = true;
+                DGVClients.Click += Right_Click;
+                DGVClients.UserDeletingRow += DGVClients_UserDeletingRow;
+                DGVClients.UserDeletedRow += DGVClients_UserDeletedRow;
+                DGVClients.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MyDataGridView_MouseDown);
+                SelectedRow.Click += new System.EventHandler(this.SelectedRow_Click);
+            }
+        }
+
+        private void SelectedRow_DoubleClick(object sender, EventArgs e)
+        {
+            var selected = DGVClients.SelectedRows[0];
+            if (selected != null)
+            {
+                SelectedClient = (Client)((DataGridViewRow)selected).DataBoundItem;
+                this.Close();
+            }
         }
 
         private void SelectedRow_Click(object sender, EventArgs e)

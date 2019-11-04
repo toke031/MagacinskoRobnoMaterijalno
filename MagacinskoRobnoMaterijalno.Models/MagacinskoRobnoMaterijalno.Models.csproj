@@ -147,6 +147,26 @@
     <Compile Include="Migrations\201911031412382_DocumentDocumentItem.Designer.cs">
       <DependentUpon>201911031412382_DocumentDocumentItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911041834579_promena.cs" />
+    <Compile Include="Migrations\201911041834579_promena.Designer.cs">
+      <DependentUpon>201911041834579_promena.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911042127393_promena_2.cs" />
+    <Compile Include="Migrations\201911042127393_promena_2.Designer.cs">
+      <DependentUpon>201911042127393_promena_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911042142120_promena_3.cs" />
+    <Compile Include="Migrations\201911042142120_promena_3.Designer.cs">
+      <DependentUpon>201911042142120_promena_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911042157540_promena_4.cs" />
+    <Compile Include="Migrations\201911042157540_promena_4.Designer.cs">
+      <DependentUpon>201911042157540_promena_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911042230243_promena_5.cs" />
+    <Compile Include="Migrations\201911042230243_promena_5.Designer.cs">
+      <DependentUpon>201911042230243_promena_5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Document.cs" />
@@ -169,6 +189,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911031412382_DocumentDocumentItem.resx">
       <DependentUpon>201911031412382_DocumentDocumentItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911041834579_promena.resx">
+      <DependentUpon>201911041834579_promena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911042127393_promena_2.resx">
+      <DependentUpon>201911042127393_promena_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911042142120_promena_3.resx">
+      <DependentUpon>201911042142120_promena_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911042157540_promena_4.resx">
+      <DependentUpon>201911042157540_promena_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911042230243_promena_5.resx">
+      <DependentUpon>201911042230243_promena_5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

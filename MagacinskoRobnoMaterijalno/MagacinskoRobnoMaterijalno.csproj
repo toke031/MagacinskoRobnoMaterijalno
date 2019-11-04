@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MagacinskoRobnoMaterijalno</RootNamespace>
     <AssemblyName>MagacinskoRobnoMaterijalno</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -123,6 +123,8 @@
     <Compile Include="Classes\ArticalLogic.cs" />
     <Compile Include="Classes\ClientLogic.cs" />
     <Compile Include="Classes\DocumentLogic.cs" />
+    <Compile Include="Classes\Lib.cs" />
+    <Compile Include="Classes\WarehouseLogic.cs" />
     <Compile Include="Forms\frmArticles.cs">
       <SubType>Form</SubType>
     </Compile>

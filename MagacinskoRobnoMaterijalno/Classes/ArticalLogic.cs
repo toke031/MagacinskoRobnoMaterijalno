@@ -55,5 +55,6 @@ namespace MagacinskoRobnoMaterijalno.Classes
         {
             return _mainRepository.GetArticleByName(name);
         }
+
     }
 }
