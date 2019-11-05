@@ -20,7 +20,10 @@ namespace MagacinskoRobnoMaterijalno.Forms
         public int DocumentTypeID { get; set; }
         DocumentLogic _documentLogic;
         WarehouseLogic _warehouseLogic;
+        ArticalLogic _articalLogic;
         Document _document;
+        List<Article> listaArtikla;
+        BindingList<DocumentItem> listaStavki = new BindingList<DocumentItem>();
         public frmReceiptsDespatchs()
         {
             InitializeComponent();
@@ -29,6 +32,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void InitDocument()
         {
+            _articalLogic = new ArticalLogic();
             _documentLogic = new DocumentLogic();
             _warehouseLogic = new WarehouseLogic();
             if (FormMode == FormMode.New)
@@ -54,37 +58,98 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbWarehouse.DisplayMember = "Name";
             cmbWarehouse.ValueMember = "WarehouseTypeID";
 
-            DGVReceiptsDespatchsItems.AutoGenerateColumns = false;
-            BindingSource bs = new BindingSource();
-            bs.DataSource = _document.DocumentItems;
-            bs.AllowNew = true;
-            DGVReceiptsDespatchsItems.DataSource = bs;
-            DGVReceiptsDespatchsItems.AllowUserToAddRows = true;
-            DGVReceiptsDespatchsItems.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
-            DGVReceiptsDespatchsItems.Columns.Add("ItemName", "Naziv artikla");
-            DGVReceiptsDespatchsItems.Columns.Add("Quantity", "Kolicina");
-            DGVReceiptsDespatchsItems.Columns.Add("ItemPrice", "Cena");
-            DGVReceiptsDespatchsItems.Columns.Add("Width", "Sirina");
-            DGVReceiptsDespatchsItems.Columns.Add("Height", "Visina");
+            listaArtikla = _articalLogic.GetAllArticles().ToList();
 
-            DGVReceiptsDespatchsItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            DGVReceiptsDespatchsItems.ReadOnly = false;
-            DGVReceiptsDespatchsItems.AllowUserToDeleteRows = true;
-            bs.AddingNew += Bs_AddingNew;
-            DGVReceiptsDespatchsItems.Click += Right_Click;
-            DGVReceiptsDespatchsItems.UserDeletingRow += DGVReceiptsDespatchs_UserDeletingRow;
-            DGVReceiptsDespatchsItems.UserDeletedRow += DGVReceiptsDespatchs_UserDeletedRow;
-            DGVReceiptsDespatchsItems.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MyDataGridView_MouseDown);
-            SelectedRow.Click += new System.EventHandler(this.SelectedRow_Click);
+            documentItemBindingSource.DataSource = _document.DocumentItems;
+            articleBindingSource.DataSource = listaArtikla;
+            documentItemBindingSource.ListChanged += DocumentItemBindingSource_ListChanged;
+            documentItemBindingSource.CurrentChanged += DocumentItemBindingSource_CurrentChanged;
+
+            DGVReceiptsDespatchsItems.DataError += DGVReceiptsDespatchsItems_DataError; 
+            DGVReceiptsDespatchsItems.CellValueChanged += DGVReceiptsDespatchsItems_CellValueChanged;
+        }
+        private void Calculate()
+        {
+            tbTotal.Text = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) - ((x.Quantity * x.QuantityItemPrice) * 0.2M)).ToString("N2");
+            tbVat.Text = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) * 0.2M).ToString("N2");
+            tbTotalWithVAT.Text = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice)).ToString("N2");
+        }
+        private void DocumentItemBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
+        private void CalculateSumOfRow(ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemChanged)
+            {
+                DocumentItem doci = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.NewIndex].DataBoundItem);
+                doci.ItemPrice = doci.Quantity * doci.QuantityItemPrice;
+            }
+        }
+
+        private void DocumentItemBindingSource_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            CalculateSumOfRow(e);
+            Calculate();
+            SetRb();
+        }
+
+        private void SetRb()
+        {
+            int i = 1;
+            foreach (DataGridViewRow row in DGVReceiptsDespatchsItems.Rows)
+                row.Cells["Rb"].Value = i++;
+        }
+
+        private void DGVReceiptsDespatchsItems_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        bool inload = false;
+        private void DGVReceiptsDespatchsItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (inload)
+                return;
+            inload = true;
+            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "ArticleNoUnbound")
+            {
+                if (DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null || DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "")
+                {
+                    ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = null;
+                    ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = null;
+                }
+                else
+                {
+                    Article pronadjen = listaArtikla.FirstOrDefault(x => x.ArticleNo == DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                    if (pronadjen != null)
+                    {
+                        ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = pronadjen;
+                        ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = pronadjen.ArticleNo;
+                    }
+                    else
+                    {
+                        DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                    }
+                }
+                
+            }
+            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "Article")
+            {
+                var stavka = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem);
+                Article pronadjen = stavka.Item;
+                if (pronadjen != null)
+                {
+                    DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = pronadjen.ArticleNo;
+                }
+
+            }
+
+            inload = false;
             DGVReceiptsDespatchsItems.Refresh();
         }
 
-        private void Bs_AddingNew(object sender, AddingNewEventArgs e)
-        {
-            //DocumentItem newObj = new DocumentItem();
-            //_document.DocumentItems.Add(newObj);
-            //e.NewObject = new Warehouse();
-        }
 
         private void SetAllControlsReadOnly()
         {
@@ -215,7 +280,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            _documentLogic.SaveAllChanges();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
