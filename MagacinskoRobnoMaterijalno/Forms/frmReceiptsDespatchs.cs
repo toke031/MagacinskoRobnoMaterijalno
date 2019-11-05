@@ -24,7 +24,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
         Document _document;
         List<Article> listaArtikla;
         BindingList<DocumentItem> listaStavki = new BindingList<DocumentItem>();
-        public frmReceiptsDespatchs()
+        public frmReceiptsDespatchs(int documentTypeID)
         {
             DocumentTypeID = documentTypeID;
             InitializeComponent();
