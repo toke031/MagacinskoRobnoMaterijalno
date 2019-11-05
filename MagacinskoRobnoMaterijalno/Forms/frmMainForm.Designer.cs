@@ -49,7 +49,7 @@
             this.ReceiptsDespatchs.Name = "ReceiptsDespatchs";
             this.ReceiptsDespatchs.Size = new System.Drawing.Size(207, 139);
             this.ReceiptsDespatchs.TabIndex = 1;
-            this.ReceiptsDespatchs.Text = "Prijenmnice/Otoremnice";
+            this.ReceiptsDespatchs.Text = "Prijenmnice/Otpremnice";
             this.ReceiptsDespatchs.UseVisualStyleBackColor = true;
             this.ReceiptsDespatchs.Click += new System.EventHandler(this.ReceiptsDespatchs_Click);
             // 
@@ -63,7 +63,7 @@
             this.Articles.UseVisualStyleBackColor = true;
             this.Articles.Click += new System.EventHandler(this.Articles_Click);
             // 
-            // MainForm
+            // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,7 +71,7 @@
             this.Controls.Add(this.Articles);
             this.Controls.Add(this.ReceiptsDespatchs);
             this.Controls.Add(this.Clients);
-            this.Name = "MainForm";
+            this.Name = "frmMainForm";
             this.ShowIcon = false;
             this.Text = "Glavna forma";
             this.ResumeLayout(false);

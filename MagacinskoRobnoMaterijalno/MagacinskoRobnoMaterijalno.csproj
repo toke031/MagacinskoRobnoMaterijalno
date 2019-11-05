@@ -190,6 +190,12 @@
     <EmbeddedResource Include="Forms\frmNewItem.resx">
       <DependentUpon>frmNewItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewReceiptsDespatchs.resx">
+      <DependentUpon>frmNewReceiptsDespatchs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewReceiptsDespatchsItem.resx">
+      <DependentUpon>frmNewReceiptsDespatchsItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmReceiptsDespatchs.resx">
       <DependentUpon>frmReceiptsDespatchs.cs</DependentUpon>
     </EmbeddedResource>

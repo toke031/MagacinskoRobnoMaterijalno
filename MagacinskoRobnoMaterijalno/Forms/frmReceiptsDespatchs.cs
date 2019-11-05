@@ -21,8 +21,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
         DocumentLogic _documentLogic;
         WarehouseLogic _warehouseLogic;
         Document _document;
-        public frmReceiptsDespatchs()
+        public frmReceiptsDespatchs(int documentTypeID)
         {
+            DocumentTypeID = documentTypeID;
             InitializeComponent();
             InitDocument();
         }
@@ -47,12 +48,36 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
             // status
             cmbStatus.DisplayMember = "Description";
-            cmbStatus.DataSource = Enum.GetValues(typeof(Classes.Lib.StatusEnum));
+            cmbStatus.DataSource = Enum.GetValues(typeof(Classes.Lib.StatusEnum))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
             cmbStatus.DataBindings.Add("SelectedItem", _document, "StatusID");
             // magacini
-            cmbWarehouse.DataSource = _warehouseLogic.GetAllWarehouseForTypeID(DocumentTypeID);
+            cmbWarehouse.DataSource = _warehouseLogic.GetAllWarehouse();
             cmbWarehouse.DisplayMember = "Name";
             cmbWarehouse.ValueMember = "WarehouseTypeID";
+
+            //tip dokumenta
+            cbDocumentType.Enabled = false;
+            cbDocumentType.DisplayMember = "Description";
+            cbDocumentType.ValueMember = "Value";
+            cbDocumentType.DataSource = Enum.GetValues(typeof(Classes.Lib.DocumentType))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            cbDocumentType.SelectedIndex = DocumentTypeID;
+
 
             DGVReceiptsDespatchsItems.AutoGenerateColumns = false;
             BindingSource bs = new BindingSource();

@@ -20,5 +20,10 @@ namespace MagacinskoRobnoMaterijalno.Classes
         {
             return _mainRepository.GetWarehouseByTypeID(typeID);
         }
+
+        internal BindingList<Warehouse> GetAllWarehouse()
+        {
+            return _mainRepository.GetAllWarehouse();
+        }
     }
 }

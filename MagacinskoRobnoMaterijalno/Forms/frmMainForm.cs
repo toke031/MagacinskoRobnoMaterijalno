@@ -25,7 +25,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void ReceiptsDespatchs_Click(object sender, EventArgs e)
         {
-            Form receiptsDespatchs = new frmReceiptsDespatchs();
+            Form receiptsDespatchs = new frmNewReceiptsDespatchs();
             receiptsDespatchs.Show();
         }
 

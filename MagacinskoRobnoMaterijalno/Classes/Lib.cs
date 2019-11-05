@@ -26,5 +26,14 @@ namespace MagacinskoRobnoMaterijalno.Classes
             ReadOnly = 2
         }
 
+        public enum DocumentType
+        {
+            [Description("Prijemnica")]
+            Receipt = 0,
+
+            [Description("Otpremnica")]
+            Despatch = 1
+        }
+
     }
 }

@@ -62,11 +62,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cbDocumentType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGVReceiptsDespatchsItems)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGVReceiptsDespatchsItems
@@ -285,7 +288,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.DGVReceiptsDespatchsItems);
-            this.groupBox3.Location = new System.Drawing.Point(12, 139);
+            this.groupBox3.Location = new System.Drawing.Point(12, 190);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(776, 296);
             this.groupBox3.TabIndex = 38;
@@ -314,7 +317,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(710, 482);
+            this.btnSave.Location = new System.Drawing.Point(710, 533);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 40;
@@ -324,7 +327,7 @@
             // 
             // tbTotalWithVAT
             // 
-            this.tbTotalWithVAT.Location = new System.Drawing.Point(685, 456);
+            this.tbTotalWithVAT.Location = new System.Drawing.Point(685, 507);
             this.tbTotalWithVAT.Name = "tbTotalWithVAT";
             this.tbTotalWithVAT.Size = new System.Drawing.Size(100, 20);
             this.tbTotalWithVAT.TabIndex = 42;
@@ -332,7 +335,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(682, 440);
+            this.label1.Location = new System.Drawing.Point(682, 491);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 13);
             this.label1.TabIndex = 43;
@@ -341,7 +344,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(576, 438);
+            this.label2.Location = new System.Drawing.Point(576, 489);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 45;
@@ -349,7 +352,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(579, 456);
+            this.textBox1.Location = new System.Drawing.Point(579, 507);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 44;
@@ -357,7 +360,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(468, 440);
+            this.label3.Location = new System.Drawing.Point(468, 491);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 47;
@@ -365,14 +368,14 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(472, 456);
+            this.textBox2.Location = new System.Drawing.Point(472, 507);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 46;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(629, 482);
+            this.btnCancel.Location = new System.Drawing.Point(629, 533);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 48;
@@ -380,11 +383,31 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.cbDocumentType);
+            this.groupBox5.Location = new System.Drawing.Point(12, 134);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(172, 55);
+            this.groupBox5.TabIndex = 49;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Tip dokumenta";
+            // 
+            // cbDocumentType
+            // 
+            this.cbDocumentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDocumentType.FormattingEnabled = true;
+            this.cbDocumentType.Location = new System.Drawing.Point(6, 19);
+            this.cbDocumentType.Name = "cbDocumentType";
+            this.cbDocumentType.Size = new System.Drawing.Size(160, 21);
+            this.cbDocumentType.TabIndex = 1;
+            // 
             // frmReceiptsDespatchs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 517);
+            this.ClientSize = new System.Drawing.Size(800, 569);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
@@ -405,6 +428,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -445,5 +469,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ComboBox cbDocumentType;
     }
 }

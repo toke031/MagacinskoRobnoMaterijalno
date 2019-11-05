@@ -27,6 +27,12 @@ namespace MagacinskoRobnoMaterijalno.Models
             return _context.Warehouses.Local.ToBindingList();
         }
 
+        public BindingList<Warehouse> GetAllWarehouse()
+        {
+            _context.Warehouses.Load();
+            return _context.Warehouses.Local.ToBindingList();
+        }
+
         public List<Article> GetArticlesByName(string articleName) 
         {
            return _context.Articles.Where(x=>x.Name.Contains(articleName)).ToList();
