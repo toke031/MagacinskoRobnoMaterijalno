@@ -20,5 +20,7 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         [DisplayName("Naziv magacina")]
         public string Name { get; set; }
+
+        public ICollection<Article> Articles { get; set; }
     }
 }

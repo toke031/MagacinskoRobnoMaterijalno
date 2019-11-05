@@ -20,6 +20,10 @@ namespace MagacinskoRobnoMaterijalno.Classes
         {
             return _mainRepository.GetArticles();
         }
+        public BindingList<Article> GetAllArticlesForWarehouse(Warehouse warehouse)
+        {
+            return _mainRepository.GetArticlesForWarehouse(warehouse);
+        }
 
         public void AddArtical(Article article)
         {

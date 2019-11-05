@@ -9,7 +9,7 @@ namespace MagacinskoRobnoMaterijalno.Models.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(MagacinskoRobnoMaterijalno.Models.MainDBContext context)
