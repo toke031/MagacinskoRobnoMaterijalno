@@ -55,6 +55,11 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 }
             }
 
+            if (_document.Client != null)
+            {
+                BindClientProperties();
+            }
+
             tbTotalWithVAT.DataBindings.Clear();
             tbTotalWithVAT.DataBindings.Add("Text", _document, "TotalPrice");
             tbDocumentNo.DataBindings.Clear();
@@ -117,6 +122,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
             tbTotal.Text = (totalWithWAT - (totalWithWAT * 0.2M)).ToString("N2");
             tbVat.Text = (totalWithWAT * 0.2M).ToString("N2");
             _document.TotalPrice = totalWithWAT;
+            tbTotalWithVAT.Text = _document.TotalPrice.ToString("N2");
+            tbTotalWithVAT.Update();
+            
         }
         private void DocumentItemBindingSource_CurrentChanged(object sender, EventArgs e)
         {

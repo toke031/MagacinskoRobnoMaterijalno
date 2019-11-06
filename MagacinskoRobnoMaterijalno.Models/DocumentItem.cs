@@ -14,7 +14,7 @@ namespace MagacinskoRobnoMaterijalno.Models
         public decimal ItemPrice { get; set; }
         public string ArticleNo { get; set; }
         public Article Item { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public decimal QuantityItemPrice { get; set; }
         public decimal Width { get; set; }
         public decimal Height { get; set; }
