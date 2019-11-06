@@ -82,10 +82,10 @@ namespace MagacinskoRobnoMaterijalno.Forms
             if (me.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 ContextMenu cm = new ContextMenu();
-                cm.MenuItems.Add("Dodaj klijenta", new EventHandler(AddNewArtical_Click));
+                cm.MenuItems.Add("Dodaj artikal", new EventHandler(AddNewArtical_Click));
                 if (DGVArticles.SelectedRows.Count == 1)
                 {
-                    cm.MenuItems.Add("Izmeni klijenta", new EventHandler(EditRow_Click));
+                    cm.MenuItems.Add("Izmeni artikal", new EventHandler(EditRow_Click));
                 }
                 cm.Show(DGVArticles, new Point(me.X, me.Y));
             }

@@ -35,9 +35,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbDocumentType = new System.Windows.Forms.ComboBox();
+            this.cmbDocumentType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbDocumentStatus = new System.Windows.Forms.ComboBox();
+            this.cmbDocumentStatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dtCreatedDate = new System.Windows.Forms.DateTimePicker();
             this.btnNewDespatch = new System.Windows.Forms.Button();
@@ -86,9 +86,9 @@
             // 
             this.groupBox2.Controls.Add(this.btnSearch);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.cbDocumentType);
+            this.groupBox2.Controls.Add(this.cmbDocumentType);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.cbDocumentStatus);
+            this.groupBox2.Controls.Add(this.cmbDocumentStatus);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.dtCreatedDate);
             this.groupBox2.Controls.Add(this.lblPIB);
@@ -119,13 +119,13 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Tip dokumenta:";
             // 
-            // cbDocumentType
+            // cmbDocumentType
             // 
-            this.cbDocumentType.FormattingEnabled = true;
-            this.cbDocumentType.Location = new System.Drawing.Point(288, 53);
-            this.cbDocumentType.Name = "cbDocumentType";
-            this.cbDocumentType.Size = new System.Drawing.Size(118, 21);
-            this.cbDocumentType.TabIndex = 7;
+            this.cmbDocumentType.FormattingEnabled = true;
+            this.cmbDocumentType.Location = new System.Drawing.Point(288, 53);
+            this.cmbDocumentType.Name = "cmbDocumentType";
+            this.cmbDocumentType.Size = new System.Drawing.Size(118, 21);
+            this.cmbDocumentType.TabIndex = 7;
             // 
             // label2
             // 
@@ -136,13 +136,13 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Status dokumenta:";
             // 
-            // cbDocumentStatus
+            // cmbDocumentStatus
             // 
-            this.cbDocumentStatus.FormattingEnabled = true;
-            this.cbDocumentStatus.Location = new System.Drawing.Point(288, 12);
-            this.cbDocumentStatus.Name = "cbDocumentStatus";
-            this.cbDocumentStatus.Size = new System.Drawing.Size(118, 21);
-            this.cbDocumentStatus.TabIndex = 5;
+            this.cmbDocumentStatus.FormattingEnabled = true;
+            this.cmbDocumentStatus.Location = new System.Drawing.Point(288, 12);
+            this.cmbDocumentStatus.Name = "cmbDocumentStatus";
+            this.cmbDocumentStatus.Size = new System.Drawing.Size(118, 21);
+            this.cmbDocumentStatus.TabIndex = 5;
             // 
             // label1
             // 
@@ -210,9 +210,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cbDocumentType;
+        private System.Windows.Forms.ComboBox cmbDocumentType;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbDocumentStatus;
+        private System.Windows.Forms.ComboBox cmbDocumentStatus;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtCreatedDate;
         private System.Windows.Forms.Button btnNewDespatch;

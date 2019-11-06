@@ -20,8 +20,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
         public bool SelectionMode { get; internal set; }
         public Client SelectedClient { get; internal set; }
 
-        public frmClients()
+        public frmClients(bool selectionMode = false)
         {
+            SelectionMode = selectionMode;
             InitializeComponent();
             InitClients();
         }

@@ -11,9 +11,9 @@ namespace MagacinskoRobnoMaterijalno.Classes
     {
         public enum StatusEnum
         {
-            [Description("U pripremi")]
+            [Description("Neplaćeni")]
             U_Pripremi  = 0,
-            [Description("Vazeci")]
+            [Description("Plaćeni")]
             Vazeci = 1,
             [Description("Storno")]
             Storno = 2

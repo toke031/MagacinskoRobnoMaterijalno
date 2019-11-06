@@ -19,7 +19,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void Clients_Click(object sender, EventArgs e)
         {
-            Form clients = new frmClients();
+            Form clients = new frmClients(true);
             clients.Show();
         }
 
