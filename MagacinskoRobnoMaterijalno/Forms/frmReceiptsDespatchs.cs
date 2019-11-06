@@ -67,6 +67,22 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbWarehouse.DisplayMember = "Name";
             cmbWarehouse.ValueMember = "WarehouseTypeID";
 
+
+            // tip dokumenta
+            cmbDocumentType.DisplayMember = "Description";
+            cmbDocumentType.DataSource = Enum.GetValues(typeof(Classes.Lib.DocumentType))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            cmbDocumentType.Enabled = false;
+            cmbDocumentType.SelectedIndex = DocumentTypeID;
+
+
             listaArtikla = _articalLogic.GetAllArticles().ToList();
 
             documentItemBindingSource.DataSource = _document.DocumentItems;

@@ -33,13 +33,13 @@
             this.tbPIB = new System.Windows.Forms.TextBox();
             this.lblPIB = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dtCreatedDate = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbDocumentStatus = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cbDocumentType = new System.Windows.Forms.ComboBox();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbDocumentStatus = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtCreatedDate = new System.Windows.Forms.DateTimePicker();
             this.btnNewDespatch = new System.Windows.Forms.Button();
             this.btnNewReceipt = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -100,39 +100,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pretraga";
             // 
-            // dtCreatedDate
+            // btnSearch
             // 
-            this.dtCreatedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtCreatedDate.Location = new System.Drawing.Point(88, 53);
-            this.dtCreatedDate.Name = "dtCreatedDate";
-            this.dtCreatedDate.Size = new System.Drawing.Size(93, 20);
-            this.dtCreatedDate.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Datum kreiranja:";
-            // 
-            // cbDocumentStatus
-            // 
-            this.cbDocumentStatus.FormattingEnabled = true;
-            this.cbDocumentStatus.Location = new System.Drawing.Point(288, 12);
-            this.cbDocumentStatus.Name = "cbDocumentStatus";
-            this.cbDocumentStatus.Size = new System.Drawing.Size(118, 21);
-            this.cbDocumentStatus.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(187, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Status dokumenta:";
+            this.btnSearch.Location = new System.Drawing.Point(288, 80);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(118, 30);
+            this.btnSearch.TabIndex = 9;
+            this.btnSearch.Text = "Pretraži";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label3
             // 
@@ -151,15 +127,39 @@
             this.cbDocumentType.Size = new System.Drawing.Size(118, 21);
             this.cbDocumentType.TabIndex = 7;
             // 
-            // btnSearch
+            // label2
             // 
-            this.btnSearch.Location = new System.Drawing.Point(288, 80);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(118, 30);
-            this.btnSearch.TabIndex = 9;
-            this.btnSearch.Text = "Pretraži";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(187, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Status dokumenta:";
+            // 
+            // cbDocumentStatus
+            // 
+            this.cbDocumentStatus.FormattingEnabled = true;
+            this.cbDocumentStatus.Location = new System.Drawing.Point(288, 12);
+            this.cbDocumentStatus.Name = "cbDocumentStatus";
+            this.cbDocumentStatus.Size = new System.Drawing.Size(118, 21);
+            this.cbDocumentStatus.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Datum kreiranja:";
+            // 
+            // dtCreatedDate
+            // 
+            this.dtCreatedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtCreatedDate.Location = new System.Drawing.Point(88, 53);
+            this.dtCreatedDate.Name = "dtCreatedDate";
+            this.dtCreatedDate.Size = new System.Drawing.Size(93, 20);
+            this.dtCreatedDate.TabIndex = 3;
             // 
             // btnNewDespatch
             // 
@@ -186,12 +186,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 517);
-            this.ControlBox = false;
             this.Controls.Add(this.btnNewReceipt);
             this.Controls.Add(this.btnNewDespatch);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmNewReceiptsDespatchs";
+            this.ShowIcon = false;
             this.Text = "Prijemnice/Otpremnice";
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVNewReceiptDespatch)).EndInit();
