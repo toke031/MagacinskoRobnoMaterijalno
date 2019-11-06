@@ -19,6 +19,9 @@ namespace MagacinskoRobnoMaterijalno.Models
         [DisplayName("Naziv artikla")]
         public string Name { get; set; }
 
+        [DisplayName("Jedinicna cena")]
+        public decimal QuantityItemPrice { get; set; }
+
         public Warehouse Warehouse { get; set; }
 
 

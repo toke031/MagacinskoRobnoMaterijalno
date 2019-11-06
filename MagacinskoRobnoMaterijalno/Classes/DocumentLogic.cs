@@ -32,5 +32,10 @@ namespace MagacinskoRobnoMaterijalno.Classes
         {
             return _docRepository.GetDocument(iD);
         }
+
+        internal string GetLastNoForDoument(int year)
+        {
+            return _docRepository.GetLastNoForDoument(year);
+        }
     }
 }

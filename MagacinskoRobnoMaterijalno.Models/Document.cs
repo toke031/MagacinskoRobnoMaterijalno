@@ -20,7 +20,7 @@ namespace MagacinskoRobnoMaterijalno.Models
         public DateTime PaymentEndDate { get; set; }
         public DateTime PaymentDate { get; set; }
         public int EmployeeID { get; set; }
-        public int TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public Client Client { get; set; }
         public Warehouse Warehouse { get; set; }
         public int StatusID { get; set; }

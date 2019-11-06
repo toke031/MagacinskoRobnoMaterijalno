@@ -40,6 +40,11 @@ namespace MagacinskoRobnoMaterijalno.Forms
             {
                 _document = new Document();
                 _documentLogic.AddDocument(_document);
+                // datum
+                _document.DocumentDateTime = DateTime.Now;
+                _document.PaymentEndDate = DateTime.Now;
+                _document.PaymentDate = DateTime.Now;
+                _document.DocumentNo = (DocumentTypeID == 0 ? "P" : "O") + "-" + _documentLogic.GetLastNoForDoument(_document.DocumentDateTime.Year) + "-" + DateTime.Now.Year;
             }
             else if (FormMode == FormMode.Modifying || FormMode == FormMode.ReadOnly)
             {
@@ -49,6 +54,18 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     SetAllControlsReadOnly();
                 }
             }
+
+            tbTotalWithVAT.DataBindings.Clear();
+            tbTotalWithVAT.DataBindings.Add("Text", _document, "TotalPrice");
+            tbDocumentNo.DataBindings.Clear();
+            tbDocumentNo.DataBindings.Add("Text", _document, "DocumentNo");
+            
+            dtpCreationDate.DataBindings.Clear();
+            dtpCreationDate.DataBindings.Add("Value", _document, "DocumentDateTime");
+            dtpEndDateForPayment.DataBindings.Clear();
+            dtpEndDateForPayment.DataBindings.Add("Value", _document, "PaymentEndDate");
+            dtpPaymentDate.DataBindings.Clear();
+            dtpPaymentDate.DataBindings.Add("Value", _document, "PaymentDate");
 
             // status
             cmbStatus.DisplayMember = "Description";
@@ -90,14 +107,16 @@ namespace MagacinskoRobnoMaterijalno.Forms
             documentItemBindingSource.ListChanged += DocumentItemBindingSource_ListChanged;
             documentItemBindingSource.CurrentChanged += DocumentItemBindingSource_CurrentChanged;
 
-            DGVReceiptsDespatchsItems.DataError += DGVReceiptsDespatchsItems_DataError; 
+            DGVReceiptsDespatchsItems.DataError += DGVReceiptsDespatchsItems_DataError;
             DGVReceiptsDespatchsItems.CellValueChanged += DGVReceiptsDespatchsItems_CellValueChanged;
         }
         private void Calculate()
         {
-            tbTotal.Text = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) - ((x.Quantity * x.QuantityItemPrice) * 0.2M)).ToString("N2");
-            tbVat.Text = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) * 0.2M).ToString("N2");
-            tbTotalWithVAT.Text = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice)).ToString("N2");
+            decimal totalWithWAT = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) * (((x.Height * x.Width) != 0) ? (x.Height * x.Width) : 1));
+
+            tbTotal.Text = (totalWithWAT - (totalWithWAT * 0.2M)).ToString("N2");
+            tbVat.Text = (totalWithWAT * 0.2M).ToString("N2");
+            _document.TotalPrice = totalWithWAT;
         }
         private void DocumentItemBindingSource_CurrentChanged(object sender, EventArgs e)
         {
@@ -109,7 +128,8 @@ namespace MagacinskoRobnoMaterijalno.Forms
             if (e.ListChangedType == ListChangedType.ItemChanged)
             {
                 DocumentItem doci = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.NewIndex].DataBoundItem);
-                doci.ItemPrice = doci.Quantity * doci.QuantityItemPrice;
+                decimal povrsina = doci.Width * doci.Height;
+                doci.ItemPrice = doci.Quantity * doci.QuantityItemPrice * ((povrsina != 0) ? povrsina : 1);
             }
         }
 
@@ -144,6 +164,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 {
                     ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = null;
                     ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = null;
+                    ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).QuantityItemPrice = 0;
                 }
                 else
                 {
@@ -152,13 +173,14 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     {
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = pronadjen;
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = pronadjen.ArticleNo;
+                        ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).QuantityItemPrice = pronadjen.QuantityItemPrice;
                     }
                     else
                     {
                         DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
                     }
                 }
-                
+
             }
             if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "Article")
             {
@@ -301,6 +323,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
             tbPhone.DataBindings.Clear();
             tbPhone.DataBindings.Add("Text", _document.Client, "Phone");
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)

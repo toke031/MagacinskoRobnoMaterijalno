@@ -38,18 +38,6 @@
             this.DGVReceiptsDespatchsItems = new System.Windows.Forms.DataGridView();
             this.Rb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ArticleNoUnbound = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.articleNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.articleBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityItemPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.widthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SelectedRow = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.lblPhoneFax = new System.Windows.Forms.Label();
@@ -82,16 +70,37 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbTotal = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cmbDocumentType = new System.Windows.Forms.ComboBox();
+            this.dtpCreationDate = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtpPaymentDate = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dtpEndDateForPayment = new System.Windows.Forms.DateTimePicker();
+            this.tbDocumentNo = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.documentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articleNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.articleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityItemPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.widthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.documentItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.DGVReceiptsDespatchsItems)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.documentItemBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentItemBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // DGVReceiptsDespatchsItems
@@ -116,7 +125,7 @@
             this.DGVReceiptsDespatchsItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGVReceiptsDespatchsItems.Location = new System.Drawing.Point(3, 16);
             this.DGVReceiptsDespatchsItems.Name = "DGVReceiptsDespatchsItems";
-            this.DGVReceiptsDespatchsItems.Size = new System.Drawing.Size(776, 277);
+            this.DGVReceiptsDespatchsItems.Size = new System.Drawing.Size(776, 260);
             this.DGVReceiptsDespatchsItems.TabIndex = 0;
             // 
             // Rb
@@ -135,103 +144,6 @@
             this.ArticleNoUnbound.Name = "ArticleNoUnbound";
             this.ArticleNoUnbound.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ArticleNoUnbound.Width = 50;
-            // 
-            // iDDataGridViewTextBoxColumn
-            // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // itemIDDataGridViewTextBoxColumn
-            // 
-            this.itemIDDataGridViewTextBoxColumn.DataPropertyName = "ItemID";
-            this.itemIDDataGridViewTextBoxColumn.HeaderText = "ItemID";
-            this.itemIDDataGridViewTextBoxColumn.Name = "itemIDDataGridViewTextBoxColumn";
-            this.itemIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // documentDataGridViewTextBoxColumn
-            // 
-            this.documentDataGridViewTextBoxColumn.DataPropertyName = "Document";
-            this.documentDataGridViewTextBoxColumn.HeaderText = "Document";
-            this.documentDataGridViewTextBoxColumn.Name = "documentDataGridViewTextBoxColumn";
-            this.documentDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // articleNoDataGridViewTextBoxColumn
-            // 
-            this.articleNoDataGridViewTextBoxColumn.DataPropertyName = "ArticleNo";
-            this.articleNoDataGridViewTextBoxColumn.DataSource = this.articleBindingSource;
-            this.articleNoDataGridViewTextBoxColumn.DisplayMember = "Name";
-            this.articleNoDataGridViewTextBoxColumn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.articleNoDataGridViewTextBoxColumn.HeaderText = "Artikal / Proizvod";
-            this.articleNoDataGridViewTextBoxColumn.Name = "articleNoDataGridViewTextBoxColumn";
-            this.articleNoDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.articleNoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.articleNoDataGridViewTextBoxColumn.ValueMember = "ArticleNo";
-            this.articleNoDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // articleBindingSource
-            // 
-            this.articleBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Article);
-            // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.quantityDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.quantityDataGridViewTextBoxColumn.HeaderText = "Kolicina";
-            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            // 
-            // quantityItemPriceDataGridViewTextBoxColumn
-            // 
-            this.quantityItemPriceDataGridViewTextBoxColumn.DataPropertyName = "QuantityItemPrice";
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.quantityItemPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
-            this.quantityItemPriceDataGridViewTextBoxColumn.HeaderText = "Jedinicna cena";
-            this.quantityItemPriceDataGridViewTextBoxColumn.Name = "quantityItemPriceDataGridViewTextBoxColumn";
-            // 
-            // widthDataGridViewTextBoxColumn
-            // 
-            this.widthDataGridViewTextBoxColumn.DataPropertyName = "Width";
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.widthDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
-            this.widthDataGridViewTextBoxColumn.HeaderText = "Sirina";
-            this.widthDataGridViewTextBoxColumn.Name = "widthDataGridViewTextBoxColumn";
-            // 
-            // heightDataGridViewTextBoxColumn
-            // 
-            this.heightDataGridViewTextBoxColumn.DataPropertyName = "Height";
-            dataGridViewCellStyle11.Format = "N2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.heightDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
-            this.heightDataGridViewTextBoxColumn.HeaderText = "Visina";
-            this.heightDataGridViewTextBoxColumn.Name = "heightDataGridViewTextBoxColumn";
-            // 
-            // itemPriceDataGridViewTextBoxColumn
-            // 
-            this.itemPriceDataGridViewTextBoxColumn.DataPropertyName = "ItemPrice";
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.itemPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
-            this.itemPriceDataGridViewTextBoxColumn.HeaderText = "Cena";
-            this.itemPriceDataGridViewTextBoxColumn.Name = "itemPriceDataGridViewTextBoxColumn";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Item";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Item";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // documentItemBindingSource
-            // 
-            this.documentItemBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.DocumentItem);
             // 
             // SelectedRow
             // 
@@ -422,7 +334,7 @@
             this.groupBox2.Controls.Add(this.lblPIB);
             this.groupBox2.Location = new System.Drawing.Point(190, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(604, 121);
+            this.groupBox2.Size = new System.Drawing.Size(604, 116);
             this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Klijent";
@@ -440,9 +352,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.DGVReceiptsDespatchsItems);
-            this.groupBox3.Location = new System.Drawing.Point(12, 190);
+            this.groupBox3.Location = new System.Drawing.Point(12, 207);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(782, 296);
+            this.groupBox3.Size = new System.Drawing.Size(782, 279);
             this.groupBox3.TabIndex = 38;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Stavke";
@@ -536,31 +448,214 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.cmbDocumentType);
-            this.groupBox5.Location = new System.Drawing.Point(12, 134);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(172, 55);
-            this.groupBox5.TabIndex = 49;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Tip dokumenta";
-            // 
             // cmbDocumentType
             // 
             this.cmbDocumentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDocumentType.FormattingEnabled = true;
-            this.cmbDocumentType.Location = new System.Drawing.Point(6, 19);
+            this.cmbDocumentType.Location = new System.Drawing.Point(6, 37);
             this.cmbDocumentType.Name = "cmbDocumentType";
             this.cmbDocumentType.Size = new System.Drawing.Size(160, 21);
             this.cmbDocumentType.TabIndex = 1;
+            // 
+            // dtpCreationDate
+            // 
+            this.dtpCreationDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpCreationDate.Location = new System.Drawing.Point(178, 38);
+            this.dtpCreationDate.Name = "dtpCreationDate";
+            this.dtpCreationDate.Size = new System.Drawing.Size(108, 20);
+            this.dtpCreationDate.TabIndex = 50;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(175, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(81, 13);
+            this.label4.TabIndex = 51;
+            this.label4.Text = "Datum kreiranja";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Controls.Add(this.tbDocumentNo);
+            this.groupBox6.Controls.Add(this.label7);
+            this.groupBox6.Controls.Add(this.dtpEndDateForPayment);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.cmbDocumentType);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.dtpPaymentDate);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Controls.Add(this.dtpCreationDate);
+            this.groupBox6.Location = new System.Drawing.Point(12, 134);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(782, 67);
+            this.groupBox6.TabIndex = 52;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Detalji dokumenta";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(291, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 53;
+            this.label5.Text = "Rok placanja";
+            // 
+            // dtpPaymentDate
+            // 
+            this.dtpPaymentDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpPaymentDate.Location = new System.Drawing.Point(406, 38);
+            this.dtpPaymentDate.Name = "dtpPaymentDate";
+            this.dtpPaymentDate.Size = new System.Drawing.Size(108, 20);
+            this.dtpPaymentDate.TabIndex = 52;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 13);
+            this.label6.TabIndex = 54;
+            this.label6.Text = "Tip dokumenta";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(405, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(81, 13);
+            this.label7.TabIndex = 56;
+            this.label7.Text = "Datum placanja";
+            // 
+            // dtpEndDateForPayment
+            // 
+            this.dtpEndDateForPayment.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEndDateForPayment.Location = new System.Drawing.Point(292, 38);
+            this.dtpEndDateForPayment.Name = "dtpEndDateForPayment";
+            this.dtpEndDateForPayment.Size = new System.Drawing.Size(108, 20);
+            this.dtpEndDateForPayment.TabIndex = 55;
+            // 
+            // tbDocumentNo
+            // 
+            this.tbDocumentNo.Location = new System.Drawing.Point(532, 38);
+            this.tbDocumentNo.Name = "tbDocumentNo";
+            this.tbDocumentNo.Size = new System.Drawing.Size(100, 20);
+            this.tbDocumentNo.TabIndex = 57;
+            this.tbDocumentNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(529, 22);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 58;
+            this.label8.Text = "Broj dokumenta";
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // itemIDDataGridViewTextBoxColumn
+            // 
+            this.itemIDDataGridViewTextBoxColumn.DataPropertyName = "ItemID";
+            this.itemIDDataGridViewTextBoxColumn.HeaderText = "ItemID";
+            this.itemIDDataGridViewTextBoxColumn.Name = "itemIDDataGridViewTextBoxColumn";
+            this.itemIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // documentDataGridViewTextBoxColumn
+            // 
+            this.documentDataGridViewTextBoxColumn.DataPropertyName = "Document";
+            this.documentDataGridViewTextBoxColumn.HeaderText = "Document";
+            this.documentDataGridViewTextBoxColumn.Name = "documentDataGridViewTextBoxColumn";
+            this.documentDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // articleNoDataGridViewTextBoxColumn
+            // 
+            this.articleNoDataGridViewTextBoxColumn.DataPropertyName = "ArticleNo";
+            this.articleNoDataGridViewTextBoxColumn.DataSource = this.articleBindingSource;
+            this.articleNoDataGridViewTextBoxColumn.DisplayMember = "Name";
+            this.articleNoDataGridViewTextBoxColumn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.articleNoDataGridViewTextBoxColumn.HeaderText = "Artikal / Proizvod";
+            this.articleNoDataGridViewTextBoxColumn.Name = "articleNoDataGridViewTextBoxColumn";
+            this.articleNoDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.articleNoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.articleNoDataGridViewTextBoxColumn.ValueMember = "ArticleNo";
+            this.articleNoDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // articleBindingSource
+            // 
+            this.articleBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Article);
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.quantityDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "Kolicina";
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            // 
+            // quantityItemPriceDataGridViewTextBoxColumn
+            // 
+            this.quantityItemPriceDataGridViewTextBoxColumn.DataPropertyName = "QuantityItemPrice";
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.quantityItemPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.quantityItemPriceDataGridViewTextBoxColumn.HeaderText = "Jedinicna cena";
+            this.quantityItemPriceDataGridViewTextBoxColumn.Name = "quantityItemPriceDataGridViewTextBoxColumn";
+            // 
+            // widthDataGridViewTextBoxColumn
+            // 
+            this.widthDataGridViewTextBoxColumn.DataPropertyName = "Width";
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.widthDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            this.widthDataGridViewTextBoxColumn.HeaderText = "Sirina";
+            this.widthDataGridViewTextBoxColumn.Name = "widthDataGridViewTextBoxColumn";
+            // 
+            // heightDataGridViewTextBoxColumn
+            // 
+            this.heightDataGridViewTextBoxColumn.DataPropertyName = "Height";
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.heightDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle11;
+            this.heightDataGridViewTextBoxColumn.HeaderText = "Visina";
+            this.heightDataGridViewTextBoxColumn.Name = "heightDataGridViewTextBoxColumn";
+            // 
+            // itemPriceDataGridViewTextBoxColumn
+            // 
+            this.itemPriceDataGridViewTextBoxColumn.DataPropertyName = "ItemPrice";
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.itemPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle12;
+            this.itemPriceDataGridViewTextBoxColumn.HeaderText = "Cena";
+            this.itemPriceDataGridViewTextBoxColumn.Name = "itemPriceDataGridViewTextBoxColumn";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Item";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Item";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // documentItemBindingSource
+            // 
+            this.documentItemBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.DocumentItem);
             // 
             // frmReceiptsDespatchs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 572);
-            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbTotal);
@@ -576,14 +671,15 @@
             this.Name = "frmReceiptsDespatchs";
             this.Text = "Prijemnice/Otpremnice";
             ((System.ComponentModel.ISupportInitialize)(this.DGVReceiptsDespatchsItems)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.documentItemBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentItemBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -639,7 +735,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn heightDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemPriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ComboBox cmbDocumentType;
+        private System.Windows.Forms.DateTimePicker dtpCreationDate;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DateTimePicker dtpEndDateForPayment;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dtpPaymentDate;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tbDocumentNo;
     }
 }
