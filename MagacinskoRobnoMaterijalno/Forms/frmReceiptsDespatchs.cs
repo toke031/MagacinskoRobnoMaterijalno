@@ -44,7 +44,8 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 _document.DocumentDateTime = DateTime.Now;
                 _document.PaymentEndDate = DateTime.Now;
                 _document.PaymentDate = DateTime.Now;
-                _document.DocumentNo = (DocumentTypeID == 0 ? "P" : "O") + "-" + _documentLogic.GetLastNoForDoument(_document.DocumentDateTime.Year) + "-" + DateTime.Now.Year;
+                _document.DocumentType = DocumentTypeID;
+                _document.DocumentNo = (DocumentTypeID == 0 ? "P" : "O") + "-" + _documentLogic.GetLastNoForDoument(_document.DocumentDateTime.Year, DocumentTypeID) + "-" + DateTime.Now.Year;
             }
             else if (FormMode == FormMode.Modifying || FormMode == FormMode.ReadOnly)
             {
@@ -64,7 +65,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             tbTotalWithVAT.DataBindings.Add("Text", _document, "TotalPrice");
             tbDocumentNo.DataBindings.Clear();
             tbDocumentNo.DataBindings.Add("Text", _document, "DocumentNo");
-            
+
             dtpCreationDate.DataBindings.Clear();
             dtpCreationDate.DataBindings.Add("Value", _document, "DocumentDateTime");
             dtpEndDateForPayment.DataBindings.Clear();
@@ -79,11 +80,10 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 .Select(value => new
                 {
                     (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
+                    v = (int)(Enum.Parse(typeof(Classes.Lib.StatusEnum), value.ToString()))
                 })
-                .OrderBy(item => item.value)
+                .OrderBy(item => item.v)
                 .ToList();
-            cmbStatus.DataBindings.Add("SelectedItem", _document, "StatusID");
             // magacini
             cmbWarehouse.DataSource = _warehouseLogic.GetAllWarehouse();
             cmbWarehouse.DisplayMember = "Name";
@@ -97,13 +97,13 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 .Select(value => new
                 {
                     (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                    value
+                    v = (int)(Enum.Parse(typeof(Classes.Lib.DocumentType), value.ToString()))
                 })
-                .OrderBy(item => item.value)
+                .OrderBy(item => item.v)
                 .ToList();
             cmbDocumentType.Enabled = false;
-            cmbDocumentType.SelectedIndex = DocumentTypeID;
-
+            cmbDocumentType.SelectedIndex = _document.DocumentType;
+            this.Text = cmbDocumentType.Text;
 
             listaArtikla = _articalLogic.GetAllArticles().ToList();
 
@@ -114,17 +114,21 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
             DGVReceiptsDespatchsItems.DataError += DGVReceiptsDespatchsItems_DataError;
             DGVReceiptsDespatchsItems.CellValueChanged += DGVReceiptsDespatchsItems_CellValueChanged;
+            DGVReceiptsDespatchsItems.CellContentClick += DGVReceiptsDespatchsItems_CellContentClick;
         }
+
+
+
         private void Calculate()
         {
-            decimal totalWithWAT = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) * (((x.Height * x.Width) != 0) ? (x.Height * x.Width) : 1));
+            decimal totalWithWAT = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) * (((x.Height * x.Width) != 0) ? ((x.Height / 100) * (x.Width / 100)) : 1));
 
             tbTotal.Text = (totalWithWAT - (totalWithWAT * 0.2M)).ToString("N2");
             tbVat.Text = (totalWithWAT * 0.2M).ToString("N2");
             _document.TotalPrice = totalWithWAT;
             tbTotalWithVAT.Text = _document.TotalPrice.ToString("N2");
             tbTotalWithVAT.Update();
-            
+
         }
         private void DocumentItemBindingSource_CurrentChanged(object sender, EventArgs e)
         {
@@ -136,8 +140,8 @@ namespace MagacinskoRobnoMaterijalno.Forms
             if (e.ListChangedType == ListChangedType.ItemChanged)
             {
                 DocumentItem doci = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.NewIndex].DataBoundItem);
-                decimal povrsina = doci.Width * doci.Height;
-                doci.ItemPrice = doci.Quantity * doci.QuantityItemPrice * ((povrsina != 0) ? povrsina : 1);
+                decimal povrsina = (doci.Width / 100) * (doci.Height / 100);
+                doci.ItemPrice = doci.Quantity * doci.QuantityItemPrice * ((povrsina != 0) ? (povrsina) : 1);
             }
         }
 
@@ -186,17 +190,23 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     else
                     {
                         DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                        DGVReceiptsDespatchsItems.Refresh();
                     }
+                    
                 }
 
             }
-            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "Article")
+            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "ArticleNo")
             {
                 var stavka = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem);
-                Article pronadjen = stavka.Item;
+                Article pronadjen = listaArtikla.FirstOrDefault(x => x.ArticleNo == stavka.ArticleNo);
+                //Article pronadjen = stavka.Item;
                 if (pronadjen != null)
                 {
-                    DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = pronadjen.ArticleNo;
+                    stavka.Item = pronadjen;
+                    stavka.ArticleNo = pronadjen.ArticleNo;
+                    stavka.QuantityItemPrice = pronadjen.QuantityItemPrice;
+                    DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells["ArticleNoUnbound"].Value = pronadjen.ArticleNo;
                 }
 
             }
@@ -204,7 +214,19 @@ namespace MagacinskoRobnoMaterijalno.Forms
             inload = false;
             DGVReceiptsDespatchsItems.Refresh();
         }
+        private void DGVReceiptsDespatchsItems_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
 
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && senderGrid.Columns[e.ColumnIndex].Name == "DeleteDocumentItem")
+            {
+                var stavka = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem);
+                if (stavka != null)
+                {
+                    _document.DocumentItems.Remove(stavka);
+                }
+            }
+        }
 
         private void SetAllControlsReadOnly()
         {
@@ -336,7 +358,13 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Sacuvaj();
+        }
+        private void Sacuvaj()
+        {
+            _document.StatusID = (int)cmbStatus.SelectedItem.GetType().GetProperty("v").GetValue(cmbStatus.SelectedItem, null);
             _documentLogic.SaveAllChanges();
+            MessageBox.Show("Dokument je sacuvan", "Cuvanje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -347,6 +375,23 @@ namespace MagacinskoRobnoMaterijalno.Forms
         private void cmbWarehouse_SelectedIndexChanged(object sender, EventArgs e)
         {
             _document.Warehouse = (Warehouse)cmbWarehouse.SelectedItem;
+        }
+
+        private void frmReceiptsDespatchs_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dres = MessageBox.Show("Da li zelite da sacuvate dokument", "Izlaz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (dres == DialogResult.Yes)
+            {
+                Sacuvaj();
+            }
+            else if (dres == DialogResult.No)
+            {
+                e.Cancel = false;
+            }
+            else if (dres == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

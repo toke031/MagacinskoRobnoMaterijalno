@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MagacinskoRobnoMaterijalno.Models
 {
    public class DocumentItem
-    {
+   {
         public long ID { get; set; }
         public long ItemID { get; set; }
         public Document Document { get; set; }

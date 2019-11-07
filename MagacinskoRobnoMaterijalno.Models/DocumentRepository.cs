@@ -32,10 +32,12 @@ namespace MagacinskoRobnoMaterijalno.Models
             return _context.Documents.FirstOrDefault(x => x.ID == iD);
         }
 
-        public string GetLastNoForDoument(int year)
+        public string GetLastNoForDoument(int year, int typeId)
         {
-            return (_context.Documents.Where(x => x.DocumentDateTime.Year == year)
-                .Where(x => x.StatusID == 1 || x.StatusID == 2).Count() + 1).ToString();
+            return (_context.Documents
+                .Where(x => x.DocumentType == typeId)
+                .Where(x => x.DocumentDateTime.Year == year)
+                .Where(x => x.StatusID == 0 || x.StatusID == 1).Count() + 1).ToString();
         }
     }
 }
