@@ -70,6 +70,18 @@ namespace MagacinskoRobnoMaterijalno.Forms
         private void InitNewItem()
         {
             _articalLogic = new ArticalLogic();
+
+            // tip dokumenta
+            cmbItemType.DisplayMember = "Description";
+            cmbItemType.DataSource = Enum.GetValues(typeof(Classes.Lib.ItemType))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    v = (int)(Enum.Parse(typeof(Classes.Lib.ItemType), value.ToString()))
+                })
+                .OrderBy(item => item.v)
+                .ToList();  
             BindingAttributes();
         }
         private void BindingAttributes()
@@ -82,6 +94,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
             tbPrice.DataBindings.Clear();
             tbPrice.DataBindings.Add("Text", _bindinglist[0], "QuantityItemPrice");
+
+            cmbItemType.DataBindings.Clear();
+            cmbItemType.DataBindings.Add("SelectedIndex", _bindinglist[0], "ArticleTypeID");
         }
     }
 }

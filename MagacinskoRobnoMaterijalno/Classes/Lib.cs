@@ -35,5 +35,14 @@ namespace MagacinskoRobnoMaterijalno.Classes
             Despatch = 1
         }
 
+        public enum ItemType
+        {
+            [Description("Materijal")]
+            Material = 0,
+
+            [Description("Proizvod")]
+            Product = 1
+        }
+
     }
 }

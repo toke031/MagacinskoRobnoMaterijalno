@@ -29,8 +29,9 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public BindingList<Article> GetArticlesForWarehouse(Warehouse warehouse)
         {
-            _context.Articles.Where(x => x.Warehouse.ID == warehouse.ID).Load();
-            return _context.Articles.Local.ToBindingList();
+            //_context.Articles.Where(x => x.Warehouse.ID == warehouse.ID).Load();
+            //return _context.Articles.Local.ToBindingList();
+            return null;
         }
 
         public BindingList<Warehouse> GetAllWarehouse()

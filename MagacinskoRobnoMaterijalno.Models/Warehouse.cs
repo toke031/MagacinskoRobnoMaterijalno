@@ -9,18 +9,9 @@ namespace MagacinskoRobnoMaterijalno.Models
 {
     public class Warehouse
     {
-        [System.ComponentModel.Browsable(false)]
         public long ID { get; set; }
-
-        [DisplayName("ID tipa magacina")]
         public int WarehouseTypeID { get; set; }
-
-        [DisplayName("Sifra magacina")]
         public string WarehouseNo { get; set; }
-
-        [DisplayName("Naziv magacina")]
         public string Name { get; set; }
-
-        public ICollection<Article> Articles { get; set; }
     }
 }

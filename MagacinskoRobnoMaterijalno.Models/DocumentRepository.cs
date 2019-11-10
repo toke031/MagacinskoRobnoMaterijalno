@@ -39,5 +39,10 @@ namespace MagacinskoRobnoMaterijalno.Models
                 .Where(x => x.DocumentDateTime.Year == year)
                 .Where(x => x.StatusID == 0 || x.StatusID == 1).Count() + 1).ToString();
         }
+
+        public List<Document> GetAllDocuments()
+        {
+            return _context.Documents.ToList();
+        }
     }
 }

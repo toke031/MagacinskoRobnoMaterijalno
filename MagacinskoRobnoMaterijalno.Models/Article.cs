@@ -9,20 +9,12 @@ namespace MagacinskoRobnoMaterijalno.Models
 {
     public class Article
     {
-        [System.ComponentModel.Browsable(false)]
         public long ID { get; set; }
-
-
-        [DisplayName("Sifra artikla")]
         public string ArticleNo { get; set; }
-
-        [DisplayName("Naziv artikla")]
         public string Name { get; set; }
-
-        [DisplayName("Jedinicna cena")]
         public decimal QuantityItemPrice { get; set; }
-
-        public Warehouse Warehouse { get; set; }
+        public int ArticleTypeID{ get; set; }
+        public ICollection<DocumentItem> DocumentItems { get; set; }
 
 
     }

@@ -16,6 +16,7 @@ namespace MagacinskoRobnoMaterijalno.Models
         public long ID { get; set; }
         public string DocumentNo { get; set; }
         public int DocumentType { get; set; }
+        public long ClientID { get; set; }
         public DateTime DocumentDateTime { get; set; }
         public DateTime PaymentEndDate { get; set; }
         public DateTime PaymentDate { get; set; }

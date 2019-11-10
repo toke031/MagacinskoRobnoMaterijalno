@@ -30,6 +30,13 @@ namespace MagacinskoRobnoMaterijalno.Forms
             InitializeComponent();
             InitDocument();
         }
+        public frmReceiptsDespatchs(Document document)
+        {
+            SelectedDocument = document;
+            this.FormMode = FormMode.Modifying;
+            InitializeComponent();
+            InitDocument();
+        }
 
         private void InitDocument()
         {
@@ -38,8 +45,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
             _warehouseLogic = new WarehouseLogic();
             if (FormMode == FormMode.New)
             {
-                _document = new Document();
-                _documentLogic.AddDocument(_document);
+                    _document = new Document();
+                    _documentLogic.AddDocument(_document);
+               
                 // datum
                 _document.DocumentDateTime = DateTime.Now;
                 _document.PaymentEndDate = DateTime.Now;
@@ -183,7 +191,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     Article pronadjen = listaArtikla.FirstOrDefault(x => x.ArticleNo == DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
                     if (pronadjen != null)
                     {
-                        ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = pronadjen;
+                        ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = (pronadjen);
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = pronadjen.ArticleNo;
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).QuantityItemPrice = pronadjen.QuantityItemPrice;
                     }
@@ -203,7 +211,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 //Article pronadjen = stavka.Item;
                 if (pronadjen != null)
                 {
-                    stavka.Item = pronadjen;
+                    stavka.Item = (pronadjen);
                     stavka.ArticleNo = pronadjen.ArticleNo;
                     stavka.QuantityItemPrice = pronadjen.QuantityItemPrice;
                     DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells["ArticleNoUnbound"].Value = pronadjen.ArticleNo;
@@ -324,6 +332,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             if (fc.SelectedClient != null)
             {
                 _document.Client = fc.SelectedClient;
+                _document.ClientID = fc.SelectedClient.ID;
                 BindClientProperties();
             }
         }
@@ -362,6 +371,11 @@ namespace MagacinskoRobnoMaterijalno.Forms
         }
         private void Sacuvaj()
         {
+            if(_document.DocumentItems.Any(x=>x.Item == null))
+            {
+                MessageBox.Show("Niste izabrali artikal");
+                return;
+            }
             _document.StatusID = (int)cmbStatus.SelectedItem.GetType().GetProperty("v").GetValue(cmbStatus.SelectedItem, null);
             _documentLogic.SaveAllChanges();
             MessageBox.Show("Dokument je sacuvan", "Cuvanje", MessageBoxButtons.OK, MessageBoxIcon.Information);

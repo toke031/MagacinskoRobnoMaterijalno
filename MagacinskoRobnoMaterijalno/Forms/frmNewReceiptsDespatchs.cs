@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MagacinskoRobnoMaterijalno.Classes;
+using MagacinskoRobnoMaterijalno.Models;
 
 namespace MagacinskoRobnoMaterijalno.Forms
 {
     public partial class frmNewReceiptsDespatchs : Form
     {
         private DocumentLogic _documentLogic;
+        private ClientLogic _clientLogic;
         private Dictionary<int, string> documentTypeDictionary;
         private Dictionary<int, string> documentStatusDictionary;
         public frmNewReceiptsDespatchs()
@@ -27,6 +29,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             _documentLogic = new DocumentLogic();
             documentTypeDictionary = new Dictionary<int, string>();
             documentStatusDictionary = new Dictionary<int, string>();
+            _clientLogic = new ClientLogic();
 
             documentTypeDictionary.Add(2, "Svi");
             documentTypeDictionary.Add(0, "Prijemnica");
@@ -47,7 +50,28 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbDocumentStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbDocumentStatus.DataSource = documentStatusDictionary.ToList();
 
+            documentBindingSource.DataSource = _documentLogic.GetAllDocuments();
+            clientBindingSource.DataSource = _clientLogic.GetAllClients();
 
+            DGVNewReceiptDespatch.DataError += DGVNewReceiptDespatch_DataError;
+            DGVNewReceiptDespatch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGVNewReceiptDespatch.DoubleClick += SelectedRow_DoubleClick;
+        }
+
+        private void SelectedRow_DoubleClick(object sender, EventArgs e)
+        {
+            var selected = DGVNewReceiptDespatch.SelectedRows[0];
+            if (selected != null)
+            {
+                frmReceiptsDespatchs EditDocument = new frmReceiptsDespatchs((Document)((DataGridViewRow)selected).DataBoundItem);
+                EditDocument.Show();
+            }
+        }
+
+
+        private void DGVNewReceiptDespatch_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            //throw new NotImplementedException();
         }
 
         private void btnNewDespatch_Click(object sender, EventArgs e)

@@ -35,6 +35,8 @@
             this.btnAddArticle = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbPrice = new System.Windows.Forms.TextBox();
+            this.cmbItemType = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbSifra
@@ -71,7 +73,7 @@
             // 
             // btnAddArticle
             // 
-            this.btnAddArticle.Location = new System.Drawing.Point(163, 122);
+            this.btnAddArticle.Location = new System.Drawing.Point(163, 134);
             this.btnAddArticle.Name = "btnAddArticle";
             this.btnAddArticle.Size = new System.Drawing.Size(142, 30);
             this.btnAddArticle.TabIndex = 10;
@@ -95,11 +97,31 @@
             this.tbPrice.Size = new System.Drawing.Size(100, 20);
             this.tbPrice.TabIndex = 11;
             // 
+            // cmbItemType
+            // 
+            this.cmbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbItemType.FormattingEnabled = true;
+            this.cmbItemType.Location = new System.Drawing.Point(106, 98);
+            this.cmbItemType.Name = "cmbItemType";
+            this.cmbItemType.Size = new System.Drawing.Size(121, 21);
+            this.cmbItemType.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 101);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Tip artikla";
+            // 
             // frmNewItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 166);
+            this.ClientSize = new System.Drawing.Size(321, 176);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cmbItemType);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbPrice);
             this.Controls.Add(this.btnAddArticle);
@@ -123,5 +145,7 @@
         private System.Windows.Forms.Button btnAddArticle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbPrice;
+        private System.Windows.Forms.ComboBox cmbItemType;
+        private System.Windows.Forms.Label label2;
     }
 }
