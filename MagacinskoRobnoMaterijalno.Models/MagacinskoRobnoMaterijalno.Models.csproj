@@ -203,6 +203,22 @@
     <Compile Include="Migrations\201911091621070_promena14.Designer.cs">
       <DependentUpon>201911091621070_promena14.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911101617159_promena15.cs" />
+    <Compile Include="Migrations\201911101617159_promena15.Designer.cs">
+      <DependentUpon>201911101617159_promena15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911101639586_promena17.cs" />
+    <Compile Include="Migrations\201911101639586_promena17.Designer.cs">
+      <DependentUpon>201911101639586_promena17.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911101641584_promena171.cs" />
+    <Compile Include="Migrations\201911101641584_promena171.Designer.cs">
+      <DependentUpon>201911101641584_promena171.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911101646551_promena18.cs" />
+    <Compile Include="Migrations\201911101646551_promena18.Designer.cs">
+      <DependentUpon>201911101646551_promena18.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Document.cs" />
@@ -267,6 +283,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911091621070_promena14.resx">
       <DependentUpon>201911091621070_promena14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911101617159_promena15.resx">
+      <DependentUpon>201911101617159_promena15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911101639586_promena17.resx">
+      <DependentUpon>201911101639586_promena17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911101641584_promena171.resx">
+      <DependentUpon>201911101641584_promena171.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911101646551_promena18.resx">
+      <DependentUpon>201911101646551_promena18.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

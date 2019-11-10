@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace MagacinskoRobnoMaterijalno.Models
@@ -29,7 +30,7 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public Document GetDocument(long iD)
         {
-            return _context.Documents.FirstOrDefault(x => x.ID == iD);
+            return _context.Documents.Include(x => x.Client).Include(y => y.DocumentItems.Select(h=>h.Item)).Where(x => x.ID == iD).FirstOrDefault();
         }
 
         public string GetLastNoForDoument(int year, int typeId)

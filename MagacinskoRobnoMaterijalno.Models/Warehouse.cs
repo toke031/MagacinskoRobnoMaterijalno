@@ -13,5 +13,6 @@ namespace MagacinskoRobnoMaterijalno.Models
         public int WarehouseTypeID { get; set; }
         public string WarehouseNo { get; set; }
         public string Name { get; set; }
+        ICollection<Document> Documents { get; set; }
     }
 }

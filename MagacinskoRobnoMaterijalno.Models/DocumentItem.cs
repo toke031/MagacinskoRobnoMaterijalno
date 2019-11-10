@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace MagacinskoRobnoMaterijalno.Models
         public Document Document { get; set; }
         public decimal ItemPrice { get; set; }
         public string ArticleNo { get; set; }
+
+        [ForeignKey("ItemID")]
         public Article Item { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityItemPrice { get; set; }
