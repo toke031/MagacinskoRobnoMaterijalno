@@ -96,7 +96,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbWarehouse.DataSource = _warehouseLogic.GetAllWarehouse();
             cmbWarehouse.DisplayMember = "Name";
             cmbWarehouse.ValueMember = "WarehouseTypeID";
-
+            cmbWarehouse.SelectedIndexChanged += CmbWarehouse_ValuseChanged;
 
             // tip dokumenta
             cmbDocumentType.DisplayMember = "Description";
@@ -113,7 +113,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbDocumentType.SelectedIndex = _document.DocumentType;
             this.Text = cmbDocumentType.Text;
 
-            listaArtikla = _articalLogic.GetAllArticles().ToList();
+            listaArtikla = _articalLogic.GetAllArticlesByWarehouseType(cmbWarehouse.SelectedIndex).ToList();
 
             documentItemBindingSource.DataSource = _document.DocumentItems;
             articleBindingSource.DataSource = listaArtikla;
@@ -125,7 +125,11 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DGVReceiptsDespatchsItems.CellContentClick += DGVReceiptsDespatchsItems_CellContentClick;
         }
 
-
+        private void CmbWarehouse_ValuseChanged(object sender, EventArgs e)
+        {
+            listaArtikla = _articalLogic.GetAllArticlesByWarehouseType(cmbWarehouse.SelectedIndex).ToList();
+            articleBindingSource.DataSource = listaArtikla;
+        }
 
         private void Calculate()
         {
