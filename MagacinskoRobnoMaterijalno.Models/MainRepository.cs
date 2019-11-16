@@ -55,9 +55,11 @@ namespace MagacinskoRobnoMaterijalno.Models
             _context.Entry(client).State = System.Data.Entity.EntityState.Modified;
         }
 
-        public List<Article> GetArticlesByWarehouseType(int warehouseType)
+        public BindingList<Article> GetArticlesByWarehouseType(int warehouseType)
         {
-            return _context.Articles.Where(x => x.ArticleTypeID == warehouseType).ToList();
+          //  _context.Articles.Where(x => x.ArticleTypeID == warehouseType).Load();
+            BindingList<Article> b = new BindingList<Article>(_context.Articles.Where(x => x.ArticleTypeID == warehouseType).ToList());
+            return b;//.Where(x => x.ArticleTypeID == warehouseType);
         }
 
         public Client GetClientByClientPIB(string PIB)

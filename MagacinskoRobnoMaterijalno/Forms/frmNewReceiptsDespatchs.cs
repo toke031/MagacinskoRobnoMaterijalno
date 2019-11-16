@@ -16,6 +16,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
     {
         private DocumentLogic _documentLogic;
         private ClientLogic _clientLogic;
+        private WarehouseLogic _warehouseLogic;
         private Dictionary<int, string> documentTypeDictionary;
         private Dictionary<int, string> documentStatusDictionary;
         public frmNewReceiptsDespatchs()
@@ -30,7 +31,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             documentTypeDictionary = new Dictionary<int, string>();
             documentStatusDictionary = new Dictionary<int, string>();
             _clientLogic = new ClientLogic();
-
+            _warehouseLogic = new WarehouseLogic();
             documentTypeDictionary.Add(2, "Svi");
             documentTypeDictionary.Add(0, "Prijemnica");
             documentTypeDictionary.Add(1, "Otpremnica");
@@ -50,22 +51,34 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbDocumentStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbDocumentStatus.DataSource = documentStatusDictionary.ToList();
 
+            var statuses = new List<Status>() { new Status() { ID = 0, Name = "Neplaćeni" }, new Status() { ID = 1, Name = "Plaćeni" }, new Status() { ID = 2, Name = "Storno" } };
+
+            documentTypeBindingSource.DataSource = statuses.ToList();
             documentBindingSource.DataSource = _documentLogic.GetAllDocuments();
             clientBindingSource.DataSource = _clientLogic.GetAllClients();
+            warehouseBindingSource.DataSource = _warehouseLogic.GetAllWarehouse();
 
             DGVNewReceiptDespatch.DataError += DGVNewReceiptDespatch_DataError;
             DGVNewReceiptDespatch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGVNewReceiptDespatch.DoubleClick += SelectedRow_DoubleClick;
         }
-
         private void SelectedRow_DoubleClick(object sender, EventArgs e)
         {
             var selected = DGVNewReceiptDespatch.SelectedRows[0];
             if (selected != null)
             {
-                frmReceiptsDespatchs EditDocument = new frmReceiptsDespatchs((Document)((DataGridViewRow)selected).DataBoundItem);
+                frmReceiptsDespatchs EditDocument = new frmReceiptsDespatchs((Document)((DataGridViewRow)selected).DataBoundItem, this);
                 EditDocument.Show();
             }
+        }
+        public void RefreshFromAnotherForm()
+        {
+            DGVNewReceiptDespatch.DataSource = null;
+            documentBindingSource = new BindingSource();
+            documentBindingSource.DataSource = _documentLogic.GetAllDocuments();
+            DGVNewReceiptDespatch.DataSource = documentBindingSource;
+            DGVNewReceiptDespatch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
         }
 
 

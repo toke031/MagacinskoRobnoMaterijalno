@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,9 +39,14 @@ namespace MagacinskoRobnoMaterijalno.Classes
             return _docRepository.GetLastNoForDoument(year, type);
         }
 
-        internal List<Document> GetAllDocuments()
+        internal BindingList<Document> GetAllDocuments()
         {
             return _docRepository.GetAllDocuments();
+        }
+
+        public bool IsChangedChanged()
+        {
+            return _docRepository.IsChangedChanged();
         }
     }
 }

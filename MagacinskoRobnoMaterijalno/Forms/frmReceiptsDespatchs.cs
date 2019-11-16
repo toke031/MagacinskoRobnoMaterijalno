@@ -20,9 +20,11 @@ namespace MagacinskoRobnoMaterijalno.Forms
         public int DocumentTypeID { get; set; }
         DocumentLogic _documentLogic;
         WarehouseLogic _warehouseLogic;
+        Client _client;
+        frmNewReceiptsDespatchs _frmNewReceiptsDespatchs;
         ArticalLogic _articalLogic;
         Document _document;
-        List<Article> listaArtikla;
+        BindingList<Article> listaArtikla;
         BindingList<DocumentItem> listaStavki = new BindingList<DocumentItem>();
         public frmReceiptsDespatchs(int documentTypeID)
         {
@@ -30,9 +32,10 @@ namespace MagacinskoRobnoMaterijalno.Forms
             InitializeComponent();
             InitDocument();
         }
-        public frmReceiptsDespatchs(Document document)
+        public frmReceiptsDespatchs(Document document, frmNewReceiptsDespatchs frmNewReceiptsDespatchs)
         {
             SelectedDocument = document;
+            _frmNewReceiptsDespatchs = frmNewReceiptsDespatchs;
             this.FormMode = FormMode.Modifying;
             InitializeComponent();
             InitDocument();
@@ -58,13 +61,14 @@ namespace MagacinskoRobnoMaterijalno.Forms
             else if (FormMode == FormMode.Modifying || FormMode == FormMode.ReadOnly)
             {
                 _document = _documentLogic.GetDocument(SelectedDocument.ID);
+                _client = _document.Client;
                 if (FormMode == FormMode.ReadOnly)
                 {
                     SetAllControlsReadOnly();
                 }
             }
 
-            if (_document.Client != null)
+            if (_client != null)
             {
                 BindClientProperties();
             }
@@ -92,6 +96,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 })
                 .OrderBy(item => item.v)
                 .ToList();
+            cmbStatus.SelectedIndex = _document.StatusID;
             // magacini
             cmbWarehouse.DataSource = _warehouseLogic.GetAllWarehouse();
             cmbWarehouse.DisplayMember = "Name";
@@ -113,9 +118,10 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbDocumentType.SelectedIndex = _document.DocumentType;
             this.Text = cmbDocumentType.Text;
 
-            listaArtikla = _articalLogic.GetAllArticlesByWarehouseType(cmbWarehouse.SelectedIndex).ToList();
-
+            listaArtikla = _articalLogic.GetAllArticlesByWarehouseType(cmbWarehouse.SelectedIndex);
             documentItemBindingSource.DataSource = _document.DocumentItems;
+            
+
             articleBindingSource.DataSource = listaArtikla;
             documentItemBindingSource.ListChanged += DocumentItemBindingSource_ListChanged;
             documentItemBindingSource.CurrentChanged += DocumentItemBindingSource_CurrentChanged;
@@ -123,11 +129,43 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DGVReceiptsDespatchsItems.DataError += DGVReceiptsDespatchsItems_DataError;
             DGVReceiptsDespatchsItems.CellValueChanged += DGVReceiptsDespatchsItems_CellValueChanged;
             DGVReceiptsDespatchsItems.CellContentClick += DGVReceiptsDespatchsItems_CellContentClick;
+            DGVReceiptsDespatchsItems.CellFormatting += DGVReceiptsDespatchsItems_CellFormatting;
+
+
+            inload = true;
+            InitUnboundColumns();
+            inload = false;
+            DGVReceiptsDespatchsItems.Update();
+            DGVReceiptsDespatchsItems.Refresh();
+            
+        }
+
+        private void DGVReceiptsDespatchsItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+           
+            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "ArticleNoUnbound" && e.Value == null)
+            {
+                if (DGVReceiptsDespatchsItems.Rows[e.RowIndex] == null || DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem == null)
+                    return;
+                e.Value = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo;
+            }
+            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "Rb" && e.Value == null)
+            {
+                if (DGVReceiptsDespatchsItems.Rows[e.RowIndex] == null || DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem == null)
+                    return;
+                e.Value = e.RowIndex + 1;
+            }
+        }
+
+        private void InitUnboundColumns()
+        {
+            Calculate();
+            
         }
 
         private void CmbWarehouse_ValuseChanged(object sender, EventArgs e)
         {
-            listaArtikla = _articalLogic.GetAllArticlesByWarehouseType(cmbWarehouse.SelectedIndex).ToList();
+            listaArtikla = _articalLogic.GetAllArticlesByWarehouseType(cmbWarehouse.SelectedIndex);
             articleBindingSource.DataSource = listaArtikla;
         }
 
@@ -185,8 +223,8 @@ namespace MagacinskoRobnoMaterijalno.Forms
             {
                 if (DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null || DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "")
                 {
-                    ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = null;
-                    ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ItemID = 0;
+                   // ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = null;
+                    //((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ItemID = 0;
                     ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = null;
                     ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).QuantityItemPrice = 0;
                 }
@@ -195,7 +233,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     Article pronadjen = listaArtikla.FirstOrDefault(x => x.ArticleNo == DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
                     if (pronadjen != null)
                     {
-                        ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = (pronadjen);
+                       // ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = (pronadjen);
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ItemID = (pronadjen.ID);
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = pronadjen.ArticleNo;
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).QuantityItemPrice = pronadjen.QuantityItemPrice;
@@ -217,7 +255,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 if (pronadjen != null)
                 {
                     stavka.ItemID = pronadjen.ID;
-                    stavka.Item = (pronadjen);
+                   // stavka.Item = (pronadjen);
                     stavka.ArticleNo = pronadjen.ArticleNo;
                     stavka.QuantityItemPrice = pronadjen.QuantityItemPrice;
                     DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells["ArticleNoUnbound"].Value = pronadjen.ArticleNo;
@@ -337,7 +375,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             fc.ShowDialog();
             if (fc.SelectedClient != null)
             {
-               _document.Client = fc.SelectedClient;
+                _client = fc.SelectedClient;
                 _document.ClientID = fc.SelectedClient.ID;
                 BindClientProperties();
             }
@@ -346,28 +384,28 @@ namespace MagacinskoRobnoMaterijalno.Forms
         private void BindClientProperties()
         {
             tbName.DataBindings.Clear();
-            tbName.DataBindings.Add("Text", _document.Client, "Name");
+            tbName.DataBindings.Add("Text", _client, "Name");
 
             tbMB.DataBindings.Clear();
-            tbMB.DataBindings.Add("Text", _document.Client, "MB");
+            tbMB.DataBindings.Add("Text", _client, "MB");
 
             tbPIB.DataBindings.Clear();
-            tbPIB.DataBindings.Add("Text", _document.Client, "PIB");
+            tbPIB.DataBindings.Add("Text", _client, "PIB");
 
             tbAddress.DataBindings.Clear();
-            tbAddress.DataBindings.Add("Text", _document.Client, "Address");
+            tbAddress.DataBindings.Add("Text", _client, "Address");
 
             tbBankAccount.DataBindings.Clear();
-            tbBankAccount.DataBindings.Add("Text", _document.Client, "BankAccount");
+            tbBankAccount.DataBindings.Add("Text", _client, "BankAccount");
 
             tbPhoneFax.DataBindings.Clear();
-            tbPhoneFax.DataBindings.Add("Text", _document.Client, "PhoneFax");
+            tbPhoneFax.DataBindings.Add("Text", _client, "PhoneFax");
 
             tbEmail.DataBindings.Clear();
-            tbEmail.DataBindings.Add("Text", _document.Client, "Email");
+            tbEmail.DataBindings.Add("Text", _client, "Email");
 
             tbPhone.DataBindings.Clear();
-            tbPhone.DataBindings.Add("Text", _document.Client, "Phone");
+            tbPhone.DataBindings.Add("Text", _client, "Phone");
 
         }
 
@@ -382,11 +420,12 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 MessageBox.Show("Niste izabrali artikal");
                 return;
             }
-            _document.Client = null;
-            _document.Warehouse = null;
-            _document.DocumentItems.ToList().ForEach(x => { x.Item = null; });
+         //   _document.Client = null;
+          //  _document.Warehouse = null;
+       //   _document.DocumentItems.ToList().ForEach(x => { x.Item = null; });
             _document.StatusID = (int)cmbStatus.SelectedItem.GetType().GetProperty("v").GetValue(cmbStatus.SelectedItem, null);
             _documentLogic.SaveAllChanges();
+            _frmNewReceiptsDespatchs.RefreshFromAnotherForm();
             MessageBox.Show("Dokument je sacuvan", "Cuvanje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -402,19 +441,28 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void frmReceiptsDespatchs_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dres = MessageBox.Show("Da li zelite da sacuvate dokument", "Izlaz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (dres == DialogResult.Yes)
+            if (_documentLogic.IsChangedChanged())
             {
-                Sacuvaj();
+                DialogResult dres = MessageBox.Show("Da li zelite da sacuvate dokument", "Izlaz", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                //this.Parent.Refresh();
+                if (dres == DialogResult.Yes)
+                {
+                    Sacuvaj();
+                }
+                else if (dres == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
+                else if (dres == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
             }
-            else if (dres == DialogResult.No)
-            {
-                e.Cancel = false;
-            }
-            else if (dres == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-            }
+        }
+
+        private void frmReceiptsDespatchs_Shown(object sender, EventArgs e)
+        {
+            DGVReceiptsDespatchsItems.Refresh();
         }
     }
 }

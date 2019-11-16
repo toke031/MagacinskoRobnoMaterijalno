@@ -135,89 +135,9 @@
     <Compile Include="DocumentRepository.cs" />
     <Compile Include="MainDBContext.cs" />
     <Compile Include="MainRepository.cs" />
-    <Compile Include="Migrations\201910290004174_CreateFirst.cs" />
-    <Compile Include="Migrations\201910290004174_CreateFirst.Designer.cs">
-      <DependentUpon>201910290004174_CreateFirst.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910301453117_changeattributes.cs" />
-    <Compile Include="Migrations\201910301453117_changeattributes.Designer.cs">
-      <DependentUpon>201910301453117_changeattributes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911031412382_DocumentDocumentItem.cs" />
-    <Compile Include="Migrations\201911031412382_DocumentDocumentItem.Designer.cs">
-      <DependentUpon>201911031412382_DocumentDocumentItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911041834579_promena.cs" />
-    <Compile Include="Migrations\201911041834579_promena.Designer.cs">
-      <DependentUpon>201911041834579_promena.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911042127393_promena_2.cs" />
-    <Compile Include="Migrations\201911042127393_promena_2.Designer.cs">
-      <DependentUpon>201911042127393_promena_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911042142120_promena_3.cs" />
-    <Compile Include="Migrations\201911042142120_promena_3.Designer.cs">
-      <DependentUpon>201911042142120_promena_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911042157540_promena_4.cs" />
-    <Compile Include="Migrations\201911042157540_promena_4.Designer.cs">
-      <DependentUpon>201911042157540_promena_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911042230243_promena_5.cs" />
-    <Compile Include="Migrations\201911042230243_promena_5.Designer.cs">
-      <DependentUpon>201911042230243_promena_5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911042354426_promena_6.cs" />
-    <Compile Include="Migrations\201911042354426_promena_6.Designer.cs">
-      <DependentUpon>201911042354426_promena_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911050010072_promena_7.cs" />
-    <Compile Include="Migrations\201911050010072_promena_7.Designer.cs">
-      <DependentUpon>201911050010072_promena_7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911052135556_promena_8.cs" />
-    <Compile Include="Migrations\201911052135556_promena_8.Designer.cs">
-      <DependentUpon>201911052135556_promena_8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911061720068_promena_9.cs" />
-    <Compile Include="Migrations\201911061720068_promena_9.Designer.cs">
-      <DependentUpon>201911061720068_promena_9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911061844048_promena_10.cs" />
-    <Compile Include="Migrations\201911061844048_promena_10.Designer.cs">
-      <DependentUpon>201911061844048_promena_10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911061907071_promena_11.cs" />
-    <Compile Include="Migrations\201911061907071_promena_11.Designer.cs">
-      <DependentUpon>201911061907071_promena_11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911090105045_izmena12.cs" />
-    <Compile Include="Migrations\201911090105045_izmena12.Designer.cs">
-      <DependentUpon>201911090105045_izmena12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911091608468_promena13.cs" />
-    <Compile Include="Migrations\201911091608468_promena13.Designer.cs">
-      <DependentUpon>201911091608468_promena13.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911091621070_promena14.cs" />
-    <Compile Include="Migrations\201911091621070_promena14.Designer.cs">
-      <DependentUpon>201911091621070_promena14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911101617159_promena15.cs" />
-    <Compile Include="Migrations\201911101617159_promena15.Designer.cs">
-      <DependentUpon>201911101617159_promena15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911101639586_promena17.cs" />
-    <Compile Include="Migrations\201911101639586_promena17.Designer.cs">
-      <DependentUpon>201911101639586_promena17.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911101641584_promena171.cs" />
-    <Compile Include="Migrations\201911101641584_promena171.Designer.cs">
-      <DependentUpon>201911101641584_promena171.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911101646551_promena18.cs" />
-    <Compile Include="Migrations\201911101646551_promena18.Designer.cs">
-      <DependentUpon>201911101646551_promena18.cs</DependentUpon>
+    <Compile Include="Migrations\201911151247218_initial3.cs" />
+    <Compile Include="Migrations\201911151247218_initial3.Designer.cs">
+      <DependentUpon>201911151247218_initial3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -233,68 +153,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910290004174_CreateFirst.resx">
-      <DependentUpon>201910290004174_CreateFirst.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910301453117_changeattributes.resx">
-      <DependentUpon>201910301453117_changeattributes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911031412382_DocumentDocumentItem.resx">
-      <DependentUpon>201911031412382_DocumentDocumentItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911041834579_promena.resx">
-      <DependentUpon>201911041834579_promena.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911042127393_promena_2.resx">
-      <DependentUpon>201911042127393_promena_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911042142120_promena_3.resx">
-      <DependentUpon>201911042142120_promena_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911042157540_promena_4.resx">
-      <DependentUpon>201911042157540_promena_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911042230243_promena_5.resx">
-      <DependentUpon>201911042230243_promena_5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911042354426_promena_6.resx">
-      <DependentUpon>201911042354426_promena_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911050010072_promena_7.resx">
-      <DependentUpon>201911050010072_promena_7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911052135556_promena_8.resx">
-      <DependentUpon>201911052135556_promena_8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911061720068_promena_9.resx">
-      <DependentUpon>201911061720068_promena_9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911061844048_promena_10.resx">
-      <DependentUpon>201911061844048_promena_10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911061907071_promena_11.resx">
-      <DependentUpon>201911061907071_promena_11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911090105045_izmena12.resx">
-      <DependentUpon>201911090105045_izmena12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911091608468_promena13.resx">
-      <DependentUpon>201911091608468_promena13.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911091621070_promena14.resx">
-      <DependentUpon>201911091621070_promena14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911101617159_promena15.resx">
-      <DependentUpon>201911101617159_promena15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911101639586_promena17.resx">
-      <DependentUpon>201911101639586_promena17.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911101641584_promena171.resx">
-      <DependentUpon>201911101641584_promena171.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911101646551_promena18.resx">
-      <DependentUpon>201911101646551_promena18.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911151247218_initial3.resx">
+      <DependentUpon>201911151247218_initial3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

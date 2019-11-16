@@ -60,7 +60,7 @@ namespace MagacinskoRobnoMaterijalno.Classes
             return _mainRepository.GetArticleByName(name);
         }
 
-        internal List<Article> GetAllArticlesByWarehouseType(int warehouseType)
+        internal BindingList<Article> GetAllArticlesByWarehouseType(int warehouseType)
         {
             return _mainRepository.GetArticlesByWarehouseType(warehouseType);
         }

@@ -124,6 +124,7 @@
     <Compile Include="Classes\ClientLogic.cs" />
     <Compile Include="Classes\DocumentLogic.cs" />
     <Compile Include="Classes\Lib.cs" />
+    <Compile Include="Classes\Status.cs" />
     <Compile Include="Classes\WarehouseLogic.cs" />
     <Compile Include="Forms\frmArticles.cs">
       <SubType>Form</SubType>
@@ -210,10 +211,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\MagacinskoRobnoMaterijalno.Classes.Lib+DocumentType.datasource" />
     <None Include="Properties\DataSources\MagacinskoRobnoMaterijalno.Models.Article.datasource" />
     <None Include="Properties\DataSources\MagacinskoRobnoMaterijalno.Models.Client.datasource" />
     <None Include="Properties\DataSources\MagacinskoRobnoMaterijalno.Models.Document.datasource" />
     <None Include="Properties\DataSources\MagacinskoRobnoMaterijalno.Models.DocumentItem.datasource" />
+    <None Include="Properties\DataSources\MagacinskoRobnoMaterijalno.Models.Warehouse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

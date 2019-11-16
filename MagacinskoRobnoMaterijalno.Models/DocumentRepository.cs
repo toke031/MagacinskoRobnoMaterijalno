@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace MagacinskoRobnoMaterijalno.Models
 {
@@ -30,7 +31,7 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public Document GetDocument(long iD)
         {
-            return _context.Documents.Include(x => x.Client).Include(y => y.DocumentItems.Select(h=>h.Item)).Where(x => x.ID == iD).FirstOrDefault();
+            return _context.Documents.Include(x => x.Client).Include(b=>b.DocumentItems).Where(x => x.ID == iD).FirstOrDefault();
         }
 
         public string GetLastNoForDoument(int year, int typeId)
@@ -41,9 +42,26 @@ namespace MagacinskoRobnoMaterijalno.Models
                 .Where(x => x.StatusID == 0 || x.StatusID == 1).Count() + 1).ToString();
         }
 
-        public List<Document> GetAllDocuments()
+        public BindingList<Document> GetAllDocuments()
         {
-            return _context.Documents.ToList();
+                foreach (var entity in _context.ChangeTracker.Entries())
+            {
+                entity.Reload();
+            }
+            _context.Documents.ToList();
+            return _context.Documents.Local.ToBindingList();
+        }
+
+        public bool IsChangedChanged()
+        {
+            foreach (var entity in _context.ChangeTracker.Entries())
+            {
+                var d = entity;//.Reload();
+
+            }
+                return _context.ChangeTracker.Entries().Any(e => e.State == EntityState.Added
+                                              || e.State == EntityState.Modified
+                                              || e.State == EntityState.Deleted);
         }
     }
 }

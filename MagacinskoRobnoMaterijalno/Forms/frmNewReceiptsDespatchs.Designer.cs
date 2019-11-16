@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.DGVNewReceiptDespatch = new System.Windows.Forms.DataGridView();
+            this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.warehouseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.documentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbPIB = new System.Windows.Forms.TextBox();
             this.lblPIB = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -46,24 +49,25 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewComboBoxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Client = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.documentTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.documentNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Client = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.documentTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.statusIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.documentDateTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paymentDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paymentEndDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.totalPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.documentItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVNewReceiptDespatch)).BeginInit();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warehouseBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.documentTypeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -103,6 +107,18 @@
             this.DGVNewReceiptDespatch.ReadOnly = true;
             this.DGVNewReceiptDespatch.Size = new System.Drawing.Size(1143, 277);
             this.DGVNewReceiptDespatch.TabIndex = 0;
+            // 
+            // clientBindingSource
+            // 
+            this.clientBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Client);
+            // 
+            // warehouseBindingSource
+            // 
+            this.warehouseBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Warehouse);
+            // 
+            // documentBindingSource
+            // 
+            this.documentBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Document);
             // 
             // tbPIB
             // 
@@ -241,90 +257,114 @@
             this.dataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // documentTypeBindingSource
+            // 
+            this.documentTypeBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Classes.Status);
+            // 
+            // documentNoDataGridViewTextBoxColumn
+            // 
+            this.documentNoDataGridViewTextBoxColumn.DataPropertyName = "DocumentNo";
+            this.documentNoDataGridViewTextBoxColumn.HeaderText = "Broj dokumenta";
+            this.documentNoDataGridViewTextBoxColumn.Name = "documentNoDataGridViewTextBoxColumn";
+            this.documentNoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // Client
             // 
             this.Client.DataPropertyName = "ClientID";
             this.Client.DataSource = this.clientBindingSource;
             this.Client.DisplayMember = "Name";
-            this.Client.HeaderText = "Client";
+            this.Client.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.Client.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Client.HeaderText = "Klijent";
             this.Client.Name = "Client";
+            this.Client.ReadOnly = true;
             this.Client.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Client.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Client.ValueMember = "ID";
             // 
-            // documentNoDataGridViewTextBoxColumn
-            // 
-            this.documentNoDataGridViewTextBoxColumn.DataPropertyName = "DocumentNo";
-            this.documentNoDataGridViewTextBoxColumn.HeaderText = "DocumentNo";
-            this.documentNoDataGridViewTextBoxColumn.Name = "documentNoDataGridViewTextBoxColumn";
-            // 
-            // clientBindingSource
-            // 
-            this.clientBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Client);
-            // 
             // documentTypeDataGridViewTextBoxColumn
             // 
             this.documentTypeDataGridViewTextBoxColumn.DataPropertyName = "DocumentType";
-            this.documentTypeDataGridViewTextBoxColumn.HeaderText = "DocumentType";
+            this.documentTypeDataGridViewTextBoxColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.documentTypeDataGridViewTextBoxColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.documentTypeDataGridViewTextBoxColumn.HeaderText = "Tip dokumenta";
             this.documentTypeDataGridViewTextBoxColumn.Name = "documentTypeDataGridViewTextBoxColumn";
+            this.documentTypeDataGridViewTextBoxColumn.ReadOnly = true;
             this.documentTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.documentTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.documentTypeDataGridViewTextBoxColumn.Visible = false;
             // 
             // statusIDDataGridViewTextBoxColumn
             // 
             this.statusIDDataGridViewTextBoxColumn.DataPropertyName = "StatusID";
-            this.statusIDDataGridViewTextBoxColumn.HeaderText = "StatusID";
+            this.statusIDDataGridViewTextBoxColumn.DataSource = this.documentTypeBindingSource;
+            this.statusIDDataGridViewTextBoxColumn.DisplayMember = "Name";
+            this.statusIDDataGridViewTextBoxColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.statusIDDataGridViewTextBoxColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.statusIDDataGridViewTextBoxColumn.HeaderText = "Status";
             this.statusIDDataGridViewTextBoxColumn.Name = "statusIDDataGridViewTextBoxColumn";
+            this.statusIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.statusIDDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.statusIDDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.statusIDDataGridViewTextBoxColumn.ValueMember = "ID";
             // 
             // documentDateTimeDataGridViewTextBoxColumn
             // 
             this.documentDateTimeDataGridViewTextBoxColumn.DataPropertyName = "DocumentDateTime";
-            this.documentDateTimeDataGridViewTextBoxColumn.HeaderText = "DocumentDateTime";
+            this.documentDateTimeDataGridViewTextBoxColumn.HeaderText = "Datum kreiranja dokumenta";
             this.documentDateTimeDataGridViewTextBoxColumn.Name = "documentDateTimeDataGridViewTextBoxColumn";
+            this.documentDateTimeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // paymentDateDataGridViewTextBoxColumn
             // 
             this.paymentDateDataGridViewTextBoxColumn.DataPropertyName = "PaymentDate";
-            this.paymentDateDataGridViewTextBoxColumn.HeaderText = "PaymentDate";
+            this.paymentDateDataGridViewTextBoxColumn.HeaderText = "Datum paćanja";
             this.paymentDateDataGridViewTextBoxColumn.Name = "paymentDateDataGridViewTextBoxColumn";
+            this.paymentDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // paymentEndDateDataGridViewTextBoxColumn
             // 
             this.paymentEndDateDataGridViewTextBoxColumn.DataPropertyName = "PaymentEndDate";
-            this.paymentEndDateDataGridViewTextBoxColumn.HeaderText = "PaymentEndDate";
+            this.paymentEndDateDataGridViewTextBoxColumn.HeaderText = "Krajnji datum plaćanja";
             this.paymentEndDateDataGridViewTextBoxColumn.Name = "paymentEndDateDataGridViewTextBoxColumn";
+            this.paymentEndDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // employeeIDDataGridViewTextBoxColumn
             // 
             this.employeeIDDataGridViewTextBoxColumn.DataPropertyName = "EmployeeID";
             this.employeeIDDataGridViewTextBoxColumn.HeaderText = "EmployeeID";
             this.employeeIDDataGridViewTextBoxColumn.Name = "employeeIDDataGridViewTextBoxColumn";
+            this.employeeIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.employeeIDDataGridViewTextBoxColumn.Visible = false;
             // 
             // warehouseDataGridViewTextBoxColumn
             // 
-            this.warehouseDataGridViewTextBoxColumn.DataPropertyName = "Warehouse";
-            this.warehouseDataGridViewTextBoxColumn.HeaderText = "Warehouse";
+            this.warehouseDataGridViewTextBoxColumn.DataPropertyName = "WarehouseID";
+            this.warehouseDataGridViewTextBoxColumn.DataSource = this.warehouseBindingSource;
+            this.warehouseDataGridViewTextBoxColumn.DisplayMember = "Name";
+            this.warehouseDataGridViewTextBoxColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.warehouseDataGridViewTextBoxColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.warehouseDataGridViewTextBoxColumn.HeaderText = "Magacin";
             this.warehouseDataGridViewTextBoxColumn.Name = "warehouseDataGridViewTextBoxColumn";
+            this.warehouseDataGridViewTextBoxColumn.ReadOnly = true;
+            this.warehouseDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.warehouseDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.warehouseDataGridViewTextBoxColumn.ValueMember = "ID";
             // 
             // totalPriceDataGridViewTextBoxColumn
             // 
             this.totalPriceDataGridViewTextBoxColumn.DataPropertyName = "TotalPrice";
-            this.totalPriceDataGridViewTextBoxColumn.HeaderText = "TotalPrice";
+            this.totalPriceDataGridViewTextBoxColumn.HeaderText = "Ukupna cena";
             this.totalPriceDataGridViewTextBoxColumn.Name = "totalPriceDataGridViewTextBoxColumn";
+            this.totalPriceDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // documentItemsDataGridViewTextBoxColumn
             // 
             this.documentItemsDataGridViewTextBoxColumn.DataPropertyName = "DocumentItems";
             this.documentItemsDataGridViewTextBoxColumn.HeaderText = "DocumentItems";
             this.documentItemsDataGridViewTextBoxColumn.Name = "documentItemsDataGridViewTextBoxColumn";
+            this.documentItemsDataGridViewTextBoxColumn.ReadOnly = true;
             this.documentItemsDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // documentBindingSource
-            // 
-            this.documentBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Document);
             // 
             // frmNewReceiptsDespatchs
             // 
@@ -340,10 +380,12 @@
             this.Text = "Prijemnice/Otpremnice";
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGVNewReceiptDespatch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warehouseBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentTypeBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -368,17 +410,19 @@
         private System.Windows.Forms.BindingSource documentBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn2;
+        private System.Windows.Forms.BindingSource warehouseBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn documentNoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn Client;
         private System.Windows.Forms.DataGridViewComboBoxColumn documentTypeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn statusIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource documentTypeBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn documentDateTimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn paymentDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn paymentEndDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn warehouseDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn documentItemsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn2;
     }
 }
