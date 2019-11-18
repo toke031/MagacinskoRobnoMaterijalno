@@ -37,11 +37,12 @@ namespace MagacinskoRobnoMaterijalno.Classes
 
         public enum ItemType
         {
-            [Description("Materijal")]
-            Material = 0,
 
             [Description("Proizvod")]
-            Product = 1
+            Product = 1,
+
+            [Description("Materijal")]
+            Material = 0
         }
 
     }

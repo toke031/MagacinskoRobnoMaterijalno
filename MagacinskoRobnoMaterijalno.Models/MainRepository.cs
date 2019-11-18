@@ -42,11 +42,16 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public List<Article> GetArticlesByName(string articleName) 
         {
-           return _context.Articles.Where(x=>x.Name.Contains(articleName)).ToList();
+           return _context.Articles.Where(x=>x.ArticleNo.Contains(articleName)).ToList();
         }
-        public Article GetArticlesByArticleNo (string articleNo)
+        public Article GetArticleByArticleNo (string articleNo)
         {
             return _context.Articles.Where(x => x.ArticleNo == articleNo).FirstOrDefault();
+        }
+
+        public BindingList<Article> GetArticlesByArticleNo(string articleNo)
+        {
+            return new BindingList<Article>(_context.Articles.Where(x => x.ArticleNo.StartsWith(articleNo)).ToList());
         }
 
         public void EditClient(Client client)
@@ -60,6 +65,11 @@ namespace MagacinskoRobnoMaterijalno.Models
           //  _context.Articles.Where(x => x.ArticleTypeID == warehouseType).Load();
             BindingList<Article> b = new BindingList<Article>(_context.Articles.Where(x => x.ArticleTypeID == warehouseType).ToList());
             return b;//.Where(x => x.ArticleTypeID == warehouseType);
+        }
+
+        public bool IfExists(string articleNo)
+        {
+            return _context.Articles.Any(x => x.ArticleNo == articleNo);
         }
 
         public Client GetClientByClientPIB(string PIB)
@@ -102,6 +112,7 @@ namespace MagacinskoRobnoMaterijalno.Models
         public void DeleteArticle(Article itemForDelete)
         {
             _context.Articles.Remove(itemForDelete);
+            _context.SaveAllChanges();
         }
 
         public void AddClient(Client client)

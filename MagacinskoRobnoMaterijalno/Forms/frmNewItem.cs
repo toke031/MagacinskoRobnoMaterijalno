@@ -20,7 +20,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
         {
             InitializeComponent();
             _bindinglist = new BindingList<Article>();
-            _bindinglist.Add(new Article());
+            _bindinglist.Add(new Article() { ArticleTypeID =1});
             InitNewItem();
         }
 
@@ -32,7 +32,6 @@ namespace MagacinskoRobnoMaterijalno.Forms
             InitNewItem();
             btnAddArticle.Text = "Sačuvaj izmenu";
             this.Text = "Izmena artikla";
-            tbSifra.ReadOnly = true;
             btnAddArticle.Click -= btnAddArticle_Click;
             btnAddArticle.Click += btnEditArticle_Click;
         }
@@ -54,6 +53,16 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void btnAddArticle_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(_bindinglist[0].ArticleNo))
+            {
+                MessageBox.Show("Šifra artikla je obavezno polje.");
+                return;
+            }
+            else if(_articalLogic.IfExists(_bindinglist[0].ArticleNo))
+            {
+                MessageBox.Show("Artikal sa šifrom " + _bindinglist[0].ArticleNo + " već postoji. Promenite šifru i probajte ponovo.");
+                return;
+            }
             _articalLogic.AddArtical(_bindinglist[0]);
            var result = _articalLogic.SaveAllChanges();
             if(result ==true)
@@ -81,8 +90,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     v = (int)(Enum.Parse(typeof(Classes.Lib.ItemType), value.ToString()))
                 })
                 .OrderBy(item => item.v)
-                .ToList();  
+                .ToList();
             BindingAttributes();
+
         }
         private void BindingAttributes()
         {

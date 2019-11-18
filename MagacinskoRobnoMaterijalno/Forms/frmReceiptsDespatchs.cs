@@ -26,8 +26,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
         Document _document;
         BindingList<Article> listaArtikla;
         BindingList<DocumentItem> listaStavki = new BindingList<DocumentItem>();
-        public frmReceiptsDespatchs(int documentTypeID)
+        public frmReceiptsDespatchs(int documentTypeID, frmNewReceiptsDespatchs frmNewReceiptsDespatchs)
         {
+            _frmNewReceiptsDespatchs = frmNewReceiptsDespatchs;
             DocumentTypeID = documentTypeID;
             InitializeComponent();
             InitDocument();
@@ -101,6 +102,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbWarehouse.DataSource = _warehouseLogic.GetAllWarehouse();
             cmbWarehouse.DisplayMember = "Name";
             cmbWarehouse.ValueMember = "WarehouseTypeID";
+            cmbWarehouse.SelectedIndex = 1;
             cmbWarehouse.SelectedIndexChanged += CmbWarehouse_ValuseChanged;
 
             // tip dokumenta
@@ -171,7 +173,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void Calculate()
         {
-            decimal totalWithWAT = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) * (((x.Height * x.Width) != 0) ? ((x.Height / 100) * (x.Width / 100)) : 1));
+            decimal totalWithWAT = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) * (((x.Height * x.Width) > 10000) ? ((x.Height / 100) * (x.Width / 100)) : 1));
 
             tbTotal.Text = (totalWithWAT - (totalWithWAT * 0.2M)).ToString("N2");
             tbVat.Text = (totalWithWAT * 0.2M).ToString("N2");
@@ -190,7 +192,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             {
                 DocumentItem doci = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.NewIndex].DataBoundItem);
                 decimal povrsina = (doci.Width / 100) * (doci.Height / 100);
-                doci.ItemPrice = doci.Quantity * doci.QuantityItemPrice * ((povrsina != 0) ? (povrsina) : 1);
+                doci.ItemPrice = doci.Quantity * doci.QuantityItemPrice * ((povrsina > 1) ? (povrsina) : 1);
             }
         }
 

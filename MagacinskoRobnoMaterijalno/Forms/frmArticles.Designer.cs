@@ -30,17 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.DGVArticles = new System.Windows.Forms.DataGridView();
-            this.tbSearchName = new System.Windows.Forms.TextBox();
-            this.lblSearchName = new System.Windows.Forms.Label();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.SelectedRow = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.articleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.articleNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityItemPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.articleTypeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbSearchItemNo = new System.Windows.Forms.TextBox();
+            this.lblSearchItemNo = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.SelectedRow = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGVArticles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).BeginInit();
@@ -57,8 +56,7 @@
             this.articleNoDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.quantityItemPriceDataGridViewTextBoxColumn,
-            this.articleTypeIDDataGridViewTextBoxColumn,
-            this.documentItemsDataGridViewTextBoxColumn});
+            this.articleTypeIDDataGridViewTextBoxColumn});
             this.DGVArticles.DataSource = this.articleBindingSource;
             this.DGVArticles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGVArticles.GridColor = System.Drawing.SystemColors.Control;
@@ -68,41 +66,6 @@
             this.DGVArticles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGVArticles.Size = new System.Drawing.Size(472, 445);
             this.DGVArticles.TabIndex = 0;
-            // 
-            // tbSearchName
-            // 
-            this.tbSearchName.Location = new System.Drawing.Point(96, 40);
-            this.tbSearchName.Name = "tbSearchName";
-            this.tbSearchName.Size = new System.Drawing.Size(100, 20);
-            this.tbSearchName.TabIndex = 1;
-            // 
-            // lblSearchName
-            // 
-            this.lblSearchName.AutoSize = true;
-            this.lblSearchName.Location = new System.Drawing.Point(23, 43);
-            this.lblSearchName.Name = "lblSearchName";
-            this.lblSearchName.Size = new System.Drawing.Size(65, 13);
-            this.lblSearchName.TabIndex = 2;
-            this.lblSearchName.Text = "Naziv artikla";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(352, 33);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(98, 27);
-            this.btnSearch.TabIndex = 3;
-            this.btnSearch.Text = "Pretraži";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // SelectedRow
-            // 
-            this.SelectedRow.Name = "SelectedRow";
-            this.SelectedRow.Size = new System.Drawing.Size(61, 4);
-            // 
-            // articleBindingSource
-            // 
-            this.articleBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Article);
             // 
             // iDDataGridViewTextBoxColumn
             // 
@@ -136,12 +99,40 @@
             this.articleTypeIDDataGridViewTextBoxColumn.Name = "articleTypeIDDataGridViewTextBoxColumn";
             this.articleTypeIDDataGridViewTextBoxColumn.Visible = false;
             // 
-            // documentItemsDataGridViewTextBoxColumn
+            // articleBindingSource
             // 
-            this.documentItemsDataGridViewTextBoxColumn.DataPropertyName = "DocumentItems";
-            this.documentItemsDataGridViewTextBoxColumn.HeaderText = "DocumentItems";
-            this.documentItemsDataGridViewTextBoxColumn.Name = "documentItemsDataGridViewTextBoxColumn";
-            this.documentItemsDataGridViewTextBoxColumn.Visible = false;
+            this.articleBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Article);
+            // 
+            // tbSearchItemNo
+            // 
+            this.tbSearchItemNo.Location = new System.Drawing.Point(96, 40);
+            this.tbSearchItemNo.Name = "tbSearchItemNo";
+            this.tbSearchItemNo.Size = new System.Drawing.Size(100, 20);
+            this.tbSearchItemNo.TabIndex = 1;
+            // 
+            // lblSearchItemNo
+            // 
+            this.lblSearchItemNo.AutoSize = true;
+            this.lblSearchItemNo.Location = new System.Drawing.Point(23, 43);
+            this.lblSearchItemNo.Name = "lblSearchItemNo";
+            this.lblSearchItemNo.Size = new System.Drawing.Size(59, 13);
+            this.lblSearchItemNo.TabIndex = 2;
+            this.lblSearchItemNo.Text = "Šifra artikla";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(352, 33);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(98, 27);
+            this.btnSearch.TabIndex = 3;
+            this.btnSearch.Text = "Pretraži";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // SelectedRow
+            // 
+            this.SelectedRow.Name = "SelectedRow";
+            this.SelectedRow.Size = new System.Drawing.Size(61, 4);
             // 
             // groupBox1
             // 
@@ -160,8 +151,8 @@
             this.ClientSize = new System.Drawing.Size(479, 574);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.lblSearchName);
-            this.Controls.Add(this.tbSearchName);
+            this.Controls.Add(this.lblSearchItemNo);
+            this.Controls.Add(this.tbSearchItemNo);
             this.Name = "frmArticles";
             this.Text = "Artikli";
             ((System.ComponentModel.ISupportInitialize)(this.DGVArticles)).EndInit();
@@ -175,8 +166,8 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DGVArticles;
-        private System.Windows.Forms.TextBox tbSearchName;
-        private System.Windows.Forms.Label lblSearchName;
+        private System.Windows.Forms.TextBox tbSearchItemNo;
+        private System.Windows.Forms.Label lblSearchItemNo;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ContextMenuStrip SelectedRow;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;

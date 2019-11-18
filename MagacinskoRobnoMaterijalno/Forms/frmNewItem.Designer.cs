@@ -76,7 +76,7 @@
             this.btnAddArticle.Location = new System.Drawing.Point(163, 134);
             this.btnAddArticle.Name = "btnAddArticle";
             this.btnAddArticle.Size = new System.Drawing.Size(142, 30);
-            this.btnAddArticle.TabIndex = 10;
+            this.btnAddArticle.TabIndex = 4;
             this.btnAddArticle.Text = "Dodaj artikal";
             this.btnAddArticle.UseVisualStyleBackColor = true;
             this.btnAddArticle.Click += new System.EventHandler(this.btnAddArticle_Click);
@@ -95,7 +95,7 @@
             this.tbPrice.Location = new System.Drawing.Point(106, 72);
             this.tbPrice.Name = "tbPrice";
             this.tbPrice.Size = new System.Drawing.Size(100, 20);
-            this.tbPrice.TabIndex = 11;
+            this.tbPrice.TabIndex = 2;
             // 
             // cmbItemType
             // 
@@ -104,7 +104,7 @@
             this.cmbItemType.Location = new System.Drawing.Point(106, 98);
             this.cmbItemType.Name = "cmbItemType";
             this.cmbItemType.Size = new System.Drawing.Size(121, 21);
-            this.cmbItemType.TabIndex = 13;
+            this.cmbItemType.TabIndex = 3;
             // 
             // label2
             // 

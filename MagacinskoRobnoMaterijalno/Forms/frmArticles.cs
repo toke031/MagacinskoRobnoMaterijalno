@@ -46,7 +46,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DialogResult result = MessageBox.Show("Da li ste sigurni da želite da obrišete artikal", "Brisanje artikla", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                ItemForDelete = _articalLogic.GetArticlesByArticleNo(e.Row.Cells["ArticleNo"].Value.ToString());
+                ItemForDelete = _articalLogic.GetArticleByArticleNo(e.Row.Cells[1].Value.ToString());
             }
             else
             {
@@ -85,7 +85,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 var articalForEdit = (Article)DGVArticles.SelectedRows[0].DataBoundItem;
                 frmNewItem editArticle = new frmNewItem(articalForEdit);
                 editArticle.ShowDialog();
-                DGVArticles.DataSource = new BindingList<Article>(_articalLogic.GetArticleByName(tbSearchName.Text));
+                DGVArticles.DataSource = new BindingList<Article>(_articalLogic.GetArticleByName(tbSearchItemNo.Text));
                 DGVArticles.ClearSelection();
             }
         }
@@ -105,7 +105,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            DGVArticles.DataSource = new BindingList<Article>(_articalLogic.GetArticlesByName(tbSearchName.Text));
+            DGVArticles.DataSource = _articalLogic.GetArticlesByArticleNo(tbSearchItemNo.Text);
         }
     }
 }

@@ -89,13 +89,13 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void btnNewDespatch_Click(object sender, EventArgs e)
         {
-            frmReceiptsDespatchs _despatch = new frmReceiptsDespatchs((int)Lib.DocumentType.Despatch);
+            frmReceiptsDespatchs _despatch = new frmReceiptsDespatchs((int)Lib.DocumentType.Despatch, this);
             _despatch.Show();
         }
 
         private void btnNewReceipt_Click(object sender, EventArgs e)
         {
-            frmReceiptsDespatchs _receipt = new frmReceiptsDespatchs((int)Lib.DocumentType.Receipt);
+            frmReceiptsDespatchs _receipt = new frmReceiptsDespatchs((int)Lib.DocumentType.Receipt, this);
             _receipt.Show();
         }
 

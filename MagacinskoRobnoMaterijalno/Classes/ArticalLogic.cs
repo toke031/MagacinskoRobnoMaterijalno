@@ -35,7 +35,11 @@ namespace MagacinskoRobnoMaterijalno.Classes
             return _mainRepository.SaveChanges();
         }
 
-        public Article GetArticlesByArticleNo(string articleNo)
+        public Article GetArticleByArticleNo(string articleNo)
+        {
+            return _mainRepository.GetArticleByArticleNo(articleNo);
+        }
+        public BindingList<Article> GetArticlesByArticleNo(string articleNo)
         {
             return _mainRepository.GetArticlesByArticleNo(articleNo);
         }
@@ -63,6 +67,11 @@ namespace MagacinskoRobnoMaterijalno.Classes
         internal BindingList<Article> GetAllArticlesByWarehouseType(int warehouseType)
         {
             return _mainRepository.GetArticlesByWarehouseType(warehouseType);
+        }
+
+        internal bool IfExists(string articleNo)
+        {
+            return  _mainRepository.IfExists(articleNo);
         }
     }
 }
