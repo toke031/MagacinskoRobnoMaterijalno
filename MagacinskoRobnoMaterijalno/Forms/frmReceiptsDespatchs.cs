@@ -30,6 +30,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
         {
             _frmNewReceiptsDespatchs = frmNewReceiptsDespatchs;
             DocumentTypeID = documentTypeID;
+
             InitializeComponent();
             InitDocument();
         }
@@ -38,6 +39,15 @@ namespace MagacinskoRobnoMaterijalno.Forms
             SelectedDocument = document;
             _frmNewReceiptsDespatchs = frmNewReceiptsDespatchs;
             this.FormMode = FormMode.Modifying;
+            InitializeComponent();
+            InitDocument();
+        }
+        Document _documentForPayment;
+        public frmReceiptsDespatchs(int documentTypeID, Document documentForPayment, frmNewReceiptsDespatchs frmNewReceiptsDespatchs)
+        {
+            _frmNewReceiptsDespatchs = frmNewReceiptsDespatchs;
+            this.DocumentTypeID = documentTypeID;
+            this._documentForPayment = documentForPayment;
             InitializeComponent();
             InitDocument();
         }
@@ -57,7 +67,32 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 _document.PaymentEndDate = DateTime.Now;
                 _document.PaymentDate = DateTime.Now;
                 _document.DocumentType = DocumentTypeID;
-                _document.DocumentNo = (DocumentTypeID == 0 ? "P" : "O") + "-" + _documentLogic.GetLastNoForDoument(_document.DocumentDateTime.Year, DocumentTypeID) + "-" + DateTime.Now.Year;
+                string documentNumber = "";
+                string middle = _documentLogic.GetLastNoForDoument(_document.DocumentDateTime.Year, DocumentTypeID) + "-" + DateTime.Now.Year;
+                string end = "";
+                switch (DocumentTypeID)
+                {
+                    case 0:
+                        documentNumber = "P";
+                        break;
+                    case 1:
+                        documentNumber = "O";
+                        break;
+                    case 2:
+                        _document.Client = _documentForPayment.Client;
+                        _document.ClientID = _documentForPayment.ClientID;
+                        _document.TotalPrice = _documentForPayment.TotalPrice;
+                        documentNumber = "DO";
+                        end = " {" + _documentForPayment.DocumentNo + "}";
+                        _client = _document.Client;
+                        _document.LinkDocumentNo = _documentForPayment.DocumentNo;
+                        _document.DocumentType = 2;
+                        break;
+                    default:
+                        break;
+                }
+                documentNumber += "-" + middle + end;
+                _document.DocumentNo = documentNumber;// (DocumentTypeID == 0 ? "P" : "O") + "-" + _documentLogic.GetLastNoForDoument(_document.DocumentDateTime.Year, DocumentTypeID) + "-" + DateTime.Now.Year;
             }
             else if (FormMode == FormMode.Modifying || FormMode == FormMode.ReadOnly)
             {
@@ -78,7 +113,8 @@ namespace MagacinskoRobnoMaterijalno.Forms
             tbTotalWithVAT.DataBindings.Add("Text", _document, "TotalPrice");
             tbDocumentNo.DataBindings.Clear();
             tbDocumentNo.DataBindings.Add("Text", _document, "DocumentNo");
-
+            tbSpoljniBroj.DataBindings.Clear();
+            tbSpoljniBroj.DataBindings.Add("Text", _document, "LinkDocumentNo");
             dtpCreationDate.DataBindings.Clear();
             dtpCreationDate.DataBindings.Add("Value", _document, "DocumentDateTime");
             dtpEndDateForPayment.DataBindings.Clear();
@@ -133,12 +169,21 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DGVReceiptsDespatchsItems.CellContentClick += DGVReceiptsDespatchsItems_CellContentClick;
             DGVReceiptsDespatchsItems.CellFormatting += DGVReceiptsDespatchsItems_CellFormatting;
 
-
-            inload = true;
-            InitUnboundColumns();
-            inload = false;
+            if (_document.DocumentType == (int)DocumentType.Payment)
+            {
+                DGVReceiptsDespatchsItems.Enabled = false;
+                tbTotalWithVAT.Text = _document.TotalPrice.ToString("N2");
+            }
+            else
+            {
+                inload = true;
+                InitUnboundColumns();
+                inload = false;
+            }
             DGVReceiptsDespatchsItems.Update();
             DGVReceiptsDespatchsItems.Refresh();
+
+            
             
         }
 
@@ -216,6 +261,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
         }
 
         bool inload = false;
+
         private void DGVReceiptsDespatchsItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (inload)

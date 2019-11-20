@@ -19,6 +19,7 @@ namespace MagacinskoRobnoMaterijalno.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long ID { get; set; }
         public string DocumentNo { get; set; }
+        public string LinkDocumentNo { get; set; }
         public int DocumentType { get; set; }
         public DateTime DocumentDateTime { get; set; }
         public DateTime PaymentEndDate { get; set; }

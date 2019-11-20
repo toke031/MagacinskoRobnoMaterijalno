@@ -143,6 +143,10 @@
     <Compile Include="Migrations\201911192003171_AddNote.Designer.cs">
       <DependentUpon>201911192003171_AddNote.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911192236045_spoljni_broj.cs" />
+    <Compile Include="Migrations\201911192236045_spoljni_broj.Designer.cs">
+      <DependentUpon>201911192236045_spoljni_broj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Document.cs" />
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911192003171_AddNote.resx">
       <DependentUpon>201911192003171_AddNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911192236045_spoljni_broj.resx">
+      <DependentUpon>201911192236045_spoljni_broj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

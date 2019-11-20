@@ -48,7 +48,7 @@ namespace MagacinskoRobnoMaterijalno.Models
             {
                 entity.Reload();
             }
-            _context.Documents.ToList();
+            _context.Documents.Include(x => x.Client).Load();
             return _context.Documents.Local.ToBindingList();
         }
 

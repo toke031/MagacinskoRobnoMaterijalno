@@ -32,7 +32,10 @@ namespace MagacinskoRobnoMaterijalno.Classes
             Receipt = 0,
 
             [Description("Otpremnica")]
-            Despatch = 1
+            Despatch = 1,
+
+            [Description("Delimicna otplata")]
+            Payment = 2
         }
 
         public enum ItemType

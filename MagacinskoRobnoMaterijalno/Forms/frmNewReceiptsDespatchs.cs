@@ -61,7 +61,34 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DGVNewReceiptDespatch.DataError += DGVNewReceiptDespatch_DataError;
             DGVNewReceiptDespatch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGVNewReceiptDespatch.DoubleClick += SelectedRow_DoubleClick;
+            DGVNewReceiptDespatch.CellFormatting += DGVNewReceiptDespatch_CellFormatting;
+
+            
         }
+
+        private void DGVNewReceiptDespatch_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridViewRow row = DGVNewReceiptDespatch.Rows[e.RowIndex];
+            if (((Document)(row.DataBoundItem)).DocumentType == (int)Lib.DocumentType.Payment)
+            {
+                row.DefaultCellStyle.BackColor = Color.PapayaWhip;
+            }
+            //row.DefaultCellStyle.BackColor = Color.PapayaWhip;
+            //PaintRows();
+        }
+
+        private void PaintRows()
+        {
+            
+
+            foreach (DataGridViewRow row in DGVNewReceiptDespatch.Rows)
+                if (((Document)(row.DataBoundItem)).DocumentType == (int)Lib.DocumentType.Payment)
+                {
+                    row.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            DGVNewReceiptDespatch.Refresh();
+        }
+
         private void SelectedRow_DoubleClick(object sender, EventArgs e)
         {
             var selected = DGVNewReceiptDespatch.SelectedRows[0];
@@ -102,6 +129,31 @@ namespace MagacinskoRobnoMaterijalno.Forms
         private void btnSearch_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void DGVNewReceiptDespatch_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenu m = new ContextMenu();
+                int currentMouseOverRow = DGVNewReceiptDespatch.HitTest(e.X, e.Y).RowIndex;
+                Document selDoc = (Document)DGVNewReceiptDespatch.Rows[currentMouseOverRow].DataBoundItem;
+                if (selDoc.DocumentType == (int)Lib.DocumentType.Despatch)
+                {
+                    MenuItem mi = new MenuItem(string.Format("Napravi delimicnu otplatu za {0}", selDoc.DocumentNo));
+                    mi.Tag = selDoc;
+                    mi.Click += new System.EventHandler(this.menuItem1_Click);
+                    m.MenuItems.Add(mi);
+                }
+                m.Show(DGVNewReceiptDespatch, new Point(e.X, e.Y));
+            }
+        }
+
+        private void menuItem1_Click(object sender, EventArgs e)
+        {
+            frmReceiptsDespatchs _despatch = new frmReceiptsDespatchs((int)Lib.DocumentType.Payment, (Document)(((MenuItem)sender).Tag), this);
+            _despatch.FormMode = Lib.FormMode.New;
+            _despatch.Show();
         }
     }
 }
