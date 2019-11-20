@@ -63,7 +63,6 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DGVNewReceiptDespatch.DoubleClick += SelectedRow_DoubleClick;
             DGVNewReceiptDespatch.CellFormatting += DGVNewReceiptDespatch_CellFormatting;
 
-            
         }
 
         private void DGVNewReceiptDespatch_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -73,21 +72,19 @@ namespace MagacinskoRobnoMaterijalno.Forms
             {
                 row.DefaultCellStyle.BackColor = Color.PapayaWhip;
             }
-            //row.DefaultCellStyle.BackColor = Color.PapayaWhip;
-            //PaintRows();
-        }
-
-        private void PaintRows()
-        {
-            
-
-            foreach (DataGridViewRow row in DGVNewReceiptDespatch.Rows)
-                if (((Document)(row.DataBoundItem)).DocumentType == (int)Lib.DocumentType.Payment)
+            if (DGVNewReceiptDespatch.Columns[e.ColumnIndex].Name == "Payed" && e.Value == null)
+            {
+                if (((Document)(row.DataBoundItem)).DocumentType == (int)Lib.DocumentType.Despatch)
                 {
-                    row.DefaultCellStyle.ForeColor = Color.Red;
+                    decimal sum = _documentLogic.GetAllDocuments()
+                        .Where(x => x.LinkDocumentNo == ((Document)(row.DataBoundItem)).DocumentNo)
+                        .Where(x => x.StatusID == (int)Lib.StatusEnum.Vazeci)
+                        .Sum(x => x.TotalPrice);
+                    e.Value = sum.ToString("N2");
                 }
-            DGVNewReceiptDespatch.Refresh();
+            }
         }
+
 
         private void SelectedRow_DoubleClick(object sender, EventArgs e)
         {
@@ -105,7 +102,6 @@ namespace MagacinskoRobnoMaterijalno.Forms
             documentBindingSource.DataSource = _documentLogic.GetAllDocuments();
             DGVNewReceiptDespatch.DataSource = documentBindingSource;
             DGVNewReceiptDespatch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
         }
 
 
