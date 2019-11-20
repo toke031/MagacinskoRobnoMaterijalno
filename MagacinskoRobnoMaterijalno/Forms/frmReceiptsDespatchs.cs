@@ -79,12 +79,12 @@ namespace MagacinskoRobnoMaterijalno.Forms
                         documentNumber = "O";
                         break;
                     case 2:
-                        _document.Client = _documentForPayment.Client;
+                        _client = _documentForPayment.Client;
                         _document.ClientID = _documentForPayment.ClientID;
                         _document.TotalPrice = _documentForPayment.TotalPrice;
                         documentNumber = "DO";
                         end = " {" + _documentForPayment.DocumentNo + "}";
-                        _client = _document.Client;
+                      //  _client = _document.Client;
                         _document.LinkDocumentNo = _documentForPayment.DocumentNo;
                         _document.DocumentType = 2;
                         break;
@@ -189,7 +189,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void DGVReceiptsDespatchsItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-           
+
             if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "ArticleNoUnbound" && e.Value == null)
             {
                 if (DGVReceiptsDespatchsItems.Rows[e.RowIndex] == null || DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem == null)
