@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -49,6 +50,10 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbDocumentStatus.DisplayMember = "Value";
             cmbDocumentStatus.ValueMember = "Key";
             cmbDocumentStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            dtCreatedDateFrom.Format = DateTimePickerFormat.Custom;
+            dtCreatedDateTo.Format = DateTimePickerFormat.Custom;
+            dtCreatedDateFrom.CustomFormat = "MM/dd/yyyy";
+            dtCreatedDateTo.CustomFormat = "MM/dd/yyyy";
             cmbDocumentStatus.DataSource = documentStatusDictionary.ToList();
 
             var statuses = new List<Status>() { new Status() { ID = 0, Name = "Neplaćeni" }, new Status() { ID = 1, Name = "Plaćeni" }, new Status() { ID = 2, Name = "Storno" } };
@@ -95,6 +100,15 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 EditDocument.Show();
             }
         }
+
+        public void SetDataSourceofDataGridView(BindingList<Document> dataSource)
+        {
+            DGVNewReceiptDespatch.DataSource = null;
+            documentBindingSource = new BindingSource();
+            documentBindingSource.DataSource = dataSource;
+            DGVNewReceiptDespatch.DataSource = documentBindingSource;
+            DGVNewReceiptDespatch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
         public void RefreshFromAnotherForm()
         {
             DGVNewReceiptDespatch.DataSource = null;
@@ -124,7 +138,25 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            var listOfParams = new Dictionary<string, string>();
+            listOfParams.Add("Name", tbName.Text);
+            if (dtCreatedDateFrom.Value.Date > dtCreatedDateTo.Value.Date)
+            {
+                MessageBox.Show("Datum od ne moze biti veci od datuma do.");
+                return;
+            }
+            listOfParams.Add("CreatedDateFrom", dtCreatedDateFrom.Value.ToString("MM/dd/yyyy"));
+            listOfParams.Add("CreatedDateTo", dtCreatedDateTo.Value.ToString("MM/dd/yyyy"));
+            if (cmbDocumentStatus.SelectedIndex != 0)
+            {
+                listOfParams.Add("DocumentStatus", cmbDocumentStatus.SelectedValue.ToString());
+            }
+            if (cmbDocumentType.SelectedIndex != 0)
+            {
+                listOfParams.Add("DocumentType", cmbDocumentType.SelectedValue.ToString());
+            }
+            BindingList<Document> Documents =_documentLogic.SearchDocuments(listOfParams);
+            SetDataSourceofDataGridView(Documents);
         }
 
         private void DGVNewReceiptDespatch_MouseClick(object sender, MouseEventArgs e)

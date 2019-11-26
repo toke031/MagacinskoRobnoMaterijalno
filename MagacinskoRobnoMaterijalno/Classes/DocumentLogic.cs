@@ -43,10 +43,18 @@ namespace MagacinskoRobnoMaterijalno.Classes
         {
             return _docRepository.GetAllDocuments();
         }
-
+        internal BindingList<Document> GetAllDocumentsByDocumentType(int type)
+        {
+            return _docRepository.GetAllDocumentsByDocumentType(type);
+        }
         public bool IsChangedChanged()
         {
             return _docRepository.IsChangedChanged();
+        }
+
+        internal BindingList<Document> SearchDocuments(Dictionary<string, string> listOfParams)
+        {
+            return _docRepository.GetAllDocumentsForCcurrenParams(listOfParams);
         }
     }
 }
