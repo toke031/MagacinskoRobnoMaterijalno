@@ -60,6 +60,7 @@ namespace MagacinskoRobnoMaterijalno.Classes
             rowd.PaymentDate = document.PaymentDate;
             rowd.PaymentEndDate = document.PaymentEndDate;
             rowd.ClientID = (int)document.ClientID;
+            rowd.TotalPrice = document.TotalPrice;
             ds.Document.AddDocumentRow(rowd);
             foreach (var item in document.DocumentItems)
             {
@@ -68,12 +69,23 @@ namespace MagacinskoRobnoMaterijalno.Classes
                 row.DocumentID = (int)document.ID;
                 row.ArticleNo = item.ArticleNo;
                 row.ItemPrice = item.ItemPrice;
+                row.Quantity = item.Quantity;
+                row.QuantityItemPrice = item.QuantityItemPrice;
+                row.Height = item.Height;
+                row.Width = item.Width;
+                //row.Name = "test";
                 ds.DocumentItem.AddDocumentItemRow(row);
             }
             Data.DSReport.ClientRow rowc = ds.Client.NewClientRow();
             rowc.Address = document.Client.Address;
             rowc.ID = (int)document.ClientID;
             rowc.Name = document.Client.Name;
+            rowc.Phone = document.Client.Phone;
+            rowc.PhoneFax = document.Client.PhoneFax;
+            rowc.PIB = document.Client.PIB;
+            rowc.MB = document.Client.MB;
+            rowc.BankAccount = document.Client.BankAccount;
+            rowc.Email = document.Client.Email;
             ds.Client.AddClientRow(rowc);
             ds.AcceptChanges();
         }

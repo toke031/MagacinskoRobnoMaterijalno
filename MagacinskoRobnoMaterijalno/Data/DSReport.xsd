@@ -12,7 +12,7 @@
   <xs:element name="DSReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSReport" msprop:Generator_UserDSName="DSReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Document" msprop:Generator_TableClassName="DocumentDataTable" msprop:Generator_TableVarName="tableDocument" msprop:Generator_RowChangedName="DocumentRowChanged" msprop:Generator_TablePropName="Document" msprop:Generator_RowDeletingName="DocumentRowDeleting" msprop:Generator_RowChangingName="DocumentRowChanging" msprop:Generator_RowEvHandlerName="DocumentRowChangeEventHandler" msprop:Generator_RowDeletedName="DocumentRowDeleted" msprop:Generator_RowClassName="DocumentRow" msprop:Generator_UserTableName="Document" msprop:Generator_RowEvArgName="DocumentRowChangeEvent">
+        <xs:element name="Document" msprop:Generator_TableClassName="DocumentDataTable" msprop:Generator_TableVarName="tableDocument" msprop:Generator_TablePropName="Document" msprop:Generator_RowDeletingName="DocumentRowDeleting" msprop:Generator_RowChangingName="DocumentRowChanging" msprop:Generator_RowEvHandlerName="DocumentRowChangeEventHandler" msprop:Generator_RowDeletedName="DocumentRowDeleted" msprop:Generator_UserTableName="Document" msprop:Generator_RowChangedName="DocumentRowChanged" msprop:Generator_RowEvArgName="DocumentRowChangeEvent" msprop:Generator_RowClassName="DocumentRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -28,7 +28,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DocumentItem" msprop:Generator_TableClassName="DocumentItemDataTable" msprop:Generator_TableVarName="tableDocumentItem" msprop:Generator_RowChangedName="DocumentItemRowChanged" msprop:Generator_TablePropName="DocumentItem" msprop:Generator_RowDeletingName="DocumentItemRowDeleting" msprop:Generator_RowChangingName="DocumentItemRowChanging" msprop:Generator_RowEvHandlerName="DocumentItemRowChangeEventHandler" msprop:Generator_RowDeletedName="DocumentItemRowDeleted" msprop:Generator_RowClassName="DocumentItemRow" msprop:Generator_UserTableName="DocumentItem" msprop:Generator_RowEvArgName="DocumentItemRowChangeEvent">
+        <xs:element name="DocumentItem" msprop:Generator_TableClassName="DocumentItemDataTable" msprop:Generator_TableVarName="tableDocumentItem" msprop:Generator_TablePropName="DocumentItem" msprop:Generator_RowDeletingName="DocumentItemRowDeleting" msprop:Generator_RowChangingName="DocumentItemRowChanging" msprop:Generator_RowEvHandlerName="DocumentItemRowChangeEventHandler" msprop:Generator_RowDeletedName="DocumentItemRowDeleted" msprop:Generator_UserTableName="DocumentItem" msprop:Generator_RowChangedName="DocumentItemRowChanged" msprop:Generator_RowEvArgName="DocumentItemRowChangeEvent" msprop:Generator_RowClassName="DocumentItemRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="DocumentID" msprop:Generator_ColumnVarNameInTable="columnDocumentID" msprop:Generator_ColumnPropNameInRow="DocumentID" msprop:Generator_ColumnPropNameInTable="DocumentIDColumn" msprop:Generator_UserColumnName="DocumentID" type="xs:int" minOccurs="0" />
@@ -39,10 +39,11 @@
               <xs:element name="QuantityItemPrice" msprop:Generator_ColumnVarNameInTable="columnQuantityItemPrice" msprop:Generator_ColumnPropNameInRow="QuantityItemPrice" msprop:Generator_ColumnPropNameInTable="QuantityItemPriceColumn" msprop:Generator_UserColumnName="QuantityItemPrice" type="xs:decimal" minOccurs="0" />
               <xs:element name="Height" msprop:Generator_ColumnVarNameInTable="columnHeight" msprop:Generator_ColumnPropNameInRow="Height" msprop:Generator_ColumnPropNameInTable="HeightColumn" msprop:Generator_UserColumnName="Height" type="xs:decimal" minOccurs="0" />
               <xs:element name="Note" msprop:Generator_ColumnVarNameInTable="columnNote" msprop:Generator_ColumnPropNameInRow="Note" msprop:Generator_ColumnPropNameInTable="NoteColumn" msprop:Generator_UserColumnName="Note" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Client" msprop:Generator_TableClassName="ClientDataTable" msprop:Generator_TableVarName="tableClient" msprop:Generator_RowChangedName="ClientRowChanged" msprop:Generator_TablePropName="Client" msprop:Generator_RowDeletingName="ClientRowDeleting" msprop:Generator_RowChangingName="ClientRowChanging" msprop:Generator_RowEvHandlerName="ClientRowChangeEventHandler" msprop:Generator_RowDeletedName="ClientRowDeleted" msprop:Generator_RowClassName="ClientRow" msprop:Generator_UserTableName="Client" msprop:Generator_RowEvArgName="ClientRowChangeEvent">
+        <xs:element name="Client" msprop:Generator_TableClassName="ClientDataTable" msprop:Generator_TableVarName="tableClient" msprop:Generator_TablePropName="Client" msprop:Generator_RowDeletingName="ClientRowDeleting" msprop:Generator_RowChangingName="ClientRowChanging" msprop:Generator_RowEvHandlerName="ClientRowChangeEventHandler" msprop:Generator_RowDeletedName="ClientRowDeleted" msprop:Generator_UserTableName="Client" msprop:Generator_RowChangedName="ClientRowChanged" msprop:Generator_RowEvArgName="ClientRowChangeEvent" msprop:Generator_RowClassName="ClientRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -70,8 +71,8 @@
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="Document_DocumentItem" msdata:parent="Document" msdata:child="DocumentItem" msdata:parentkey="ID" msdata:childkey="DocumentID" msprop:Generator_UserChildTable="DocumentItem" msprop:Generator_ChildPropName="GetDocumentItemRows" msprop:Generator_UserRelationName="Document_DocumentItem" msprop:Generator_RelationVarName="relationDocument_DocumentItem" msprop:Generator_UserParentTable="Document" msprop:Generator_ParentPropName="DocumentRow" />
-      <msdata:Relationship name="Document_Client" msdata:parent="Document" msdata:child="Client" msdata:parentkey="ClientID" msdata:childkey="ID" msprop:Generator_UserChildTable="Client" msprop:Generator_ChildPropName="GetClientRows" msprop:Generator_UserRelationName="Document_Client" msprop:Generator_RelationVarName="relationDocument_Client" msprop:Generator_UserParentTable="Document" msprop:Generator_ParentPropName="DocumentRow" />
+      <msdata:Relationship name="Document_DocumentItem" msdata:parent="Document" msdata:child="DocumentItem" msdata:parentkey="ID" msdata:childkey="DocumentID" msprop:Generator_UserChildTable="DocumentItem" msprop:Generator_ChildPropName="GetDocumentItemRows" msprop:Generator_UserRelationName="Document_DocumentItem" msprop:Generator_ParentPropName="DocumentRow" msprop:Generator_RelationVarName="relationDocument_DocumentItem" msprop:Generator_UserParentTable="Document" />
+      <msdata:Relationship name="Document_Client" msdata:parent="Document" msdata:child="Client" msdata:parentkey="ClientID" msdata:childkey="ID" msprop:Generator_UserChildTable="Client" msprop:Generator_ChildPropName="GetClientRows" msprop:Generator_UserRelationName="Document_Client" msprop:Generator_ParentPropName="DocumentRow" msprop:Generator_RelationVarName="relationDocument_Client" msprop:Generator_UserParentTable="Document" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

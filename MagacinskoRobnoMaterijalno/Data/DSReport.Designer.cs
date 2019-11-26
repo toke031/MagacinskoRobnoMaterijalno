@@ -763,6 +763,8 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             private global::System.Data.DataColumn columnNote;
             
+            private global::System.Data.DataColumn columnName;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DocumentItemDataTable() {
@@ -862,6 +864,14 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn NameColumn {
+                get {
+                    return this.columnName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -897,7 +907,7 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DocumentItemRow AddDocumentItemRow(DocumentRow parentDocumentRowByDocument_DocumentItem, decimal ItemPrice, string ArticleNo, decimal Width, decimal Quantity, decimal QuantityItemPrice, decimal Height, string Note) {
+            public DocumentItemRow AddDocumentItemRow(DocumentRow parentDocumentRowByDocument_DocumentItem, decimal ItemPrice, string ArticleNo, decimal Width, decimal Quantity, decimal QuantityItemPrice, decimal Height, string Note, string Name) {
                 DocumentItemRow rowDocumentItemRow = ((DocumentItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -907,7 +917,8 @@ namespace MagacinskoRobnoMaterijalno.Data {
                         Quantity,
                         QuantityItemPrice,
                         Height,
-                        Note};
+                        Note,
+                        Name};
                 if ((parentDocumentRowByDocument_DocumentItem != null)) {
                     columnValuesArray[0] = parentDocumentRowByDocument_DocumentItem[0];
                 }
@@ -941,6 +952,7 @@ namespace MagacinskoRobnoMaterijalno.Data {
                 this.columnQuantityItemPrice = base.Columns["QuantityItemPrice"];
                 this.columnHeight = base.Columns["Height"];
                 this.columnNote = base.Columns["Note"];
+                this.columnName = base.Columns["Name"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -962,6 +974,8 @@ namespace MagacinskoRobnoMaterijalno.Data {
                 base.Columns.Add(this.columnHeight);
                 this.columnNote = new global::System.Data.DataColumn("Note", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNote);
+                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnName);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1905,6 +1919,22 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Name {
+                get {
+                    try {
+                        return ((string)(this[this.tableDocumentItem.NameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'DocumentItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDocumentItem.NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DocumentRow DocumentRow {
                 get {
                     return ((DocumentRow)(this.GetParentRow(this.Table.ParentRelations["Document_DocumentItem"])));
@@ -2008,6 +2038,18 @@ namespace MagacinskoRobnoMaterijalno.Data {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetNoteNull() {
                 this[this.tableDocumentItem.NoteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsNameNull() {
+                return this.IsNull(this.tableDocumentItem.NameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetNameNull() {
+                this[this.tableDocumentItem.NameColumn] = global::System.Convert.DBNull;
             }
         }
         
