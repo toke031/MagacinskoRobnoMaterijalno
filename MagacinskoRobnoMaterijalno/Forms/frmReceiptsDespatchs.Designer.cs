@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGVReceiptsDespatchsItems = new System.Windows.Forms.DataGridView();
             this.Rb = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ArticleNoUnbound = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,6 +97,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dtpPaymentDate = new System.Windows.Forms.DateTimePicker();
+            this.bPrint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVReceiptsDespatchsItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentItemBindingSource)).BeginInit();
@@ -135,9 +136,9 @@
             // 
             // Rb
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            this.Rb.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.Rb.DefaultCellStyle = dataGridViewCellStyle1;
             this.Rb.HeaderText = "Rb";
             this.Rb.Name = "Rb";
             this.Rb.ReadOnly = true;
@@ -191,11 +192,11 @@
             // quantityDataGridViewTextBoxColumn
             // 
             this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.quantityDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.quantityDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.quantityDataGridViewTextBoxColumn.HeaderText = "Kolicina";
             this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
             this.quantityDataGridViewTextBoxColumn.Width = 60;
@@ -203,9 +204,9 @@
             // widthDataGridViewTextBoxColumn
             // 
             this.widthDataGridViewTextBoxColumn.DataPropertyName = "Width";
-            dataGridViewCellStyle17.Format = "N2";
-            dataGridViewCellStyle17.NullValue = null;
-            this.widthDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.widthDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.widthDataGridViewTextBoxColumn.HeaderText = "Sirina cm";
             this.widthDataGridViewTextBoxColumn.Name = "widthDataGridViewTextBoxColumn";
             this.widthDataGridViewTextBoxColumn.Width = 50;
@@ -213,9 +214,9 @@
             // heightDataGridViewTextBoxColumn
             // 
             this.heightDataGridViewTextBoxColumn.DataPropertyName = "Height";
-            dataGridViewCellStyle18.Format = "N2";
-            dataGridViewCellStyle18.NullValue = null;
-            this.heightDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.heightDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.heightDataGridViewTextBoxColumn.HeaderText = "Visina cm";
             this.heightDataGridViewTextBoxColumn.Name = "heightDataGridViewTextBoxColumn";
             this.heightDataGridViewTextBoxColumn.Width = 50;
@@ -223,9 +224,9 @@
             // quantityItemPriceDataGridViewTextBoxColumn
             // 
             this.quantityItemPriceDataGridViewTextBoxColumn.DataPropertyName = "QuantityItemPrice";
-            dataGridViewCellStyle19.Format = "N2";
-            dataGridViewCellStyle19.NullValue = null;
-            this.quantityItemPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.quantityItemPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             this.quantityItemPriceDataGridViewTextBoxColumn.HeaderText = "Jedinicna cena";
             this.quantityItemPriceDataGridViewTextBoxColumn.Name = "quantityItemPriceDataGridViewTextBoxColumn";
             this.quantityItemPriceDataGridViewTextBoxColumn.Width = 80;
@@ -233,10 +234,10 @@
             // itemPriceDataGridViewTextBoxColumn
             // 
             this.itemPriceDataGridViewTextBoxColumn.DataPropertyName = "ItemPrice";
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.PapayaWhip;
-            dataGridViewCellStyle20.Format = "N2";
-            dataGridViewCellStyle20.NullValue = null;
-            this.itemPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.PapayaWhip;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.itemPriceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
             this.itemPriceDataGridViewTextBoxColumn.HeaderText = "Cena";
             this.itemPriceDataGridViewTextBoxColumn.Name = "itemPriceDataGridViewTextBoxColumn";
             this.itemPriceDataGridViewTextBoxColumn.ReadOnly = true;
@@ -244,8 +245,8 @@
             // Note
             // 
             this.Note.DataPropertyName = "Note";
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            this.Note.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.Note.DefaultCellStyle = dataGridViewCellStyle7;
             this.Note.HeaderText = "Napomena";
             this.Note.Name = "Note";
             this.Note.Width = 220;
@@ -501,7 +502,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(827, 537);
+            this.btnSave.Location = new System.Drawing.Point(746, 537);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 40;
@@ -567,7 +568,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(746, 537);
+            this.btnCancel.Location = new System.Drawing.Point(665, 537);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 48;
@@ -703,11 +704,22 @@
             this.dtpPaymentDate.Size = new System.Drawing.Size(108, 20);
             this.dtpPaymentDate.TabIndex = 52;
             // 
+            // bPrint
+            // 
+            this.bPrint.Location = new System.Drawing.Point(827, 537);
+            this.bPrint.Name = "bPrint";
+            this.bPrint.Size = new System.Drawing.Size(75, 23);
+            this.bPrint.TabIndex = 37;
+            this.bPrint.Text = "Stampaj";
+            this.bPrint.UseVisualStyleBackColor = true;
+            this.bPrint.Click += new System.EventHandler(this.bPrint_Click);
+            // 
             // frmReceiptsDespatchs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 572);
+            this.Controls.Add(this.bPrint);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label3);
@@ -805,5 +817,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn DeleteDocumentItem;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbSpoljniBroj;
+        private System.Windows.Forms.Button bPrint;
     }
 }

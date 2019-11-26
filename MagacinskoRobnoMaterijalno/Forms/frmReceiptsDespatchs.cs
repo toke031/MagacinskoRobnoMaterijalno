@@ -1,4 +1,5 @@
-﻿using MagacinskoRobnoMaterijalno.Classes;
+﻿using CrystalDecisions.Windows.Forms;
+using MagacinskoRobnoMaterijalno.Classes;
 using MagacinskoRobnoMaterijalno.Models;
 using System;
 using System.Collections.Generic;
@@ -511,6 +512,22 @@ namespace MagacinskoRobnoMaterijalno.Forms
         private void frmReceiptsDespatchs_Shown(object sender, EventArgs e)
         {
             DGVReceiptsDespatchsItems.Refresh();
+        }
+
+        private void bPrint_Click(object sender, EventArgs e)
+        {
+            Reports.Dokument rpt = new Reports.Dokument();
+            Data.DSReport ds = new Data.DSReport();
+            
+            Lib.PrepareDS(ds, _document);
+            Reports.Preview p = new Reports.Preview();
+
+            rpt.SetDataSource(ds);
+            p.crystalReportViewer1.ReportSource = rpt;
+            p.crystalReportViewer1.RefreshReport();
+            p.Show();
+            p.crystalReportViewer1.Refresh();
+
         }
     }
 }

@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MagacinskoRobnoMaterijalno.Data;
+using MagacinskoRobnoMaterijalno.Models;
 
 namespace MagacinskoRobnoMaterijalno.Classes
 {
@@ -12,7 +14,7 @@ namespace MagacinskoRobnoMaterijalno.Classes
         public enum StatusEnum
         {
             [Description("Neplaćeni")]
-            U_Pripremi  = 0,
+            U_Pripremi = 0,
             [Description("Plaćeni")]
             Vazeci = 1,
             [Description("Storno")]
@@ -48,5 +50,32 @@ namespace MagacinskoRobnoMaterijalno.Classes
             Material = 0
         }
 
+        public static void PrepareDS(DSReport ds, Document document)
+        {
+            Data.DSReport.DocumentRow rowd = ds.Document.NewDocumentRow();
+            rowd.ID = (int)document.ID;
+            rowd.DocumentNo = document.DocumentNo;
+            rowd.DocumentType = Enum.GetName(typeof(DocumentType), document.DocumentType);
+            rowd.DocumentDateTime = document.DocumentDateTime;
+            rowd.PaymentDate = document.PaymentDate;
+            rowd.PaymentEndDate = document.PaymentEndDate;
+            rowd.ClientID = (int)document.ClientID;
+            ds.Document.AddDocumentRow(rowd);
+            foreach (var item in document.DocumentItems)
+            {
+                Data.DSReport.DocumentItemRow row = ds.DocumentItem.NewDocumentItemRow();
+                row.ItemPrice = item.ItemPrice;
+                row.DocumentID = (int)document.ID;
+                row.ArticleNo = item.ArticleNo;
+                row.ItemPrice = item.ItemPrice;
+                ds.DocumentItem.AddDocumentItemRow(row);
+            }
+            Data.DSReport.ClientRow rowc = ds.Client.NewClientRow();
+            rowc.Address = document.Client.Address;
+            rowc.ID = (int)document.ClientID;
+            rowc.Name = document.Client.Name;
+            ds.Client.AddClientRow(rowc);
+            ds.AcceptChanges();
+        }
     }
 }
