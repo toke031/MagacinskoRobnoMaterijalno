@@ -105,8 +105,8 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public BindingList<Client> GetClients()
         {
-            _context.Clients.Load();
-            return _context.Clients.Local.ToBindingList();
+            //_context.Clients.Load();
+            return new BindingList<Client>(_context.Clients.OrderBy(x=>x.Name).ToList());
         }
 
         public void DeleteArticle(Article itemForDelete)

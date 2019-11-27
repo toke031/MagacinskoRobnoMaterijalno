@@ -16,11 +16,13 @@ namespace MagacinskoRobnoMaterijalno.Models
         [ForeignKey("DocumentID")]
         public Document Document { get; set; }
         public decimal ItemPrice { get; set; }
+        public DateTime OrderDate { get; set; }
         public string ArticleNo { get; set; }
 
         public long ItemID { get; set; }
-        //[ForeignKey("ItemID")]
-      //  public Article Item { get; set; }
+
+        [ForeignKey("ItemID")]
+        public Article Item { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityItemPrice { get; set; }
         public decimal Width { get; set; }

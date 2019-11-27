@@ -32,7 +32,7 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public Document GetDocument(long iD)
         {
-            return _context.Documents.Include(x => x.Client).Include(b=>b.DocumentItems).Where(x => x.ID == iD).FirstOrDefault();
+            return _context.Documents.Include(x => x.Client).Include(b => b.DocumentItems).Where(x => x.ID == iD).FirstOrDefault();
         }
 
         public string GetLastNoForDoument(int year, int typeId)
@@ -45,7 +45,7 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public BindingList<Document> GetAllDocuments()
         {
-                foreach (var entity in _context.ChangeTracker.Entries())
+            foreach (var entity in _context.ChangeTracker.Entries())
             {
                 entity.Reload();
             }
@@ -59,8 +59,8 @@ namespace MagacinskoRobnoMaterijalno.Models
             {
                 entity.Reload();
             }
-            _context.Documents.Where(x=>x.DocumentType == type).Include(x => x.Client).Load();
-            return new BindingList<Document>(_context.Documents.Local.Where(x=>x.DocumentType == type).ToList());
+            _context.Documents.Where(x => x.DocumentType == type).Include(x => x.Client).Load();
+            return new BindingList<Document>(_context.Documents.Local.Where(x => x.DocumentType == type).ToList());
         }
 
         public BindingList<Document> GetAllDocumentsForCcurrenParams(Dictionary<string, string> listOfParams)
@@ -72,32 +72,31 @@ namespace MagacinskoRobnoMaterijalno.Models
             var CreatedDateTo = DateTime.ParseExact(listOfParams.Where(l => l.Key == "CreatedDateTo").FirstOrDefault().Value, "MM/dd/yyyy", null);
             if (DocumentType == null && DocumentStatus == null)
             {
-                return new BindingList<Document>(_context.Documents.Where(x => x.Client.Name.Contains(ClientName) 
+                return new BindingList<Document>(_context.Documents.Where(x => x.Client.Name.Contains(ClientName)
                 && System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) >= CreatedDateFrom
                 && System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) <= CreatedDateTo).ToList());
             }
             else if (DocumentStatus == null && DocumentType != null)
             {
                 return new BindingList<Document>(_context.Documents.Where(x => x.Client.Name.Contains(ClientName)
-                 && x.StatusID.ToString() == DocumentStatus
-                 && x.DocumentType.ToString() == DocumentType
-                 && x.DocumentDateTime.Date >= CreatedDateFrom
-                 && x.DocumentDateTime.Date <= CreatedDateTo).ToList());
+                && x.DocumentType.ToString() == DocumentType
+                && System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) >= CreatedDateFrom
+                && System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) <= CreatedDateTo).ToList());
             }
             else if (DocumentType == null && DocumentStatus != null)
             {
                 return new BindingList<Document>(_context.Documents.Where(x => x.Client.Name.Contains(ClientName)
-             && x.StatusID.ToString() == DocumentStatus
-             && x.DocumentDateTime.Date >= CreatedDateFrom
-             && x.DocumentDateTime.Date <= CreatedDateTo).ToList());
+                && x.StatusID.ToString() == DocumentStatus
+                && System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) >= CreatedDateFrom
+                && System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) <= CreatedDateTo).ToList());
             }
             else
             {
                 return new BindingList<Document>(_context.Documents.Where(x => x.Client.Name.Contains(ClientName)
-                 && x.StatusID.ToString() == DocumentStatus
-                 && x.DocumentType.ToString() == DocumentType
-                 && x.DocumentDateTime.Date >= CreatedDateFrom
-                 && x.DocumentDateTime.Date <= CreatedDateTo).ToList());
+                && x.StatusID.ToString() == DocumentStatus
+                && x.DocumentType.ToString() == DocumentType
+                && System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) >= CreatedDateFrom
+                && System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) <= CreatedDateTo).ToList());
             }
         }
 
@@ -108,9 +107,9 @@ namespace MagacinskoRobnoMaterijalno.Models
                 var d = entity;//.Reload();
 
             }
-                return _context.ChangeTracker.Entries().Any(e => e.State == EntityState.Added
-                                              || e.State == EntityState.Modified
-                                              || e.State == EntityState.Deleted);
+            return _context.ChangeTracker.Entries().Any(e => e.State == EntityState.Added
+                                          || e.State == EntityState.Modified
+                                          || e.State == EntityState.Deleted);
         }
     }
 }

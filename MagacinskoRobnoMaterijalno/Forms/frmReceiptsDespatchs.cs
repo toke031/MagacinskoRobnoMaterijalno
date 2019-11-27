@@ -203,6 +203,18 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     return;
                 e.Value = e.RowIndex + 1;
             }
+            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "Povrsina" && e.Value == null)
+            {
+                if (DGVReceiptsDespatchsItems.Rows[e.RowIndex] == null || DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem == null)
+                    return;
+                DocumentItem doci = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem);
+                decimal povrsina = (doci.Width / 100) * (doci.Height / 100);
+                if(povrsina<1)
+                {
+                    povrsina = 1;
+                }
+                e.Value = povrsina;
+            }
         }
 
         private void InitUnboundColumns()
