@@ -213,7 +213,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 {
                     povrsina = 1;
                 }
-                e.Value = povrsina;
+                e.Value = (povrsina* doci.Quantity);
             }
         }
 
