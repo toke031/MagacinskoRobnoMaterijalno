@@ -103,7 +103,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             tbNaziv.DataBindings.Add("Text", _bindinglist[0], "Name");
 
             tbPrice.DataBindings.Clear();
-            tbPrice.DataBindings.Add("Text", _bindinglist[0], "QuantityItemPrice");
+            tbPrice.DataBindings.Add("Text", _bindinglist[0], "ItemPrice");
 
             cmbItemType.DataBindings.Clear();
             cmbItemType.DataBindings.Add("SelectedIndex", _bindinglist[0], "ArticleTypeID");

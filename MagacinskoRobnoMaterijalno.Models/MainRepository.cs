@@ -40,6 +40,11 @@ namespace MagacinskoRobnoMaterijalno.Models
             return _context.Warehouses.Local.ToBindingList();
         }
 
+        public void GetAllDespatchForClientInPeriod(long ClientID, DateTime DateFrom , DateTime DateTo)
+        {
+            
+        }
+
         public List<Article> GetArticlesByName(string articleName) 
         {
            return _context.Articles.Where(x=>x.ArticleNo.Contains(articleName)).ToList();

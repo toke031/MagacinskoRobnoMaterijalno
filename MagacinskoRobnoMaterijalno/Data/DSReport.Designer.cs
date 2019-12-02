@@ -765,6 +765,12 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             private global::System.Data.DataColumn columnName;
             
+            private global::System.Data.DataColumn columnItemID;
+            
+            private global::System.Data.DataColumn columnSurface;
+            
+            private global::System.Data.DataColumn columnOrderDate;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DocumentItemDataTable() {
@@ -872,6 +878,30 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ItemIDColumn {
+                get {
+                    return this.columnItemID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SurfaceColumn {
+                get {
+                    return this.columnSurface;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn OrderDateColumn {
+                get {
+                    return this.columnOrderDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -907,7 +937,7 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DocumentItemRow AddDocumentItemRow(DocumentRow parentDocumentRowByDocument_DocumentItem, decimal ItemPrice, string ArticleNo, decimal Width, decimal Quantity, decimal QuantityItemPrice, decimal Height, string Note, string Name) {
+            public DocumentItemRow AddDocumentItemRow(DocumentRow parentDocumentRowByDocument_DocumentItem, decimal ItemPrice, string ArticleNo, decimal Width, decimal Quantity, decimal QuantityItemPrice, decimal Height, string Note, string Name, int ItemID, decimal Surface, System.DateTime OrderDate) {
                 DocumentItemRow rowDocumentItemRow = ((DocumentItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -918,7 +948,10 @@ namespace MagacinskoRobnoMaterijalno.Data {
                         QuantityItemPrice,
                         Height,
                         Note,
-                        Name};
+                        Name,
+                        ItemID,
+                        Surface,
+                        OrderDate};
                 if ((parentDocumentRowByDocument_DocumentItem != null)) {
                     columnValuesArray[0] = parentDocumentRowByDocument_DocumentItem[0];
                 }
@@ -953,6 +986,9 @@ namespace MagacinskoRobnoMaterijalno.Data {
                 this.columnHeight = base.Columns["Height"];
                 this.columnNote = base.Columns["Note"];
                 this.columnName = base.Columns["Name"];
+                this.columnItemID = base.Columns["ItemID"];
+                this.columnSurface = base.Columns["Surface"];
+                this.columnOrderDate = base.Columns["OrderDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -976,6 +1012,12 @@ namespace MagacinskoRobnoMaterijalno.Data {
                 base.Columns.Add(this.columnNote);
                 this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnName);
+                this.columnItemID = new global::System.Data.DataColumn("ItemID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItemID);
+                this.columnSurface = new global::System.Data.DataColumn("Surface", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSurface);
+                this.columnOrderDate = new global::System.Data.DataColumn("OrderDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrderDate);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1935,6 +1977,54 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int ItemID {
+                get {
+                    try {
+                        return ((int)(this[this.tableDocumentItem.ItemIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemID\' in table \'DocumentItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDocumentItem.ItemIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal Surface {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDocumentItem.SurfaceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Surface\' in table \'DocumentItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDocumentItem.SurfaceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime OrderDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableDocumentItem.OrderDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OrderDate\' in table \'DocumentItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDocumentItem.OrderDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DocumentRow DocumentRow {
                 get {
                     return ((DocumentRow)(this.GetParentRow(this.Table.ParentRelations["Document_DocumentItem"])));
@@ -2050,6 +2140,42 @@ namespace MagacinskoRobnoMaterijalno.Data {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetNameNull() {
                 this[this.tableDocumentItem.NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsItemIDNull() {
+                return this.IsNull(this.tableDocumentItem.ItemIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetItemIDNull() {
+                this[this.tableDocumentItem.ItemIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSurfaceNull() {
+                return this.IsNull(this.tableDocumentItem.SurfaceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSurfaceNull() {
+                this[this.tableDocumentItem.SurfaceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsOrderDateNull() {
+                return this.IsNull(this.tableDocumentItem.OrderDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetOrderDateNull() {
+                this[this.tableDocumentItem.OrderDateColumn] = global::System.Convert.DBNull;
             }
         }
         

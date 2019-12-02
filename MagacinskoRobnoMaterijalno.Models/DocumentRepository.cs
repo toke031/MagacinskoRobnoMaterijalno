@@ -32,7 +32,7 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public Document GetDocument(long iD)
         {
-            return _context.Documents.Include(x => x.Client).Include(b => b.DocumentItems).Where(x => x.ID == iD).FirstOrDefault();
+            return _context.Documents.Include(x => x.Client).Include(b => b.DocumentItems).Include(c=>c.DocumentItems.Select(d=>d.Item)).Where(x => x.ID == iD).FirstOrDefault();
         }
 
         public string GetLastNoForDoument(int year, int typeId)

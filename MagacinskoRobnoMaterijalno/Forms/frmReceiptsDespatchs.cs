@@ -203,7 +203,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     return;
                 e.Value = e.RowIndex + 1;
             }
-            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "Povrsina" && e.Value == null)
+            if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "Surface" && e.Value == null)
             {
                 if (DGVReceiptsDespatchsItems.Rows[e.RowIndex] == null || DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem == null)
                     return;
@@ -231,7 +231,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void Calculate()
         {
-            decimal totalWithWAT = _document.DocumentItems.Sum(x => (x.Quantity * x.QuantityItemPrice) * (((x.Height * x.Width) > 10000) ? ((x.Height / 100) * (x.Width / 100)) : 1));
+            decimal totalWithWAT = _document.DocumentItems.Sum(x => (x.Quantity * x.ItemPrice) * (((x.Height * x.Width) > 10000) ? ((x.Height / 100) * (x.Width / 100)) : 1));
 
             tbTotal.Text = (totalWithWAT - (totalWithWAT * 0.2M)).ToString("N2");
             tbVat.Text = (totalWithWAT * 0.2M).ToString("N2");
@@ -250,7 +250,8 @@ namespace MagacinskoRobnoMaterijalno.Forms
             {
                 DocumentItem doci = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.NewIndex].DataBoundItem);
                 decimal povrsina = (doci.Width / 100) * (doci.Height / 100);
-                doci.ItemPrice = doci.Quantity * doci.QuantityItemPrice * ((povrsina > 1) ? (povrsina) : 1);
+                doci.QuantityItemPrice = doci.Quantity * doci.ItemPrice * ((povrsina > 1) ? (povrsina) : 1);
+                doci.Surface = povrsina;
             }
         }
 
@@ -287,7 +288,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                    // ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = null;
                     //((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ItemID = 0;
                     ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = null;
-                    ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).QuantityItemPrice = 0;
+                    ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ItemPrice = 0;
                 }
                 else
                 {
@@ -297,7 +298,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                        // ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = (pronadjen);
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ItemID = (pronadjen.ID);
                         ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ArticleNo = pronadjen.ArticleNo;
-                        ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).QuantityItemPrice = pronadjen.QuantityItemPrice;
+                        ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).ItemPrice = pronadjen.ItemPrice;
                     }
                     else
                     {
@@ -318,7 +319,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                     stavka.ItemID = pronadjen.ID;
                    // stavka.Item = (pronadjen);
                     stavka.ArticleNo = pronadjen.ArticleNo;
-                    stavka.QuantityItemPrice = pronadjen.QuantityItemPrice;
+                    stavka.ItemPrice = pronadjen.ItemPrice;
                     DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells["ArticleNoUnbound"].Value = pronadjen.ArticleNo;
                 }
 
@@ -528,17 +529,24 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void bPrint_Click(object sender, EventArgs e)
         {
-            Reports.Dokument rpt = new Reports.Dokument();
-            Data.DSReport ds = new Data.DSReport();
-            
-            Lib.PrepareDS(ds, _document);
-            Reports.Preview p = new Reports.Preview();
+            try
+            {
+                Reports.Dokument rpt = new Reports.Dokument();
+                Data.DSReport ds = new Data.DSReport();
 
-            rpt.SetDataSource(ds);
-            p.crystalReportViewer1.ReportSource = rpt;
-            p.crystalReportViewer1.RefreshReport();
-            p.Show();
-            p.crystalReportViewer1.Refresh();
+                Lib.PrepareDS(ds, _document);
+                Reports.Preview p = new Reports.Preview();
+
+                rpt.SetDataSource(ds);
+                p.crystalReportViewer1.ReportSource = rpt;
+                p.crystalReportViewer1.RefreshReport();
+                p.Show();
+                p.crystalReportViewer1.Refresh();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Nije moguce stampanje + \\n", ex.Message);
+            }
 
         }
     }
