@@ -383,6 +383,8 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             private global::System.Data.DataColumn columnStatusID;
             
+            private global::System.Data.DataColumn columnGroupByPrice;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DocumentDataTable() {
@@ -498,6 +500,14 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn GroupByPriceColumn {
+                get {
+                    return this.columnGroupByPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -533,7 +543,7 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DocumentRow AddDocumentRow(int ID, string DocumentNo, string LinkDocumentNo, string DocumentType, System.DateTime DocumentDateTime, System.DateTime PaymentEndDate, System.DateTime PaymentDate, decimal TotalPrice, int ClientID, string StatusID) {
+            public DocumentRow AddDocumentRow(int ID, string DocumentNo, string LinkDocumentNo, string DocumentType, System.DateTime DocumentDateTime, System.DateTime PaymentEndDate, System.DateTime PaymentDate, decimal TotalPrice, int ClientID, string StatusID, string GroupByPrice) {
                 DocumentRow rowDocumentRow = ((DocumentRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
@@ -545,7 +555,8 @@ namespace MagacinskoRobnoMaterijalno.Data {
                         PaymentDate,
                         TotalPrice,
                         ClientID,
-                        StatusID};
+                        StatusID,
+                        GroupByPrice};
                 rowDocumentRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDocumentRow);
                 return rowDocumentRow;
@@ -585,6 +596,7 @@ namespace MagacinskoRobnoMaterijalno.Data {
                 this.columnTotalPrice = base.Columns["TotalPrice"];
                 this.columnClientID = base.Columns["ClientID"];
                 this.columnStatusID = base.Columns["StatusID"];
+                this.columnGroupByPrice = base.Columns["GroupByPrice"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -610,6 +622,8 @@ namespace MagacinskoRobnoMaterijalno.Data {
                 base.Columns.Add(this.columnClientID);
                 this.columnStatusID = new global::System.Data.DataColumn("StatusID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStatusID);
+                this.columnGroupByPrice = new global::System.Data.DataColumn("GroupByPrice", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGroupByPrice);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("DocumentKey1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AllowDBNull = false;
@@ -1688,6 +1702,22 @@ namespace MagacinskoRobnoMaterijalno.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string GroupByPrice {
+                get {
+                    try {
+                        return ((string)(this[this.tableDocument.GroupByPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GroupByPrice\' in table \'Document\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDocument.GroupByPriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsDocumentNoNull() {
                 return this.IsNull(this.tableDocument.DocumentNoColumn);
             }
@@ -1792,6 +1822,18 @@ namespace MagacinskoRobnoMaterijalno.Data {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetStatusIDNull() {
                 this[this.tableDocument.StatusIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsGroupByPriceNull() {
+                return this.IsNull(this.tableDocument.GroupByPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetGroupByPriceNull() {
+                this[this.tableDocument.GroupByPriceColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

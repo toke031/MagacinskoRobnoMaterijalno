@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +56,11 @@ namespace MagacinskoRobnoMaterijalno.Classes
         internal BindingList<Document> SearchDocuments(Dictionary<string, string> listOfParams)
         {
             return _docRepository.GetAllDocumentsForCcurrenParams(listOfParams);
+        }
+
+        internal DataSet GetGroupByPriceForClient(long documentID)
+        {
+             return _docRepository.GetGroupByPriceForClient(documentID);
         }
     }
 }

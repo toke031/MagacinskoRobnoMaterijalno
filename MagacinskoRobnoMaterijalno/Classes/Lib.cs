@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,7 +52,7 @@ namespace MagacinskoRobnoMaterijalno.Classes
             Material = 0
         }
 
-        public static void PrepareDS(DSReport ds, Document document)
+        public static void PrepareDS(DSReport ds, Document document, DataSet groupByPrice)
         {
             Data.DSReport.DocumentRow rowd = ds.Document.NewDocumentRow();
             rowd.ID = (int)document.ID;
@@ -62,6 +63,12 @@ namespace MagacinskoRobnoMaterijalno.Classes
             rowd.PaymentDate = document.PaymentDate;
             rowd.PaymentEndDate = document.PaymentEndDate;
             rowd.ClientID = (int)document.ClientID;
+            rowd.GroupByPrice = "";
+            foreach (DataRow d in groupByPrice.Tables[0].Rows)
+            {
+                rowd.GroupByPrice += "Cena: " + d["StartWith"] + "; Površina: " + d["Surface"] + Environment.NewLine;
+            }
+            
             rowd.TotalPrice = document.TotalPrice;
             ds.Document.AddDocumentRow(rowd);
             foreach (var item in document.DocumentItems)

@@ -163,6 +163,14 @@
     <Compile Include="Migrations\201911301334330_dodavanjePovrsine.Designer.cs">
       <DependentUpon>201911301334330_dodavanjePovrsine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912292231124_groupByPrice.cs" />
+    <Compile Include="Migrations\201912292231124_groupByPrice.Designer.cs">
+      <DependentUpon>201912292231124_groupByPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912292241137_removeGroupByPrice.cs" />
+    <Compile Include="Migrations\201912292241137_removeGroupByPrice.Designer.cs">
+      <DependentUpon>201912292241137_removeGroupByPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Document.cs" />
@@ -197,6 +205,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911301334330_dodavanjePovrsine.resx">
       <DependentUpon>201911301334330_dodavanjePovrsine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912292231124_groupByPrice.resx">
+      <DependentUpon>201912292231124_groupByPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912292241137_removeGroupByPrice.resx">
+      <DependentUpon>201912292241137_removeGroupByPrice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

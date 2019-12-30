@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Data.Entity.Core.Objects;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace MagacinskoRobnoMaterijalno.Models
 {
@@ -61,6 +63,20 @@ namespace MagacinskoRobnoMaterijalno.Models
             }
             _context.Documents.Where(x => x.DocumentType == type).Include(x => x.Client).Load();
             return new BindingList<Document>(_context.Documents.Local.Where(x => x.DocumentType == type).ToList());
+        }
+
+        public DataSet GetGroupByPriceForClient(long documentID)
+        {
+            string queryString =
+              "select cast(di.ItemPrice as int) StartWith, sum(di.Surface) Surface from Documents d inner join DocumentItems di on d.ID = di.DocumentID where d.ID = "+ documentID + " group by di.ItemPrice";
+            SqlDataAdapter adapter = new SqlDataAdapter(queryString, "Server=.\\SQLEXPRESS;Initial Catalog=MagacinskoRobnoMaterijalno.Models.MainDBContext;Integrated Security=SSPI");
+
+            DataSet groupByPrice = new DataSet();
+            groupByPrice.Tables.Add("groupByPrice");
+            groupByPrice.Tables[0].Columns.Add("StartWith", typeof(decimal));
+            groupByPrice.Tables[0].Columns.Add("Surface", typeof(decimal));
+            adapter.Fill(groupByPrice.Tables[0]);
+            return groupByPrice;
         }
 
         public BindingList<Document> GetAllDocumentsForCcurrenParams(Dictionary<string, string> listOfParams)

@@ -251,7 +251,11 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 DocumentItem doci = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.NewIndex].DataBoundItem);
                 decimal povrsina = (doci.Width / 100) * (doci.Height / 100);
                 doci.QuantityItemPrice = doci.Quantity * doci.ItemPrice * ((povrsina > 1) ? (povrsina) : 1);
-                doci.Surface = povrsina;
+                if(povrsina<1)
+                {
+                    povrsina = 1;
+                }
+                doci.Surface = (povrsina * doci.Quantity);
             }
         }
 
@@ -533,8 +537,8 @@ namespace MagacinskoRobnoMaterijalno.Forms
             {
                 Reports.Dokument rpt = new Reports.Dokument();
                 Data.DSReport ds = new Data.DSReport();
-
-                Lib.PrepareDS(ds, _document);
+                DataSet groupByPrice = _documentLogic.GetGroupByPriceForClient(_document.ID);
+                Lib.PrepareDS(ds, _document, groupByPrice);
                 Reports.Preview p = new Reports.Preview();
 
                 rpt.SetDataSource(ds);
@@ -545,7 +549,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Nije moguce stampanje + \\n", ex.Message);
+                MessageBox.Show("Nije moguce stampanje " + Environment.NewLine +  ex.ToString());
             }
 
         }
