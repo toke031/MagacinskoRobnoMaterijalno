@@ -67,7 +67,7 @@ namespace MagacinskoRobnoMaterijalno.Classes
             foreach (DataRow d in groupByPrice.Tables[0].Rows)
             {
                 rowd.GroupByPrice += "Cena: " + d["StartWith"] + "; Površina: " + d["Surface"] + Environment.NewLine;
-            }
+            } 
             
             rowd.TotalPrice = document.TotalPrice;
             ds.Document.AddDocumentRow(rowd);
