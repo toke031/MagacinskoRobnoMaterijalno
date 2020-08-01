@@ -55,6 +55,16 @@ namespace MagacinskoRobnoMaterijalno.Models
             return _context.Documents.Local.ToBindingList();
         }
 
+        public BindingList<Document> GetDocumentForLast30Days()
+        {
+            foreach (var entity in _context.ChangeTracker.Entries())
+            {
+                entity.Reload();
+            }
+            _context.Documents.Include(x => x.Client).Where(x=>x.DocumentDateTime>=DateTime.Today.AddDays(-30) && x.DocumentDateTime <= DateTime.Today).Load();
+            return _context.Documents.Local.ToBindingList();
+        }
+
         public BindingList<Document> GetAllDocumentsByDocumentType(int type)
         {
             foreach (var entity in _context.ChangeTracker.Entries())

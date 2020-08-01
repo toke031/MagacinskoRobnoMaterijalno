@@ -59,7 +59,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             var statuses = new List<Status>() { new Status() { ID = 0, Name = "Neplaćeni" }, new Status() { ID = 1, Name = "Plaćeni" }, new Status() { ID = 2, Name = "Storno" } };
 
             documentTypeBindingSource.DataSource = statuses.ToList();
-            documentBindingSource.DataSource = _documentLogic.GetAllDocuments();
+            documentBindingSource.DataSource = _documentLogic.GetDocumentForLast30Days();
             clientBindingSource.DataSource = _clientLogic.GetAllClients();
             warehouseBindingSource.DataSource = _warehouseLogic.GetAllWarehouse();
 

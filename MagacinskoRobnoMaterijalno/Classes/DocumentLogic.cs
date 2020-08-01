@@ -44,6 +44,11 @@ namespace MagacinskoRobnoMaterijalno.Classes
         {
             return _docRepository.GetAllDocuments();
         }
+
+        internal BindingList<Document> GetDocumentForLast30Days()
+        {
+            return _docRepository.GetDocumentForLast30Days();
+        }
         internal BindingList<Document> GetAllDocumentsByDocumentType(int type)
         {
             return _docRepository.GetAllDocumentsByDocumentType(type);
