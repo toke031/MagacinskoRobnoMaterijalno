@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EnumsNET;
 using MagacinskoRobnoMaterijalno.Data;
-using MagacinskoRobnoMaterijalno.Models;
+using MagacinskoRobnoMaterijalno.Data.Model;
 
 namespace MagacinskoRobnoMaterijalno.Classes
 {
@@ -52,7 +49,7 @@ namespace MagacinskoRobnoMaterijalno.Classes
             Material = 0
         }
 
-        public static void PrepareDS(DSReport ds, Document document, DataSet groupByPrice)
+        public static void PrepareDS(DSReport ds, Data.Model.Document document, DataSet groupByPrice)
         {
             Data.DSReport.DocumentRow rowd = ds.Document.NewDocumentRow();
             rowd.ID = (int)document.ID;
@@ -78,10 +75,10 @@ namespace MagacinskoRobnoMaterijalno.Classes
                 row.DocumentID = (int)document.ID;
                 row.ArticleNo = item.ArticleNo;
                 row.ItemPrice = item.ItemPrice;
-                row.Name = item.Item.Name;
+                row.Name = item.Article.Name;
                 row.Note = item.Note;
                 row.OrderDate = item.OrderDate;
-                row.ItemID = (int)item.Item.ID;
+                row.ItemID = (int)item.Article.ID;
                 row.Quantity = item.Quantity;
                 row.QuantityItemPrice = item.QuantityItemPrice;
                 row.Height = item.Height;

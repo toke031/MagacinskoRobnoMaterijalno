@@ -2,76 +2,98 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MagacinskoRobnoMaterijalno.Models;
+using MagacinskoRobnoMaterijalno.Data.Model;
+using MagacinskoRobnoMaterijalno.Data.UnitOfWork;
 
 namespace MagacinskoRobnoMaterijalno.Classes
 {
    public class ArticalLogic
     {
-        private MainRepository _mainRepository;
         public ArticalLogic() 
         {
-            _mainRepository = new MainRepository();
+
         }
 
         public BindingList<Article> GetAllArticles() 
         {
-            return _mainRepository.GetArticles();
-        }
-        public BindingList<Article> GetAllArticlesForWarehouse(Warehouse warehouse)
-        {
-            return _mainRepository.GetArticlesForWarehouse(warehouse);
+            List<Article> articles= new List<Article>();
+            using (UOW uow = new UOW())
+            {
+                articles = uow.ArticleRepository.Find().ToList();
+            }
+            BindingList<Article> bindingListArticles = new BindingList<Article>(articles);
+            return bindingListArticles;
+
         }
 
-        public void AddArtical(Article article)
+        public int AddArtical(Article article)
         {
-            _mainRepository.AddArticle(article);
-        }
-
-        public bool SaveAllChanges()
-        {
-            return _mainRepository.SaveChanges();
+            using(UOW uow = new UOW())
+            {
+                uow.ArticleRepository.Insert(article);
+                return uow.Save();
+            }
         }
 
         public Article GetArticleByArticleNo(string articleNo)
         {
-            return _mainRepository.GetArticleByArticleNo(articleNo);
+            using (UOW uow = new UOW())
+            {
+                return uow.ArticleRepository.Find(x => x.ArticleNo == articleNo).FirstOrDefault();
+            } 
         }
         public BindingList<Article> GetArticlesByArticleNo(string articleNo)
         {
-            return _mainRepository.GetArticlesByArticleNo(articleNo);
-        }
-
-        public List<Article> GetArticlesByName(string articalName)
-        {
-            return _mainRepository.GetArticlesByName(articalName);
+            using (UOW uow = new UOW())
+            {
+                var articles = uow.ArticleRepository.Find(x => x.ArticleNo.StartsWith(articleNo)).ToList();
+                BindingList<Article> bidingListArticles = new BindingList<Article>(articles);
+                return bidingListArticles;
+            }
         }
 
         public void DeleteArticle(Article itemForDelete)
         {
-            _mainRepository.DeleteArticle(itemForDelete);
+            using (UOW uow = new UOW())
+            {
+                uow.ArticleRepository.Delete(itemForDelete);
+                uow.Save();
+            }
         }
 
-        internal void EditArticle(Article article)
+        internal int EditArticle(Article article)
         {
-            _mainRepository.EditArticle(article);
+            using (UOW uow = new UOW())
+            {
+                uow.ArticleRepository.Update(article);
+                return uow.Save();
+            }
         }
 
         internal List<Article> GetArticleByName(string name)
         {
-            return _mainRepository.GetArticleByName(name);
+            using(UOW uow = new UOW())
+            {
+                return uow.ArticleRepository.Find(x => x.Name.Contains(name)).ToList();
+            }
         }
 
         internal BindingList<Article> GetAllArticlesByWarehouseType(int warehouseType)
         {
-            return _mainRepository.GetArticlesByWarehouseType(warehouseType);
+            using (UOW uow = new UOW())
+            {
+                var articles = uow.ArticleRepository.Find(x => x.ArticleTypeID == warehouseType).ToList();
+                BindingList<Article> bindingListArticles = new BindingList<Article>(articles);
+                return bindingListArticles;
+            }
         }
 
         internal bool IfExists(string articleNo)
         {
-            return  _mainRepository.IfExists(articleNo);
+            using(UOW uow = new UOW())
+            {
+                return uow.ArticleRepository.Find(x => x.ArticleNo == articleNo).Any();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MagacinskoRobnoMaterijalno.Models;
+﻿using MagacinskoRobnoMaterijalno.Data.UnitOfWork;
+using MagacinskoRobnoMaterijalno.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,20 +11,29 @@ namespace MagacinskoRobnoMaterijalno.Classes
 {
     public class WarehouseLogic
     {
-        private MainRepository _mainRepository;
         public WarehouseLogic()
         {
-            _mainRepository = new MainRepository();
         }
 
         internal BindingList<Warehouse> GetAllWarehouseForTypeID(int typeID)
         {
-            return _mainRepository.GetWarehouseByTypeID(typeID);
+            using (UOW uow = new UOW())
+            {
+                var warehouses = uow.WarehouseRepository.Find(x => x.WarehouseTypeID == typeID).ToList();
+                BindingList<Warehouse> bindingListWarehouses = new BindingList<Warehouse>(warehouses);
+                return bindingListWarehouses;
+
+            }
         }
 
         internal BindingList<Warehouse> GetAllWarehouse()
         {
-            return _mainRepository.GetAllWarehouse();
+            using(UOW uow = new UOW())
+            {
+                var warehouses = uow.WarehouseRepository.Find().ToList();
+                BindingList<Warehouse> bindingListWarehouses = new BindingList<Warehouse>(warehouses);
+                return bindingListWarehouses;
+            }
         }
     }
 }

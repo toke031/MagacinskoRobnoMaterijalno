@@ -10,7 +10,7 @@ namespace MagacinskoRobnoMaterijalno.Models
 {
    public class MainRepository
     {
-        MainDBContext _context;
+        readonly MainDBContext _context;
         public MainRepository()
         {
             _context = new MainDBContext();
@@ -27,22 +27,10 @@ namespace MagacinskoRobnoMaterijalno.Models
             return _context.Warehouses.Local.ToBindingList();
         }
 
-        public BindingList<Article> GetArticlesForWarehouse(Warehouse warehouse)
-        {
-            //_context.Articles.Where(x => x.Warehouse.ID == warehouse.ID).Load();
-            //return _context.Articles.Local.ToBindingList();
-            return null;
-        }
-
         public BindingList<Warehouse> GetAllWarehouse()
         {
             _context.Warehouses.Load();
             return _context.Warehouses.Local.ToBindingList();
-        }
-
-        public void GetAllDespatchForClientInPeriod(long ClientID, DateTime DateFrom , DateTime DateTo)
-        {
-            
         }
 
         public List<Article> GetArticlesByName(string articleName) 

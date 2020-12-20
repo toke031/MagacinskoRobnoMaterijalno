@@ -12,35 +12,38 @@ using System.Windows.Forms;
 
 namespace MagacinskoRobnoMaterijalno.Forms
 {
-    public partial class frmNewItem : Form
+    public partial class FrmNewItem : Form
     {
-        BindingList<Article> _bindinglist;
+        readonly BindingList<Data.Model.Article> _bindinglist;
         ArticalLogic _articalLogic;
-        public frmNewItem()
+        public FrmNewItem()
         {
             InitializeComponent();
-            _bindinglist = new BindingList<Article>();
-            _bindinglist.Add(new Article() { ArticleTypeID =1});
+            _bindinglist = new BindingList<Data.Model.Article>
+            {
+                new Data.Model.Article() { ArticleTypeID = 1 }
+            };
             InitNewItem();
         }
 
-        public frmNewItem(Article article)
+        public FrmNewItem(Data.Model.Article article)
         {
             InitializeComponent();
-            _bindinglist = new BindingList<Article>();
-            _bindinglist.Add(article);
+            _bindinglist = new BindingList<Data.Model.Article>
+            {
+                article
+            };
             InitNewItem();
             btnAddArticle.Text = "Sačuvaj izmenu";
             this.Text = "Izmena artikla";
-            btnAddArticle.Click -= btnAddArticle_Click;
-            btnAddArticle.Click += btnEditArticle_Click;
+            btnAddArticle.Click -= BtnAddArticle_Click;
+            btnAddArticle.Click += BtnEditArticle_Click;
         }
 
-        private void btnEditArticle_Click(object sender, EventArgs e)
+        private void BtnEditArticle_Click(object sender, EventArgs e)
         {
-            _articalLogic.EditArticle(_bindinglist[0]);
-            var result = _articalLogic.SaveAllChanges();
-            if (result == true)
+            var result = _articalLogic.EditArticle(_bindinglist[0]);
+            if (result != 0)
             {
                 MessageBox.Show("Uspesno ste izmenili artikal.");
                 this.Close();
@@ -51,21 +54,26 @@ namespace MagacinskoRobnoMaterijalno.Forms
             }
         }
 
-        private void btnAddArticle_Click(object sender, EventArgs e)
+        private void BtnAddArticle_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(_bindinglist[0].ArticleNo))
+            if (string.IsNullOrEmpty(_bindinglist[0].ArticleNo))
             {
                 MessageBox.Show("Šifra artikla je obavezno polje.");
                 return;
             }
-            else if(_articalLogic.IfExists(_bindinglist[0].ArticleNo))
+            else if (_articalLogic.IfExists(_bindinglist[0].ArticleNo))
             {
                 MessageBox.Show("Artikal sa šifrom " + _bindinglist[0].ArticleNo + " već postoji. Promenite šifru i probajte ponovo.");
                 return;
             }
-            _articalLogic.AddArtical(_bindinglist[0]);
-           var result = _articalLogic.SaveAllChanges();
-            if(result ==true)
+
+            //Task<Task> task = Task.Factory.StartNew(() =>
+            //               _articalLogic.AddArtical(_bindinglist[0]);
+            //var addArticle = task;
+
+            var id = _articalLogic.AddArtical(_bindinglist[0]);
+
+            if (id != 0)
             {
                 MessageBox.Show("Uspesno ste dodali novi artikal.");
                 this.Close();

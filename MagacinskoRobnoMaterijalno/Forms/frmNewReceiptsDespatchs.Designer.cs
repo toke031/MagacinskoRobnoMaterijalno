@@ -1,6 +1,6 @@
 ﻿namespace MagacinskoRobnoMaterijalno.Forms
 {
-    partial class frmNewReceiptsDespatchs
+    partial class FrmNewReceiptsDespatchs
     {
         /// <summary>
         /// Required designer variable.
@@ -146,7 +146,7 @@
             // 
             // clientBindingSource
             // 
-            this.clientBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Client);
+            this.clientBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Data.Model.Client);
             // 
             // documentTypeDataGridViewTextBoxColumn
             // 
@@ -223,7 +223,7 @@
             // 
             // warehouseBindingSource
             // 
-            this.warehouseBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Warehouse);
+            this.warehouseBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Data.Model.Warehouse);
             // 
             // totalPriceDataGridViewTextBoxColumn
             // 
@@ -248,7 +248,7 @@
             // 
             // documentBindingSource
             // 
-            this.documentBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Document);
+            this.documentBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Data.Model.Document);
             // 
             // tbName
             // 
@@ -294,7 +294,7 @@
             this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "Pretraži";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // lblDocumentType
             // 
@@ -355,7 +355,7 @@
             this.btnNewDespatch.TabIndex = 4;
             this.btnNewDespatch.Text = "Kreiraj otpremnicu";
             this.btnNewDespatch.UseVisualStyleBackColor = true;
-            this.btnNewDespatch.Click += new System.EventHandler(this.btnNewDespatch_Click);
+            this.btnNewDespatch.Click += new System.EventHandler(this.BtnNewDespatch_Click);
             // 
             // btnNewReceipt
             // 
@@ -365,7 +365,7 @@
             this.btnNewReceipt.TabIndex = 5;
             this.btnNewReceipt.Text = "Kreiraj prijemnicu";
             this.btnNewReceipt.UseVisualStyleBackColor = true;
-            this.btnNewReceipt.Click += new System.EventHandler(this.btnNewReceipt_Click);
+            this.btnNewReceipt.Click += new System.EventHandler(this.BtnNewReceipt_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 

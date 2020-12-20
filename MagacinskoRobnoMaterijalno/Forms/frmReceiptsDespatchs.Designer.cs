@@ -1,6 +1,6 @@
 ﻿namespace MagacinskoRobnoMaterijalno.Forms
 {
-    partial class frmReceiptsDespatchs
+    partial class FrmReceiptsDespatchs
     {
         /// <summary>
         /// Required designer variable.
@@ -479,7 +479,7 @@
             this.button1.TabIndex = 36;
             this.button1.Text = "Izbor";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // groupBox3
             // 
@@ -509,7 +509,7 @@
             this.cmbWarehouse.Name = "cmbWarehouse";
             this.cmbWarehouse.Size = new System.Drawing.Size(160, 21);
             this.cmbWarehouse.TabIndex = 1;
-            this.cmbWarehouse.SelectedIndexChanged += new System.EventHandler(this.cmbWarehouse_SelectedIndexChanged);
+            this.cmbWarehouse.SelectedIndexChanged += new System.EventHandler(this.CmbWarehouse_SelectedIndexChanged);
             // 
             // btnSave
             // 
@@ -520,7 +520,7 @@
             this.btnSave.TabIndex = 40;
             this.btnSave.Text = "Sacuvaj";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // tbTotalWithVAT
             // 
@@ -586,7 +586,7 @@
             this.btnCancel.TabIndex = 48;
             this.btnCancel.Text = "Odustani";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // cmbDocumentType
             // 
@@ -724,7 +724,7 @@
             this.bPrint.TabIndex = 37;
             this.bPrint.Text = "Stampaj";
             this.bPrint.UseVisualStyleBackColor = true;
-            this.bPrint.Click += new System.EventHandler(this.bPrint_Click);
+            this.bPrint.Click += new System.EventHandler(this.BPrint_Click);
             // 
             // frmReceiptsDespatchs
             // 
@@ -747,8 +747,8 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmReceiptsDespatchs";
             this.Text = "Prijemnice/Otpremnice";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmReceiptsDespatchs_FormClosing);
-            this.Shown += new System.EventHandler(this.frmReceiptsDespatchs_Shown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmReceiptsDespatchs_FormClosing);
+            this.Shown += new System.EventHandler(this.FrmReceiptsDespatchs_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.DGVReceiptsDespatchsItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentItemBindingSource)).EndInit();

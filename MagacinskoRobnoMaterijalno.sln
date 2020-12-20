@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinskoRobnoMaterijalno"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinskoRobnoMaterijalno.Models", "MagacinskoRobnoMaterijalno.Models\MagacinskoRobnoMaterijalno.Models.csproj", "{CB036CBE-7055-411A-B343-3E731EB39DAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinskoRobnoMaterijalno.Data.Model", "MagacinskoRobnoMaterijalno.Data.Model\MagacinskoRobnoMaterijalno.Data.Model.csproj", "{86CD8413-8499-4770-9DD9-EF2AD3F0F903}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagacinskoRobnoMaterijalno.Data", "MagacinskoRobnoMaterijalno.Data\MagacinskoRobnoMaterijalno.Data.csproj", "{4AF6E5A0-69F3-4563-AC25-5910D71DD755}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{CB036CBE-7055-411A-B343-3E731EB39DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB036CBE-7055-411A-B343-3E731EB39DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB036CBE-7055-411A-B343-3E731EB39DAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86CD8413-8499-4770-9DD9-EF2AD3F0F903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86CD8413-8499-4770-9DD9-EF2AD3F0F903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86CD8413-8499-4770-9DD9-EF2AD3F0F903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86CD8413-8499-4770-9DD9-EF2AD3F0F903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AF6E5A0-69F3-4563-AC25-5910D71DD755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AF6E5A0-69F3-4563-AC25-5910D71DD755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AF6E5A0-69F3-4563-AC25-5910D71DD755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AF6E5A0-69F3-4563-AC25-5910D71DD755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

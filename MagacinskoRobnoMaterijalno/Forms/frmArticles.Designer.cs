@@ -1,6 +1,8 @@
-﻿namespace MagacinskoRobnoMaterijalno.Forms
+﻿using System.Windows.Forms;
+
+namespace MagacinskoRobnoMaterijalno.Forms
 {
-    partial class frmArticles
+    partial class FrmArticles
     {
         /// <summary>
         /// Required designer variable.
@@ -127,7 +129,7 @@
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "Pretraži";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // SelectedRow
             // 
@@ -176,6 +178,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityItemPriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn articleTypeIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn documentItemsDataGridViewTextBoxColumn;
+
+        public FrmArticles(DataGridViewTextBoxColumn documentItemsDataGridViewTextBoxColumn)
+        {
+            this.documentItemsDataGridViewTextBoxColumn = documentItemsDataGridViewTextBoxColumn;
+        }
+
         private System.Windows.Forms.BindingSource articleBindingSource;
         private System.Windows.Forms.GroupBox groupBox1;
     }

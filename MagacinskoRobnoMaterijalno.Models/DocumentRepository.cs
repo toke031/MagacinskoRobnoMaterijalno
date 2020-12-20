@@ -13,7 +13,7 @@ namespace MagacinskoRobnoMaterijalno.Models
 {
     public class DocumentRepository
     {
-        MainDBContext _context;
+        readonly MainDBContext _context;
 
         public DocumentRepository()
         {
@@ -57,11 +57,12 @@ namespace MagacinskoRobnoMaterijalno.Models
 
         public BindingList<Document> GetDocumentForLast30Days()
         {
+            var ThirtyDaysAgo = DateTime.Today.AddDays(-30);
             foreach (var entity in _context.ChangeTracker.Entries())
             {
                 entity.Reload();
             }
-            _context.Documents.Include(x => x.Client).Where(x=>x.DocumentDateTime>=DateTime.Today.AddDays(-30) && x.DocumentDateTime <= DateTime.Today).Load();
+            _context.Documents.Include(x => x.Client).Where(x=> System.Data.Entity.DbFunctions.TruncateTime(x.DocumentDateTime) >= ThirtyDaysAgo).Load();
             return _context.Documents.Local.ToBindingList();
         }
 
@@ -79,7 +80,7 @@ namespace MagacinskoRobnoMaterijalno.Models
         {
             string queryString =
               "select cast(di.ItemPrice as int) StartWith, sum(di.Surface) Surface from Documents d inner join DocumentItems di on d.ID = di.DocumentID where d.ID = "+ documentID + " group by di.ItemPrice";
-            SqlDataAdapter adapter = new SqlDataAdapter(queryString, "Server=.\\SQLEXPRESS;Initial Catalog=MagacinskoRobnoMaterijalno.Models.MainDBContext;Integrated Security=SSPI");
+            SqlDataAdapter adapter = new SqlDataAdapter(queryString, "data source=xInfluencers.database.windows.net;Initial Catalog=WarehouseManagement;Persist Security Info=False;User ID=xinfluencer;Password=43mADU(H-qe3kjH^W0@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
             DataSet groupByPrice = new DataSet();
             groupByPrice.Tables.Add("groupByPrice");

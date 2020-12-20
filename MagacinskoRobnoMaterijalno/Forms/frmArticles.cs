@@ -12,11 +12,11 @@ using MagacinskoRobnoMaterijalno.Models;
 
 namespace MagacinskoRobnoMaterijalno.Forms
 {
-    public partial class frmArticles : Form
+    public partial class FrmArticles : Form
     {
         ArticalLogic _articalLogic;
-        Article ItemForDelete;
-        public frmArticles()
+        Data.Model.Article ItemForDelete;
+        public FrmArticles()
         {
             InitializeComponent();
             InitArticles();
@@ -82,17 +82,17 @@ namespace MagacinskoRobnoMaterijalno.Forms
         {
             if (DGVArticles.SelectedRows.Count == 1)
             {
-                var articalForEdit = (Article)DGVArticles.SelectedRows[0].DataBoundItem;
-                frmNewItem editArticle = new frmNewItem(articalForEdit);
+                Data.Model.Article articalForEdit = (Data.Model.Article)DGVArticles.SelectedRows[0].DataBoundItem;
+                FrmNewItem editArticle = new FrmNewItem(articalForEdit);
                 editArticle.ShowDialog();
-                DGVArticles.DataSource = new BindingList<Article>(_articalLogic.GetArticleByName(tbSearchItemNo.Text));
+                DGVArticles.DataSource = new BindingList<Data.Model.Article>(_articalLogic.GetArticleByName(tbSearchItemNo.Text));
                 DGVArticles.ClearSelection();
             }
         }
 
         private void AddNewArtical_Click(object sender, EventArgs e)
         {
-            var newItemForm = new frmNewItem();
+            var newItemForm = new FrmNewItem();
             newItemForm.ShowDialog();
             RefreshDGVSource();
         }
@@ -103,7 +103,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DGVArticles.RefreshEdit();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             DGVArticles.DataSource = _articalLogic.GetArticlesByArticleNo(tbSearchItemNo.Text);
         }

@@ -1,6 +1,6 @@
 ﻿namespace MagacinskoRobnoMaterijalno.Forms
 {
-    partial class frmClients
+    partial class FrmClients
     {
         /// <summary>
         /// Required designer variable.
@@ -70,7 +70,7 @@
             this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "Pretraži";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // SelectedRow
             // 

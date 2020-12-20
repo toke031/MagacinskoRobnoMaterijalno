@@ -1,20 +1,17 @@
-﻿using CrystalDecisions.Windows.Forms;
-using MagacinskoRobnoMaterijalno.Classes;
-using MagacinskoRobnoMaterijalno.Models;
+﻿using MagacinskoRobnoMaterijalno.Classes;
+using MagacinskoRobnoMaterijalno.Data.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static MagacinskoRobnoMaterijalno.Classes.Lib;
 
 namespace MagacinskoRobnoMaterijalno.Forms
 {
-    public partial class frmReceiptsDespatchs : Form
+    public partial class FrmReceiptsDespatchs : Form
     {
         public FormMode FormMode { get; set; }
         public Document SelectedDocument { get; set; }
@@ -22,12 +19,11 @@ namespace MagacinskoRobnoMaterijalno.Forms
         DocumentLogic _documentLogic;
         WarehouseLogic _warehouseLogic;
         Client _client;
-        frmNewReceiptsDespatchs _frmNewReceiptsDespatchs;
+        private readonly FrmNewReceiptsDespatchs _frmNewReceiptsDespatchs;
         ArticalLogic _articalLogic;
-        Document _document;
-        BindingList<Article> listaArtikla;
-        BindingList<DocumentItem> listaStavki = new BindingList<DocumentItem>();
-        public frmReceiptsDespatchs(int documentTypeID, frmNewReceiptsDespatchs frmNewReceiptsDespatchs)
+        Data.Model.Document _document;
+        BindingList<Data.Model.Article> listaArtikla;
+        public FrmReceiptsDespatchs(int documentTypeID, FrmNewReceiptsDespatchs frmNewReceiptsDespatchs)
         {
             _frmNewReceiptsDespatchs = frmNewReceiptsDespatchs;
             DocumentTypeID = documentTypeID;
@@ -35,7 +31,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             InitializeComponent();
             InitDocument();
         }
-        public frmReceiptsDespatchs(Document document, frmNewReceiptsDespatchs frmNewReceiptsDespatchs)
+        public FrmReceiptsDespatchs(Document document, FrmNewReceiptsDespatchs frmNewReceiptsDespatchs)
         {
             SelectedDocument = document;
             _frmNewReceiptsDespatchs = frmNewReceiptsDespatchs;
@@ -43,8 +39,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
             InitializeComponent();
             InitDocument();
         }
-        Document _documentForPayment;
-        public frmReceiptsDespatchs(int documentTypeID, Document documentForPayment, frmNewReceiptsDespatchs frmNewReceiptsDespatchs)
+
+        readonly Document _documentForPayment;
+        public FrmReceiptsDespatchs(int documentTypeID, Document documentForPayment, FrmNewReceiptsDespatchs frmNewReceiptsDespatchs)
         {
             _frmNewReceiptsDespatchs = frmNewReceiptsDespatchs;
             this.DocumentTypeID = documentTypeID;
@@ -183,9 +180,6 @@ namespace MagacinskoRobnoMaterijalno.Forms
             }
             DGVReceiptsDespatchsItems.Update();
             DGVReceiptsDespatchsItems.Refresh();
-
-            
-            
         }
 
         private void DGVReceiptsDespatchsItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -296,7 +290,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 }
                 else
                 {
-                    Article pronadjen = listaArtikla.FirstOrDefault(x => x.ArticleNo == DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                    Data.Model.Article pronadjen = listaArtikla.FirstOrDefault(x => x.ArticleNo == DGVReceiptsDespatchsItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
                     if (pronadjen != null)
                     {
                        // ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem).Item = (pronadjen);
@@ -316,7 +310,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             if (DGVReceiptsDespatchsItems.Columns[e.ColumnIndex].Name == "ArticleNo")
             {
                 var stavka = ((DocumentItem)DGVReceiptsDespatchsItems.Rows[e.RowIndex].DataBoundItem);
-                Article pronadjen = listaArtikla.FirstOrDefault(x => x.ArticleNo == stavka.ArticleNo);
+                Data.Model.Article pronadjen = listaArtikla.FirstOrDefault(x => x.ArticleNo == stavka.ArticleNo);
                 //Article pronadjen = stavka.Item;
                 if (pronadjen != null)
                 {
@@ -409,9 +403,8 @@ namespace MagacinskoRobnoMaterijalno.Forms
         {
             if (DGVReceiptsDespatchsItems.SelectedRows.Count == 1)
             {
-                var clientForEdit = (Client)DGVReceiptsDespatchsItems.SelectedRows[0].DataBoundItem;
                 //frmNewReceiptsDespatchs editClient = new frmNewReceiptsDespatchs(clientForEdit);
-                frmNewReceiptsDespatchs editClient = new frmNewReceiptsDespatchs();
+                FrmNewReceiptsDespatchs editClient = new FrmNewReceiptsDespatchs();
                 editClient.ShowDialog();
                 DGVReceiptsDespatchsItems.ClearSelection();
             }
@@ -429,15 +422,17 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DGVReceiptsDespatchsItems.RefreshEdit();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             //    DGVReceiptsDespatchs.DataSource = new BindingList<Client>(_documentLogic.GetClientByName(tbSearchName.Text));
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            frmClients fc = new frmClients();
-            fc.SelectionMode = true;
+            FrmClients fc = new FrmClients
+            {
+                SelectionMode = true
+            };
             fc.ShowDialog();
             if (fc.SelectedClient != null)
             {
@@ -475,7 +470,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             Sacuvaj();
         }
@@ -495,17 +490,17 @@ namespace MagacinskoRobnoMaterijalno.Forms
             MessageBox.Show("Dokument je sacuvan", "Cuvanje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void cmbWarehouse_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbWarehouse_SelectedIndexChanged(object sender, EventArgs e)
         {
             _document.WarehouseID = (cmbWarehouse.SelectedItem as Warehouse).ID;
         }
 
-        private void frmReceiptsDespatchs_FormClosing(object sender, FormClosingEventArgs e)
+        private void FrmReceiptsDespatchs_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_documentLogic.IsChangedChanged())
             {
@@ -526,12 +521,12 @@ namespace MagacinskoRobnoMaterijalno.Forms
             }
         }
 
-        private void frmReceiptsDespatchs_Shown(object sender, EventArgs e)
+        private void FrmReceiptsDespatchs_Shown(object sender, EventArgs e)
         {
             DGVReceiptsDespatchsItems.Refresh();
         }
 
-        private void bPrint_Click(object sender, EventArgs e)
+        private void BPrint_Click(object sender, EventArgs e)
         {
             try
             {

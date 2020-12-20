@@ -1,4 +1,5 @@
-﻿using MagacinskoRobnoMaterijalno.Models;
+﻿using MagacinskoRobnoMaterijalno.Data.Model;
+using MagacinskoRobnoMaterijalno.Data.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,45 +11,61 @@ namespace MagacinskoRobnoMaterijalno.Classes
 {
     public class ClientLogic
     {
-        private MainRepository _mainRepository;
         public ClientLogic()
         {
-            _mainRepository = new MainRepository();
         }
 
         public BindingList<Client> GetAllClients()
         {
-            return _mainRepository.GetClients();
+            using(UOW uow = new UOW())
+            {
+                var clients = uow.ClientRepository.Find().ToList();
+                BindingList<Client> bindingListClients = new BindingList<Client>(clients);
+                return bindingListClients;
+            }
         }
 
-        public void AddClient(Client client)
+        public int AddClient(Client client)
         {
-            _mainRepository.AddClient(client);
+            using (UOW uow = new UOW())
+            {
+                uow.ClientRepository.Insert(client);
+                return uow.Save();
+            }
         }
 
-        public void EditClient(Client client)
+        public int EditClient(Client client)
         {
-            _mainRepository.EditClient(client);
-        }
-
-        public bool SaveAllChanges()
-        {
-            return _mainRepository.SaveChanges();
+            using (UOW uow = new UOW())
+            {
+                uow.ClientRepository.Update(client);
+                return uow.Save();
+            }
         }
 
         public Client GetClientByClientPIB(string PIB)
         {
-            return _mainRepository.GetClientByClientPIB(PIB);
+            using (UOW uow = new UOW())
+            {
+                return uow.ClientRepository.Find(x => x.PIB == PIB).FirstOrDefault();
+            }
         }
 
         public void DeleteClient(Client itemForDelete)
         {
-            _mainRepository.DeleteClient(itemForDelete);
+            using (UOW uow = new UOW())
+            {
+                uow.ClientRepository.Delete(itemForDelete);
+                uow.Save();
+            }
         }
 
         public List<Client> GetClientByName(string name)
         {
-           return _mainRepository.GetClientByName(name);
+            using (UOW uow = new UOW())
+            {
+                return uow.ClientRepository.Find(x => x.Name.Contains(name)).ToList();
+            }
         }
     }
 }

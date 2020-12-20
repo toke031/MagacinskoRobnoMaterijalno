@@ -1,5 +1,5 @@
 ﻿using MagacinskoRobnoMaterijalno.Classes;
-using MagacinskoRobnoMaterijalno.Models;
+using MagacinskoRobnoMaterijalno.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,33 +14,36 @@ namespace MagacinskoRobnoMaterijalno.Forms
 {
     public partial class frmNewClient : Form
     {
-        BindingList<Client> _bindinglist;
+        readonly BindingList<Client> _bindinglist;
         ClientLogic _clientLogic;
         public frmNewClient()
         {
             InitializeComponent();
-            _bindinglist = new BindingList<Client>();
-            _bindinglist.Add(new Client());
+            _bindinglist = new BindingList<Client>
+            {
+                new Client()
+            };
             InitNewClient();
         }
 
         public frmNewClient(Client client)
         {
             InitializeComponent();
-            _bindinglist = new BindingList<Client>();
-            _bindinglist.Add(client);
+            _bindinglist = new BindingList<Client>
+            {
+                client
+            };
             InitNewClient();
             btnAddClient.Text = "Sačuvaj izmenu";
             this.Text = "Izmena klijenta";
-            btnAddClient.Click -= btnAddClient_Click;
-            btnAddClient.Click += btnEditClient_Click;
+            btnAddClient.Click -= BtnAddClient_Click;
+            btnAddClient.Click += BtnEditClient_Click;
         }
 
-        private void btnEditClient_Click(object sender, EventArgs e)
+        private void BtnEditClient_Click(object sender, EventArgs e)
         {
-            _clientLogic.EditClient(_bindinglist[0]);
-            var result = _clientLogic.SaveAllChanges();
-            if (result == true)
+            var result = _clientLogic.EditClient(_bindinglist[0]);
+            if (result != 0)
             {
                 MessageBox.Show("Uspesno ste izmenili klijenta.");
                 this.Close();
@@ -52,11 +55,10 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         }
 
-        private void btnAddClient_Click(object sender, EventArgs e)
+        private void BtnAddClient_Click(object sender, EventArgs e)
         {
-            _clientLogic.AddClient(_bindinglist[0]);
-            var result = _clientLogic.SaveAllChanges();
-            if (result == true)
+           var result = _clientLogic.AddClient(_bindinglist[0]);
+            if (result != 0)
             {
                 MessageBox.Show("Uspesno ste dodali novog klijenta.");
                 this.Close();

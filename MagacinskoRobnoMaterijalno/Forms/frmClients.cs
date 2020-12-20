@@ -1,5 +1,5 @@
 ﻿using MagacinskoRobnoMaterijalno.Classes;
-using MagacinskoRobnoMaterijalno.Models;
+using MagacinskoRobnoMaterijalno.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace MagacinskoRobnoMaterijalno.Forms
 {
-    public partial class frmClients : Form
+    public partial class FrmClients : Form
     {
         ClientLogic _clientLogic;
         Client _itemForDelete;
@@ -20,7 +20,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
         public bool SelectionMode { get; internal set; }
         public Client SelectedClient { get; internal set; }
 
-        public frmClients(bool selectionMode = false)
+        public FrmClients(bool selectionMode = false)
         {
             SelectionMode = selectionMode;
             InitializeComponent();
@@ -140,7 +140,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             DGVClients.RefreshEdit();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             DGVClients.DataSource = new BindingList<Client>(_clientLogic.GetClientByName(tbSearchName.Text));
         }

@@ -1,6 +1,6 @@
 ﻿namespace MagacinskoRobnoMaterijalno.Forms
 {
-    partial class frmNewItem
+    partial class FrmNewItem
     {
         /// <summary>
         /// Required designer variable.
@@ -79,7 +79,7 @@
             this.btnAddArticle.TabIndex = 4;
             this.btnAddArticle.Text = "Dodaj artikal";
             this.btnAddArticle.UseVisualStyleBackColor = true;
-            this.btnAddArticle.Click += new System.EventHandler(this.btnAddArticle_Click);
+            this.btnAddArticle.Click += new System.EventHandler(this.BtnAddArticle_Click);
             // 
             // label1
             // 

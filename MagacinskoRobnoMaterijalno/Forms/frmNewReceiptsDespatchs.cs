@@ -8,22 +8,30 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoMapper;
 using MagacinskoRobnoMaterijalno.Classes;
-using MagacinskoRobnoMaterijalno.Models;
+using MagacinskoRobnoMaterijalno.Data.Model;
 
 namespace MagacinskoRobnoMaterijalno.Forms
 {
-    public partial class frmNewReceiptsDespatchs : Form
+    public partial class FrmNewReceiptsDespatchs : Form
     {
         private DocumentLogic _documentLogic;
         private ClientLogic _clientLogic;
         private WarehouseLogic _warehouseLogic;
         private Dictionary<int, string> documentTypeDictionary;
         private Dictionary<int, string> documentStatusDictionary;
-        public frmNewReceiptsDespatchs()
+
+        public IMapper Mapper;
+        public FrmNewReceiptsDespatchs()
         {
             InitializeComponent();
             InitNewReceiptsDespatchs();
+            var AutoMapperConfiguration = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<AutomapperConfiguration>();
+            });
+            Mapper = AutoMapperConfiguration.CreateMapper();
         }
 
         private void InitNewReceiptsDespatchs()
@@ -42,15 +50,18 @@ namespace MagacinskoRobnoMaterijalno.Forms
             cmbDocumentType.DataSource = documentTypeDictionary.ToList();
 
 
-            documentStatusDictionary = new Dictionary<int, string>();
-            documentStatusDictionary.Add(3, "Svi");
-            documentStatusDictionary.Add(0, "Neplaćeni");
-            documentStatusDictionary.Add(1, "Plaćeni");
-            documentStatusDictionary.Add(2, "Storno");
+            documentStatusDictionary = new Dictionary<int, string>
+            {
+                { 3, "Svi" },
+                { 0, "Neplaćeni" },
+                { 1, "Plaćeni" },
+                { 2, "Storno" }
+            };
             cmbDocumentStatus.DisplayMember = "Value";
             cmbDocumentStatus.ValueMember = "Key";
             cmbDocumentStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             dtCreatedDateFrom.Format = DateTimePickerFormat.Custom;
+            dtCreatedDateFrom.Value = DateTime.Today.AddDays(-30);
             dtCreatedDateTo.Format = DateTimePickerFormat.Custom;
             dtCreatedDateFrom.CustomFormat = "MM/dd/yyyy";
             dtCreatedDateTo.CustomFormat = "MM/dd/yyyy";
@@ -59,7 +70,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             var statuses = new List<Status>() { new Status() { ID = 0, Name = "Neplaćeni" }, new Status() { ID = 1, Name = "Plaćeni" }, new Status() { ID = 2, Name = "Storno" } };
 
             documentTypeBindingSource.DataSource = statuses.ToList();
-            documentBindingSource.DataSource = _documentLogic.GetDocumentForLast30Days();
+          //  documentBindingSource.DataSource = _documentLogic.GetDocumentForLast30Days();
             clientBindingSource.DataSource = _clientLogic.GetAllClients();
             warehouseBindingSource.DataSource = _warehouseLogic.GetAllWarehouse();
 
@@ -96,7 +107,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             var selected = DGVNewReceiptDespatch.SelectedRows[0];
             if (selected != null)
             {
-                frmReceiptsDespatchs EditDocument = new frmReceiptsDespatchs((Document)((DataGridViewRow)selected).DataBoundItem, this);
+                FrmReceiptsDespatchs EditDocument = new FrmReceiptsDespatchs((Document)((DataGridViewRow)selected).DataBoundItem, this);
                 EditDocument.Show();
             }
         }
@@ -104,16 +115,20 @@ namespace MagacinskoRobnoMaterijalno.Forms
         public void SetDataSourceofDataGridView(BindingList<Document> dataSource)
         {
             DGVNewReceiptDespatch.DataSource = null;
-            documentBindingSource = new BindingSource();
-            documentBindingSource.DataSource = dataSource;
+            documentBindingSource = new BindingSource
+            {
+                DataSource = dataSource
+            };
             DGVNewReceiptDespatch.DataSource = documentBindingSource;
             DGVNewReceiptDespatch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
         public void RefreshFromAnotherForm()
         {
             DGVNewReceiptDespatch.DataSource = null;
-            documentBindingSource = new BindingSource();
-            documentBindingSource.DataSource = _documentLogic.GetAllDocuments();
+            documentBindingSource = new BindingSource
+            {
+                DataSource = _documentLogic.GetDocumentForLast30Days()
+            };
             DGVNewReceiptDespatch.DataSource = documentBindingSource;
             DGVNewReceiptDespatch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
@@ -124,22 +139,24 @@ namespace MagacinskoRobnoMaterijalno.Forms
             //throw new NotImplementedException();
         }
 
-        private void btnNewDespatch_Click(object sender, EventArgs e)
+        private void BtnNewDespatch_Click(object sender, EventArgs e)
         {
-            frmReceiptsDespatchs _despatch = new frmReceiptsDespatchs((int)Lib.DocumentType.Despatch, this);
+            FrmReceiptsDespatchs _despatch = new FrmReceiptsDespatchs((int)Lib.DocumentType.Despatch, this);
             _despatch.Show();
         }
 
-        private void btnNewReceipt_Click(object sender, EventArgs e)
+        private void BtnNewReceipt_Click(object sender, EventArgs e)
         {
-            frmReceiptsDespatchs _receipt = new frmReceiptsDespatchs((int)Lib.DocumentType.Receipt, this);
+            FrmReceiptsDespatchs _receipt = new FrmReceiptsDespatchs((int)Lib.DocumentType.Receipt, this);
             _receipt.Show();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
-            var listOfParams = new Dictionary<string, string>();
-            listOfParams.Add("Name", tbName.Text);
+            var listOfParams = new Dictionary<string, string>
+            {
+                { "Name", tbName.Text }
+            };
             if (dtCreatedDateFrom.Value.Date > dtCreatedDateTo.Value.Date)
             {
                 MessageBox.Show("Datum od ne moze biti veci od datuma do.");
@@ -168,19 +185,23 @@ namespace MagacinskoRobnoMaterijalno.Forms
                 Document selDoc = (Document)DGVNewReceiptDespatch.Rows[currentMouseOverRow].DataBoundItem;
                 if (selDoc.DocumentType == (int)Lib.DocumentType.Despatch)
                 {
-                    MenuItem mi = new MenuItem(string.Format("Napravi delimicnu otplatu za {0}", selDoc.DocumentNo));
-                    mi.Tag = selDoc;
-                    mi.Click += new System.EventHandler(this.menuItem1_Click);
+                    MenuItem mi = new MenuItem(string.Format("Napravi delimicnu otplatu za {0}", selDoc.DocumentNo))
+                    {
+                        Tag = selDoc
+                    };
+                    mi.Click += new System.EventHandler(this.MenuItem1_Click);
                     m.MenuItems.Add(mi);
                 }
                 m.Show(DGVNewReceiptDespatch, new Point(e.X, e.Y));
             }
         }
 
-        private void menuItem1_Click(object sender, EventArgs e)
+        private void MenuItem1_Click(object sender, EventArgs e)
         {
-            frmReceiptsDespatchs _despatch = new frmReceiptsDespatchs((int)Lib.DocumentType.Payment, (Document)(((MenuItem)sender).Tag), this);
-            _despatch.FormMode = Lib.FormMode.New;
+            FrmReceiptsDespatchs _despatch = new FrmReceiptsDespatchs((int)Lib.DocumentType.Payment, (Document)(((MenuItem)sender).Tag), this)
+            {
+                FormMode = Lib.FormMode.New
+            };
             _despatch.Show();
         }
     }

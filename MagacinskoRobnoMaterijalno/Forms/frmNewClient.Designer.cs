@@ -190,7 +190,7 @@
             this.btnAddClient.TabIndex = 20;
             this.btnAddClient.Text = "Dodaj klijenta";
             this.btnAddClient.UseVisualStyleBackColor = true;
-            this.btnAddClient.Click += new System.EventHandler(this.btnAddClient_Click);
+            this.btnAddClient.Click += new System.EventHandler(this.BtnAddClient_Click);
             // 
             // frmNewClient
             // 

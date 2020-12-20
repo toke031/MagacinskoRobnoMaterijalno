@@ -19,19 +19,19 @@ namespace MagacinskoRobnoMaterijalno.Forms
 
         private void Clients_Click(object sender, EventArgs e)
         {
-            Form clients = new frmClients(true);
+            Form clients = new FrmClients(true);
             clients.Show();
         }
 
         private void ReceiptsDespatchs_Click(object sender, EventArgs e)
         {
-            Form receiptsDespatchs = new frmNewReceiptsDespatchs();
+            Form receiptsDespatchs = new FrmNewReceiptsDespatchs();
             receiptsDespatchs.Show();
         }
 
         private void Articles_Click(object sender, EventArgs e)
         {
-            Form articles = new frmArticles();
+            Form articles = new FrmArticles();
             articles.Show();
         }
     }
