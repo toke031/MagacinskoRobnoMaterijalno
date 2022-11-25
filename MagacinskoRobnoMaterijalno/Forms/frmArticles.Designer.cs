@@ -103,7 +103,7 @@ namespace MagacinskoRobnoMaterijalno.Forms
             // 
             // articleBindingSource
             // 
-            this.articleBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Article);
+            this.articleBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Data.Model.Article);
             // 
             // tbSearchItemNo
             // 

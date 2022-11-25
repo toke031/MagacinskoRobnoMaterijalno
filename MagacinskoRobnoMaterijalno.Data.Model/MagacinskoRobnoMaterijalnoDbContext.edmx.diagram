@@ -9,12 +9,12 @@
         <EntityTypeShape EntityType="WarehouseManagementModel.Article" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WarehouseManagementModel.Client" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WarehouseManagementModel.DocumentItem" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WarehouseManagementModel.Document" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WarehouseManagementModel.Warehouse" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <AssociationConnector Association="WarehouseManagementModel.FK_dbo_DocumentItems_dbo_Articles_ItemID" ManuallyRouted="false" />
-        <AssociationConnector Association="WarehouseManagementModel.FK_dbo_Documents_dbo_Clients_ClientID" ManuallyRouted="false" />
-        <AssociationConnector Association="WarehouseManagementModel.FK_dbo_DocumentItems_dbo_Documents_DocumentID" ManuallyRouted="false" />
-        <AssociationConnector Association="WarehouseManagementModel.FK_dbo_Documents_dbo_Warehouses_WarehouseID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WarehouseManagementModel.Document" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="WarehouseManagementModel.FK_dbo_Documents_dbo_Clients_ClientID" />
+        <AssociationConnector Association="WarehouseManagementModel.FK_dbo_DocumentItems_dbo_Documents_DocumentID" />
+        <AssociationConnector Association="WarehouseManagementModel.FK_dbo_Documents_dbo_Warehouses_WarehouseID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

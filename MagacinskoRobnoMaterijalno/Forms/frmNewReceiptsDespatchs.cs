@@ -90,11 +90,9 @@ namespace MagacinskoRobnoMaterijalno.Forms
             }
             if (DGVNewReceiptDespatch.Columns[e.ColumnIndex].Name == "Payed" && e.Value == null)
             {
-                if (((Document)(row.DataBoundItem)).DocumentType == (int)Lib.DocumentType.Despatch)
+                if (((Document)(row.DataBoundItem)).DocumentType == (int)Lib.DocumentType.Despatch && ((Document)(row.DataBoundItem)).StatusID == (int)Lib.StatusEnum.Vazeci)
                 {
-                    decimal sum = _documentLogic.GetAllDocuments()
-                        .Where(x => x.LinkDocumentNo == ((Document)(row.DataBoundItem)).DocumentNo)
-                        .Where(x => x.StatusID == (int)Lib.StatusEnum.Vazeci)
+                    decimal sum = _documentLogic.GetAllDocuments(x => x.LinkDocumentNo == ((Document)(row.DataBoundItem)).DocumentNo && x.StatusID == (int)Lib.StatusEnum.Vazeci)
                         .Sum(x => x.TotalPrice);
                     e.Value = sum.ToString("N2");
                 }

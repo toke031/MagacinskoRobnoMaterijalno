@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MagacinskoRobnoMaterijalno.Classes;
-using MagacinskoRobnoMaterijalno.Models;
 
 namespace MagacinskoRobnoMaterijalno.Forms
 {

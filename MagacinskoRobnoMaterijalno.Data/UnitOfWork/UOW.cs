@@ -82,14 +82,16 @@ namespace MagacinskoRobnoMaterijalno.Data.UnitOfWork
         /// </summary>
         public async Task SaveAsync()
         {
-            context.ChangeTracker.DetectChanges();
-            await context.SaveChangesAsync();
+            DataContext.ChangeTracker.DetectChanges();
+        //    context.ChangeTracker.DetectChanges();
+            await DataContext.SaveChangesAsync();
         }
 
         public int Save()
         {
-           context.ChangeTracker.DetectChanges();
-           return context.SaveChanges();
+            DataContext.ChangeTracker.DetectChanges();
+           //context.ChangeTracker.DetectChanges();
+           return DataContext.SaveChanges();
         }
         /// <summary>
         /// Commits this instance.
@@ -121,7 +123,7 @@ namespace MagacinskoRobnoMaterijalno.Data.UnitOfWork
 
         public bool IsChangedChanged()
         {
-            return context.ChangeTracker.Entries().Any(e => e.State == EntityState.Added
+            return DataContext.ChangeTracker.Entries().Any(e => e.State == EntityState.Added
                                           || e.State == EntityState.Modified
                                           || e.State == EntityState.Deleted);
         }

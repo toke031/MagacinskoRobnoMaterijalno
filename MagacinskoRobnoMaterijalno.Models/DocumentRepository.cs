@@ -81,7 +81,7 @@ namespace MagacinskoRobnoMaterijalno.Models
             string queryString =
               "select cast(di.ItemPrice as int) StartWith, sum(di.Surface) Surface from Documents d inner join DocumentItems di on d.ID = di.DocumentID where d.ID = "+ documentID + " group by di.ItemPrice";
             SqlDataAdapter adapter = new SqlDataAdapter(queryString, "data source=xInfluencers.database.windows.net;Initial Catalog=WarehouseManagement;Persist Security Info=False;User ID=xinfluencer;Password=43mADU(H-qe3kjH^W0@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-
+            
             DataSet groupByPrice = new DataSet();
             groupByPrice.Tables.Add("groupByPrice");
             groupByPrice.Tables[0].Columns.Add("StartWith", typeof(decimal));

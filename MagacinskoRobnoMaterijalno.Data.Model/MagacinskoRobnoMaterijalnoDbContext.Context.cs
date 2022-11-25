@@ -29,7 +29,7 @@ namespace MagacinskoRobnoMaterijalno.Data.Model
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<DocumentItem> DocumentItems { get; set; }
-        public virtual DbSet<Document> Documents { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
     }
 }

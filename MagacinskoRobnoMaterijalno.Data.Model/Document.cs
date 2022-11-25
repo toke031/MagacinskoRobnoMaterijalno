@@ -11,13 +11,15 @@ namespace MagacinskoRobnoMaterijalno.Data.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Document
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Document()
         {
-            this.DocumentItems = new HashSet<DocumentItem>();
+            //this.DocumentItems = new HashSet<DocumentItem>();
+            this.DocumentItems = new BindingList<DocumentItem>();
         }
     
         public long ID { get; set; }
@@ -28,8 +30,8 @@ namespace MagacinskoRobnoMaterijalno.Data.Model
         public System.DateTime PaymentDate { get; set; }
         public int EmployeeID { get; set; }
         public decimal TotalPrice { get; set; }
-        public long ClientID { get; set; }
-        public long WarehouseID { get; set; }
+        public Nullable<long> ClientID { get; set; }
+        public Nullable<long> WarehouseID { get; set; }
         public int StatusID { get; set; }
         public string LinkDocumentNo { get; set; }
     

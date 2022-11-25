@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WarehouseManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WarehouseManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -68,8 +68,8 @@
           <Property Name="PaymentDate" Type="datetime" Nullable="false" />
           <Property Name="EmployeeID" Type="int" Nullable="false" />
           <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ClientID" Type="bigint" Nullable="false" />
-          <Property Name="WarehouseID" Type="bigint" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" />
+          <Property Name="WarehouseID" Type="bigint" />
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="LinkDocumentNo" Type="nvarchar(max)" />
         </EntityType>
@@ -111,7 +111,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_Documents_dbo_Clients_ClientID">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
@@ -125,7 +125,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_Documents_dbo_Warehouses_WarehouseID">
-          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="1">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
@@ -162,8 +162,7 @@
             <End Role="Documents" EntitySet="Documents" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WarehouseManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -201,7 +200,7 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneFax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Documents" Relationship="Self.FK_dbo_Documents_dbo_Clients_ClientID" FromRole="Clients" ToRole="Documents" />
+          <NavigationProperty Name="Documents" Relationship="WarehouseManagementModel.FK_dbo_Documents_dbo_Clients_ClientID" FromRole="Client" ToRole="Document" />
         </EntityType>
         <EntityType Name="DocumentItem">
           <Key>
@@ -220,27 +219,7 @@
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Surface" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="Article" Relationship="Self.FK_dbo_DocumentItems_dbo_Articles_ItemID" FromRole="DocumentItems" ToRole="Articles" />
-          <NavigationProperty Name="Document" Relationship="Self.FK_dbo_DocumentItems_dbo_Documents_DocumentID" FromRole="DocumentItems" ToRole="Documents" />
-        </EntityType>
-        <EntityType Name="Document">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DocumentNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DocumentType" Type="Int32" Nullable="false" />
-          <Property Name="DocumentDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PaymentEndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ClientID" Type="Int64" Nullable="false" />
-          <Property Name="WarehouseID" Type="Int64" Nullable="false" />
-          <Property Name="StatusID" Type="Int32" Nullable="false" />
-          <Property Name="LinkDocumentNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Documents_dbo_Clients_ClientID" FromRole="Documents" ToRole="Clients" />
-          <NavigationProperty Name="DocumentItems" Relationship="Self.FK_dbo_DocumentItems_dbo_Documents_DocumentID" FromRole="Documents" ToRole="DocumentItems" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.FK_dbo_Documents_dbo_Warehouses_WarehouseID" FromRole="Documents" ToRole="Warehouses" />
+          <NavigationProperty Name="Document" Relationship="WarehouseManagementModel.FK_dbo_DocumentItems_dbo_Documents_DocumentID" FromRole="DocumentItem" ToRole="Document" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -250,7 +229,7 @@
           <Property Name="WarehouseTypeID" Type="Int32" Nullable="false" />
           <Property Name="WarehouseNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Documents" Relationship="Self.FK_dbo_Documents_dbo_Warehouses_WarehouseID" FromRole="Warehouses" ToRole="Documents" />
+          <NavigationProperty Name="Documents" Relationship="WarehouseManagementModel.FK_dbo_Documents_dbo_Warehouses_WarehouseID" FromRole="Warehouse" ToRole="Document" />
         </EntityType>
         <Association Name="FK_dbo_DocumentItems_dbo_Articles_ItemID">
           <End Role="Articles" Type="Self.Article" Multiplicity="1">
@@ -266,73 +245,93 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Documents_dbo_Clients_ClientID">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Documents" Type="Self.Document" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Documents">
-              <PropertyRef Name="ClientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_DocumentItems_dbo_Documents_DocumentID">
-          <End Role="Documents" Type="Self.Document" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="DocumentItems" Type="Self.DocumentItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Documents">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DocumentItems">
-              <PropertyRef Name="DocumentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Documents_dbo_Warehouses_WarehouseID">
-          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Documents" Type="Self.Document" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouses">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Documents">
-              <PropertyRef Name="WarehouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="WarehouseManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Articles" EntityType="Self.Article" />
           <EntitySet Name="Clients" EntityType="Self.Client" />
           <EntitySet Name="DocumentItems" EntityType="Self.DocumentItem" />
-          <EntitySet Name="Documents" EntityType="Self.Document" />
           <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
           <AssociationSet Name="FK_dbo_DocumentItems_dbo_Articles_ItemID" Association="Self.FK_dbo_DocumentItems_dbo_Articles_ItemID">
             <End Role="Articles" EntitySet="Articles" />
             <End Role="DocumentItems" EntitySet="DocumentItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Documents_dbo_Clients_ClientID" Association="Self.FK_dbo_Documents_dbo_Clients_ClientID">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Documents" EntitySet="Documents" />
+          <EntitySet Name="Documents" EntityType="WarehouseManagementModel.Document" />
+          <AssociationSet Name="FK_dbo_Documents_dbo_Clients_ClientID" Association="WarehouseManagementModel.FK_dbo_Documents_dbo_Clients_ClientID">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Document" EntitySet="Documents" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_DocumentItems_dbo_Documents_DocumentID" Association="Self.FK_dbo_DocumentItems_dbo_Documents_DocumentID">
-            <End Role="Documents" EntitySet="Documents" />
-            <End Role="DocumentItems" EntitySet="DocumentItems" />
+          <AssociationSet Name="FK_dbo_DocumentItems_dbo_Documents_DocumentID" Association="WarehouseManagementModel.FK_dbo_DocumentItems_dbo_Documents_DocumentID">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="DocumentItem" EntitySet="DocumentItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Documents_dbo_Warehouses_WarehouseID" Association="Self.FK_dbo_Documents_dbo_Warehouses_WarehouseID">
-            <End Role="Warehouses" EntitySet="Warehouses" />
-            <End Role="Documents" EntitySet="Documents" />
+          <AssociationSet Name="FK_dbo_Documents_dbo_Warehouses_WarehouseID" Association="WarehouseManagementModel.FK_dbo_Documents_dbo_Warehouses_WarehouseID">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Document" EntitySet="Documents" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          </EntityContainer>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType" Type="Int32" Nullable="false" />
+          <Property Name="DocumentDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentEndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ClientID" Type="Int64" />
+          <Property Name="WarehouseID" Type="Int64" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="LinkDocumentNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="WarehouseManagementModel.FK_dbo_Documents_dbo_Clients_ClientID" FromRole="Document" ToRole="Client" />
+          <NavigationProperty Name="DocumentItems" Relationship="WarehouseManagementModel.FK_dbo_DocumentItems_dbo_Documents_DocumentID" FromRole="Document" ToRole="DocumentItem" />
+          <NavigationProperty Name="Warehouse" Relationship="WarehouseManagementModel.FK_dbo_Documents_dbo_Warehouses_WarehouseID" FromRole="Document" ToRole="Warehouse" />
+        </EntityType>
+        <Association Name="FK_dbo_Documents_dbo_Clients_ClientID">
+          <End Type="WarehouseManagementModel.Client" Role="Client" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WarehouseManagementModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentItems_dbo_Documents_DocumentID">
+          <End Type="WarehouseManagementModel.Document" Role="Document" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WarehouseManagementModel.DocumentItem" Role="DocumentItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocumentItem">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Documents_dbo_Warehouses_WarehouseID">
+          <End Type="WarehouseManagementModel.Warehouse" Role="Warehouse" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WarehouseManagementModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -392,24 +391,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Documents">
-            <EntityTypeMapping TypeName="WarehouseManagementModel.Document">
-              <MappingFragment StoreEntitySet="Documents">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
-                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
-                <ScalarProperty Name="DocumentDateTime" ColumnName="DocumentDateTime" />
-                <ScalarProperty Name="PaymentEndDate" ColumnName="PaymentEndDate" />
-                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="LinkDocumentNo" ColumnName="LinkDocumentNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Warehouses">
             <EntityTypeMapping TypeName="WarehouseManagementModel.Warehouse">
               <MappingFragment StoreEntitySet="Warehouses">
@@ -417,6 +398,24 @@
                 <ScalarProperty Name="WarehouseTypeID" ColumnName="WarehouseTypeID" />
                 <ScalarProperty Name="WarehouseNo" ColumnName="WarehouseNo" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="WarehouseManagementModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="LinkDocumentNo" ColumnName="LinkDocumentNo" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentEndDate" ColumnName="PaymentEndDate" />
+                <ScalarProperty Name="DocumentDateTime" ColumnName="DocumentDateTime" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

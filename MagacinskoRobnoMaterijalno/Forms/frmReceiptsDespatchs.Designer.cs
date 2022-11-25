@@ -169,7 +169,7 @@
             // 
             // articleBindingSource
             // 
-            this.articleBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.Article);
+            this.articleBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Data.Model.Article);
             // 
             // itemIDDataGridViewTextBoxColumn
             // 
@@ -274,7 +274,7 @@
             // 
             // documentItemBindingSource
             // 
-            this.documentItemBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Models.DocumentItem);
+            this.documentItemBindingSource.DataSource = typeof(MagacinskoRobnoMaterijalno.Data.Model.DocumentItem);
             // 
             // SelectedRow
             // 
